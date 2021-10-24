@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "declaration-colon-newline-after": "always-multi-line",
+    "selector-type-no-unknown": null,
+    "property-no-unknown": [true, {
+        "ignoreProperties": ["content-visibility"]
+    }],
+    "selector-nested-pattern": "^&",
+    "no-descending-specificity": null,
+    "no-eol-whitespace": null,
+    "declaration-empty-line-before": null
+  }
+}
