@@ -15,7 +15,6 @@ jobs:
 
   discord-notification:
     name: Discord notification
-    needs: run-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
