@@ -14,6 +14,7 @@ jobs:
         run: npm install && npm test
   discord-message:
     name: Discord notification
+    needs: run-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -22,4 +23,5 @@ jobs:
         with:
           webhook_id: ${{ secrets.DISCORD_CHANNEL_ID }}
           webhook_token: ${{ secrets.DISCORD_FRONT }}
+          username: "AvocaDev-Front"
           message: ${{ github.event_name }}
