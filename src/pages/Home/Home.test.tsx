@@ -4,6 +4,6 @@ import Home from './Home';
 
 test('Home has catchword', () => {
   render(<Home />);
-  const catchWord = screen.getByText(/La web del cuidado personal/i);
+  const catchWord = screen.getByText(/La web del cuidado personalista/i);
   expect(catchWord).toBeInTheDocument();
 });
