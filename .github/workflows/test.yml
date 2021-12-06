@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   discord-notification:
-    name: Discord notification
+    name: Run Test and Discord notification
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
