@@ -1,9 +1,9 @@
-name: CI
+name: CI-Tests
 
 on: [push]
 
 jobs:
-  discord-notification:
+  test-and-notification:
     name: Run Test and Discord notification
     runs-on: ubuntu-latest
     steps:

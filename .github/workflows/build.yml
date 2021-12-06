@@ -1,0 +1,14 @@
+name: CI-Build
+
+on: [push]
+
+jobs:
+  build:
+    name: Build app
+    runs-on: ubuntu-latest
+    needs: test-and-notification
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run test
+        run: npm install && npm build
