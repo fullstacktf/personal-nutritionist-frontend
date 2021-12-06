@@ -3,16 +3,6 @@ name: CI
 on: [push]
 
 jobs:
-
-  # run-test:
-  #   name: run test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #     - name: Run test
-  #       run: npm install && npm test
-
   discord-notification:
     name: Discord notification
     runs-on: ubuntu-latest
