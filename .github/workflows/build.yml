@@ -20,8 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: send custom message with args
-        uses: appleboy/discord-action@master
+        uses: rjstone/discord-webhook-notify@v1
         with:
-          webhook_id: ${{ secrets.DISCORD_CHANNEL_ID }}
-          webhook_token: ${{ secrets.DISCORD_FRONT }}
-          message: Hello friends ${{ github.event_name }} !!
+          severity: info
+          username: AvocaDev-Front
+          color: '#00ff77'
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.DISCORD_FRONT }}
