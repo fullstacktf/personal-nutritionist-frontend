@@ -10,23 +10,18 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-
       - name: Build image
         run: docker build . -t nutriguide-frontend
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_TOKEN }}
-
       - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
-
       - name: Tag image
-        run: docker tag nutriguide-frontend registry.digitalocean.com/nutriguide/nutriguide-frontend
-
+        run: docker tag nutriguide-frontend ${{ secrets.DOCKER_IMAGE_REGISTRY }}
       - name: Push image to DO Container Registry
-        run: docker push registry.digitalocean.com/nutriguide/nutriguide-frontend
+        run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}
 
   run_new_app_containers:
     runs-on: ubuntu-latest
