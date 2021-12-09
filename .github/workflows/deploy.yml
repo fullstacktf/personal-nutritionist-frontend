@@ -44,5 +44,5 @@ jobs:
           docker-compose down
           docker tag ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7) ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
           doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
-          docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
+          docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7)
           docker-compose up -d
