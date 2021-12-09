@@ -1,9 +1,9 @@
 name: CD
 
 on: [push]
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
 jobs:
   build_and_push:
@@ -29,9 +29,6 @@ jobs:
       - name: Tag image
         run: docker tag ${{secrets.DOCKER_IMAGE_REGISTRY}}:$(echo $GITHUB_SHA | head -c7) ${{secrets.DOCKER_IMAGE_REGISTRY}}:latest
 
-      # - name: Log in to DO Container Registry
-      #   run: doctl registry login --expiry-seconds 600
-
       - name: Push image to DO Container Registry
         run: docker push ${{secrets.DOCKER_IMAGE_REGISTRY}}:latest
 
@@ -46,10 +43,9 @@ jobs:
         host: ${{ secrets.DROPLET_HOST }}
         username: ${{ secrets.DROPLET_ElENA }}
         key: ${{ secrets.DROPLET_ELENA_KEY }}
-          # docker tag ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7) ${{ secrets.DOCKER_IMAGE_REGISTRY }}
         script: |
           cd ../nutriguide-project
           docker-compose down
           doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
-          docker pull ${{secrets.DOCKER_IMAGE_REGISTRY}}:$(echo $GITHUB_SHA | head -c7)
+          docker pull ${{secrets.DOCKER_IMAGE_REGISTRY}}:latest
           docker-compose up -d
