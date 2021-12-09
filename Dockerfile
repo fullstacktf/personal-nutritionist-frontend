@@ -1,7 +1,8 @@
 FROM node:14.17.6 as build
 WORKDIR /app
 COPY . . 
-RUN npm install && npm run build
+RUN npm install 
+RUN npm run build
 
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html

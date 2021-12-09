@@ -1,9 +1,9 @@
 name: CD
 
-on: [push]
-  # push:
-  #   branches:
-  #     - main
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build_and_push:
