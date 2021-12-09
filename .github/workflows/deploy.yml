@@ -25,9 +25,9 @@ jobs:
 
       - name: Tag image
         run: docker tag nutriguide-frontend ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7)
-        
+
       - name: Push image to DO Container Registry
-        run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}
+        run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7)
 
   run_new_app_containers:
     runs-on: ubuntu-latest
