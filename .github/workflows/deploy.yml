@@ -27,9 +27,9 @@ jobs:
         run: docker push ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7)
 
       - name: Tag image
-        run: docker tag  ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7) ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:latest
+        run: docker tag ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7) ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:latest
 
-        - name: Log in to DO Container Registry
+      - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
 
       - name: Push image to DO Container Registry
