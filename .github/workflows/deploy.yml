@@ -1,8 +1,9 @@
 name: CD
 
 on: [push]
-    # branches:
-    #   - main
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   build_and_push:
@@ -10,16 +11,21 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
+
       - name: Build image
         run: docker build . -t nutriguide-frontend
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
       - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
+
       - name: Tag image
-        run: docker tag nutriguide-frontend ${{ secrets.DOCKER_IMAGE_REGISTRY }}
+        run: docker tag nutriguide-frontend ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7)
+        
       - name: Push image to DO Container Registry
         run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}
 
@@ -36,7 +42,7 @@ jobs:
         script: |
           cd ../nutriguide-project
           docker-compose down
-          docker tag ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest ${{ secrets.DOCKER_IMAGE_REGISTRY }}:old
+          docker tag ${{ secrets.DOCKER_IMAGE_REGISTRY }}:$(echo $GITHUB_SHA | head -c7) ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
           doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
           docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
           docker-compose up -d
