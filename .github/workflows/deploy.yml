@@ -51,5 +51,5 @@ jobs:
           cd ../nutriguide-project
           docker-compose down
           doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
-          docker pull ${{secrets.DOCKER_IMAGE_REGISTRY}}/${{secrets.DOCKER_IMAGE_NAME}}:$(echo $GITHUB_SHA | head -c7)
+          docker pull ${{secrets.DOCKER_IMAGE_REGISTRY}}:$(echo $GITHUB_SHA | head -c7)
           docker-compose up -d
