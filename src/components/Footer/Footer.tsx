@@ -1,12 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import "./Footer.css"
-
-import facebook from "./Facebook.png"
-import twitter from "./Twitter.png"
-import instagram from "./Instagram.png"
-import avocado from "./avocado.png"
+import "./Footer.css";
 
 export default function Footer(){
   return(
@@ -27,7 +22,7 @@ export default function Footer(){
             alignItems={"center"}
           >
             <div className="avocado-box">
-              <img className="avocado" src={avocado} alt="avocado" />
+              <img className="avocado" src='/assets/avocado.png' alt="avocado" />
             </div>
           </Box>
           
@@ -37,9 +32,9 @@ export default function Footer(){
               <a href="a">Acerca de</a>
               <a href="a">Preguntas Frecuentes</a>
             </div>
-            <a href="a"><img className="icon" src={facebook} alt="facebook icon" /></a>
-            <a href="a"><img className="icon" src={twitter} alt="twitter icon" /></a>
-            <a href="a"><img className="icon" src={instagram} alt="instragram icon" /></a>
+            <a href="a"><img className="icon" src='/assets/Facebook.png' alt="facebook icon" /></a>
+            <a href="a"><img className="icon" src='/assets/Twitter.png' alt="twitter icon" /></a>
+            <a href="a"><img className="icon" src='/assets/Instagram.png' alt="instragram icon" /></a>
           </Grid>
 
           <Grid item xs={2} sm={2} md={2} >
