@@ -1,5 +1,5 @@
-import './Home.css';
-import { Button } from '@mui/material';
+import "./Home.css";
+import { Button } from "@mui/material";
 
 export default function Home() {
   return (
