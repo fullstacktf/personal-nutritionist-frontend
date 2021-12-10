@@ -46,7 +46,7 @@ export default function Footer(){
             <div className="column">
             <h3>¿Quiénes somos?</h3>
               <a href="a">Equipo</a>
-              <a href="a">Docs</a>
+              <a href="a">Documentación</a>
               <a href="a">Contáctanos</a>
             </div>
           </Grid>
