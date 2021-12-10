@@ -34,8 +34,8 @@ export default function Footer(){
           <Grid item xs={2} sm={4} md={4} >
             <div className="column">
               <h3>Conoce Nutriguide</h3>
-              <a href="a">About</a>
-              <a href="a">FAQs</a>
+              <a href="a">Acerca de</a>
+              <a href="a">Preguntas Frecuentes</a>
             </div>
             <a href="a"><img className="icon" src={facebook} alt="facebook icon" /></a>
             <a href="a"><img className="icon" src={twitter} alt="twitter icon" /></a>
@@ -47,7 +47,7 @@ export default function Footer(){
             <h3>¿Quiénes somos?</h3>
               <a href="a">Equipo</a>
               <a href="a">Docs</a>
-              <a href="a">Contactanos</a>
+              <a href="a">Contáctanos</a>
             </div>
           </Grid>
 
