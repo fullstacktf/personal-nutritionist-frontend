@@ -1,8 +1,8 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
 
-test('app has component home', () => {
+test("app has component home", () => {
   render(<App />);
 
 });
