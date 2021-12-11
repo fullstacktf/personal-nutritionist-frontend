@@ -10,23 +10,25 @@ const LogIn: FC = () => {
     password: ""
   });
 
-  const handleSubmitChange = (event: any) => {
-     console.log(data);
-     setData({
-     ...data,
+  const handleDataChange = (event: any) => {
+    console.log("Me ejecuto");
+    setData({
+      ...data,
       [event.target.name] : event.target.value,
       
     });
+  };
+  const submitData = () => {
+    console.log(data);
   };
 
   return (
     <form className="Login">
       <h2>Bienvenido a Nutriguide</h2>
       <p>¿Eres nuevo?<a href="a">Crear una cuenta</a></p>
-      <InputForm name="name" placeholder="Usuario" type="username" />
-      <InputForm name="password" placeholder="Contraseña" type="password" />
-      <Button onClick={handleSubmitChange} variant="contained" >Iniciar Sesión</Button>
-      {/* onClick={handleSubmitChange} */}
+      <InputForm onChange={handleDataChange} name="name" placeholder="Usuario" type="username" />
+      <InputForm onChange={handleDataChange} name="password" placeholder="Contraseña" type="password" />
+      <Button onClick={submitData} variant="contained" >Iniciar Sesión</Button>
     </form>
   );
 };
