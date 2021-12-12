@@ -38,7 +38,7 @@ export const MarketingCard: FC<Props> = ({ name, cardImage, info, altInfo }) => 
           alt={altInfo}
         />
         <ContainerInfo>
-          <Text align="left" variant="h4">
+          <Text align="left" variant="h3">
             {name}
           </Text>
           <Typography align="left" variant="subtitle1">
