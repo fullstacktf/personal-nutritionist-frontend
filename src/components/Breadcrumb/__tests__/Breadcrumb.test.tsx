@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import App from "./App";
+import CustomizedBreadcrumbs from "../Breadcrumb";
 
 test("renders learn react link", () => {
-  render(<App />);
+  render(<CustomizedBreadcrumbs />);
 });
