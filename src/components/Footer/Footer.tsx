@@ -4,7 +4,7 @@ export default function Footer(){
   return(
     <Grid container sx={{ flexGrow: 1, background: "#CDCDCD" }}>
       <Grid item xs={12} md={2} sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-        <img src='/assets/avocado.png' style={{ height: "100px", width: "100px"}} alt="Icono de un aguacate"/>
+        <img src='/assets/avocado.png' style={{ height: "100px", width: "100px" }} alt="Icono de un aguacate"/>
       </Grid>
       <Grid item xs={12} md={4}>
         <Grid container spacing={2}>
