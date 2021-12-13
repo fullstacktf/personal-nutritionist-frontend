@@ -3,7 +3,7 @@ import {Grid}  from "@mui/material";
 export default function Footer(){
   return(
     <Grid container sx={{ flexGrow: 1, background: "#CDCDCD" }}>
-      <Grid item xs={12} md={2} sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+      <Grid item xs={12} md={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <img src='/assets/avocado.png' style={{ height: "100px", width: "100px" }} alt="Icono de un aguacate"/>
       </Grid>
       <Grid item xs={12} md={4}>
