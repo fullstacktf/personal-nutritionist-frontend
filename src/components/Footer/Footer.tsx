@@ -26,7 +26,7 @@ export default function Footer(){
         <a href="a">Documentación</a>
         <a href="a">Contáctanos</a>
       </Grid>
-      <Grid item xs={12} md={2} sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+      <Grid item xs={12} md={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <p><b>2021 © Personal Nutricionist</b></p> 
       </Grid>
     </Grid>
