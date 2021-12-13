@@ -14,7 +14,7 @@ export default function Footer(){
             <a href="a">Preguntas Frecuentes</a>
           </Grid>
           <Grid item xs={12} md={12}>
-            <a href="a"><img style={{ height: "40px", width: "40px"}} src='/assets/Facebook.png' alt="facebook icon"/></a>
+            <a href="a"><img style={{ height: "40px", width: "40px" }} src='/assets/Facebook.png' alt="facebook icon"/></a>
             <a href="a"><img style={{ height: "40px", width: "40px" }} src='/assets/Twitter.png' alt="twitter icon"/></a>
             <a href="https://www.instagram.com/nutriguide_es/"><img style={{ height: "40px", width: "40px" }} src="/assets/Instagram.png" alt="instragram icon"/></a>
           </Grid>
