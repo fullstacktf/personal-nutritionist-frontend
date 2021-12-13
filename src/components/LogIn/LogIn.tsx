@@ -1,8 +1,7 @@
-import {useState} from "react";
+import { useState, ChangeEvent } from "react";
 import Button from "@mui/material/Button";
-import InputForm from "../InputForm/InputForm";
-import {FC} from "react";
-import "./LogIn.css";
+import { InputForm } from "../InputForm/InputForm";
+import { FC } from "react";
 
 const LogIn: FC = () => {
   const [data, setData] = useState({
@@ -10,11 +9,10 @@ const LogIn: FC = () => {
     password: ""
   });
 
-  const handleDataChange = (event: any) => {
+  const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
       [event.target.name] : event.target.value,
-      
     });
   };
 
@@ -26,8 +24,8 @@ const LogIn: FC = () => {
     <form className="Login">
       <h2>Bienvenido a Nutriguide</h2>
       <p>¿Eres nuevo?<a href="a">Crear una cuenta</a></p>
-      <InputForm onChange={handleDataChange} name="name" placeholder="Usuario" type="username" />
-      <InputForm onChange={handleDataChange} name="password" placeholder="Contraseña" type="password" />
+      <InputForm onChange={handleDataChange} name="name" placeholder="Usuario" type="username" validation={true} />
+      <InputForm onChange={handleDataChange} name="password" placeholder="Contraseña" type="password" validation={true} />
       <Button onClick={submitData} variant="contained" >Iniciar Sesión</Button>
     </form>
   );

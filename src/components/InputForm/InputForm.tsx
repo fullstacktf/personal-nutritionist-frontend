@@ -1,35 +1,27 @@
-import {FC} from "react";
+import { FC, useState, ChangeEvent } from "react";
 import { Input } from "@mui/material";
-import {useState} from "react";
+import { isValidated } from "./validation";
 
 interface Props {
   type: string;
   placeholder: string;
   name: string;
   onChange: any;
+  validation?: boolean;
 }
 
-const InputForm: FC<Props> = ({type, placeholder, name, onChange}) => {
-  
-  const [message, setMessage] = useState("");
+export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, validation=false }) => {  
+  const [message, setMessage] = useState<string>("");
 
-  const isPasswordValid = (event: any, type:string ) => {
-    return event.target.value.length < 8 && type === "password";
-  };
-  
-  const isUserValid = (event: any, type:string) => {
-    return event.target.value.length < 5 && type === "username";
+  const isValid = (event: ChangeEvent<HTMLInputElement>) => {
+    const validateInfo = isValidated(event, type);
+    setMessage(`${validateInfo[1]}`);
+    return validateInfo[0];
   };
 
-  const handleMessageChange = (event: any) => {
-    if(isPasswordValid(event, type) ){
-      setMessage("La contraseña debe tener al menos 8 caracteres");
-    } 
-    else if(isUserValid(event, type) )
-      setMessage("El nombre de usuario es demasiado corto");
-    else {
-      setMessage("");
-      
+  const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if(validation) {
+      isValid(event);
     }
     onChange(event);
   };
@@ -42,5 +34,3 @@ const InputForm: FC<Props> = ({type, placeholder, name, onChange}) => {
     </div>
   );
 };
-
-export default InputForm;
