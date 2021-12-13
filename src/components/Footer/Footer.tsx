@@ -1,59 +1,34 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Grid }  from "@mui/material";
 
-import "./Footer.css";
-
-export default function Footer(){
+export default function Footer() {
   return(
-    
-      <Box className="footer" sx={{ flexGrow: 1 }} >
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 2, sm: 16, md: 18 }}
-        >
-          <Box
-            component={Grid}
-            xs={2}
-            sm={2}
-            md={2}
-            display={{ xs: "none", xm:"flex", lg: "flex" }}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <div className="avocado-box">
-              <img className="avocado" src='/assets/avocado.png' alt="avocado" />
-            </div>
-          </Box>
-          
-          <Grid item xs={2} sm={4} md={4} >
-            <div className="column">
-              <h3>Conoce Nutriguide</h3>
-              <a href="a">Acerca de</a>
-              <a href="a">Preguntas Frecuentes</a>
-            </div>
-            <a href="a"><img className="icon" src='/assets/Facebook.png' alt="facebook icon" /></a>
-            <a href="a"><img className="icon" src='/assets/Twitter.png' alt="twitter icon" /></a>
-            <a href="a"><img className="icon" src='/assets/Instagram.png' alt="instragram icon" /></a>
+    <Grid container sx={{ flexGrow: 1, background: "#CDCDCD" }}>
+      <Grid item xs={12} md={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <img src='/assets/avocado.png' style={{ height: "100px", width: "100px" }} alt="Icono de un aguacate"/>
+      </Grid>
+      <Grid item xs={12} md={4}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={12} sx={{ display: "flex", flexDirection: "column" }}>
+            <h3>Conoce Nutriguide</h3>
+            <a href="a">Acerca de</a>
+            <a href="a">Preguntas Frecuentes</a>
           </Grid>
-
-          <Grid item xs={2} sm={2} md={2} >
-            <div className="column">
-            <h3>¿Quiénes somos?</h3>
-              <a href="a">Equipo</a>
-              <a href="a">Documentación</a>
-              <a href="a">Contáctanos</a>
-            </div>
+          <Grid item xs={12} md={12}>
+            <a href="a"><img style={{ height: "40px", width: "40px" }} src='/assets/Facebook.png' alt="facebook icon"/></a>
+            <a href="a"><img style={{ height: "40px", width: "40px" }} src='/assets/Twitter.png' alt="twitter icon"/></a>
+            <a href="https://www.instagram.com/nutriguide_es/"><img style={{ height: "40px", width: "40px" }} src="/assets/Instagram.png" alt="instragram icon"/></a>
           </Grid>
-
-          <Grid item xs={0} sm={6} md={6} >
-          </Grid>
-
-          <Grid className="column copyright" item xs={2} sm={4} md={4} >
-              <p>2021 © Personal Nutricionist</p> 
-          </Grid>
-
         </Grid>
-      </Box>
+      </Grid>
+      <Grid item xs={12} md={4} sx={{ display: "flex", flexDirection: "column" }}>
+        <h3>¿Quiénes somos?</h3>
+        <a href="a">Equipo</a>
+        <a href="a">Documentación</a>
+        <a href="a">Contáctanos</a>
+      </Grid>
+      <Grid item xs={12} md={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <p><b>2021 © Personal Nutricionist</b></p> 
+      </Grid>
+    </Grid>
   );
 }

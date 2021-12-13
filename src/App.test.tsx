@@ -4,5 +4,4 @@ import App from "./App";
 
 test("app has component home", () => {
   render(<App />);
-
 });
