@@ -8,7 +8,7 @@ export default function Footer() {
       </Grid>
       <Grid item xs={12} md={4}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={12} sx={{display: "flex", flexDirection: "column"}}>
+          <Grid item xs={12} md={12} sx={{ display: "flex", flexDirection: "column" }}>
             <h3>Conoce Nutriguide</h3>
             <a href="a">Acerca de</a>
             <a href="a">Preguntas Frecuentes</a>
