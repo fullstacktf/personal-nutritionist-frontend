@@ -11,13 +11,13 @@ const LogIn: FC = () => {
   });
 
   const handleDataChange = (event: any) => {
-    console.log("Me ejecuto");
     setData({
       ...data,
       [event.target.name] : event.target.value,
       
     });
   };
+
   const submitData = () => {
     console.log(data);
   };
