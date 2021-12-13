@@ -1,6 +1,6 @@
 import {Grid}  from "@mui/material";
 
-export default function Footer(){
+export default function Footer() {
   return(
     <Grid container sx={{ flexGrow: 1, background: "#CDCDCD" }}>
       <Grid item xs={12} md={2} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
