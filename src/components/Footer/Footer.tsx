@@ -20,7 +20,7 @@ export default function Footer(){
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={4} sx={{display: "flex", flexDirection: "column"}}>
+      <Grid item xs={12} md={4} sx={{ display: "flex", flexDirection: "column" }}>
         <h3>¿Quiénes somos?</h3>
         <a href="a">Equipo</a>
         <a href="a">Documentación</a>
