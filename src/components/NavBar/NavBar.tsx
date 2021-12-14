@@ -7,7 +7,8 @@ import { AccountCircle } from "@mui/icons-material";
 import CustomizedBreadcrumbs from "../Breadcrumb/Breadcrumb";
 
 const divTopStyle: CSSProperties = {
-  backgroundColor: "#cdcdcd",
+  backgroundColor: "#937A61",
+  color: "white",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-around"
@@ -22,8 +23,9 @@ const h1TitleStyle: CSSProperties = {
   fontSize: "1.5em"
 };
 
-const LogInButton = styled(Button)(() => ({
-  padding: "1em"
+const ButtonLogIn = styled(Button)(() => ({
+  padding: "1em",
+  color: "white"
 }));
 
 export const NavBar: FC = () => {
@@ -32,15 +34,9 @@ export const NavBar: FC = () => {
       <div style={divTopStyle}>
         <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         <h1 style={h1TitleStyle}>Nutriguide</h1>
-        <LogInButton 
-          variant="text" 
-          endIcon={<AccountCircle />}
-          sx={{
-            padding: "1em"
-          }}
-        >
+        <ButtonLogIn variant="text" endIcon={<AccountCircle />}>
           Log In
-        </LogInButton>
+        </ButtonLogIn>
       </div>
       <CustomizedBreadcrumbs />
     </div>
