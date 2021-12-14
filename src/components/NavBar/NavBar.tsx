@@ -23,7 +23,7 @@ const h1TitleStyle: CSSProperties = {
   fontSize: "1.5em"
 };
 
-const LogInButton = styled(Button)(() => ({
+const ButtonLogIn = styled(Button)(() => ({
   padding: "1em"
 }));
 
@@ -33,7 +33,7 @@ export const NavBar: FC = () => {
       <div style={divTopStyle}>
         <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         <h1 style={h1TitleStyle}>Nutriguide</h1>
-        <LogInButton      
+        <ButtonLogIn      
           variant="text" 
           endIcon={<AccountCircle />}
           sx={{
@@ -42,7 +42,7 @@ export const NavBar: FC = () => {
           }}
         >
           Log In
-        </LogInButton>
+        </ButtonLogIn>
       </div>
       <CustomizedBreadcrumbs />
     </div>
