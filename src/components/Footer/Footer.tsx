@@ -1,7 +1,6 @@
 import { CSSProperties, FC } from "react";
 
 import { styled } from "@mui/material/styles";
-
 import { Grid }  from "@mui/material";
 
 const GridFooterContainer = styled(Grid)(() => ({
