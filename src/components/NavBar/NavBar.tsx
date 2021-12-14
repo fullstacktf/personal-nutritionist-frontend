@@ -34,7 +34,7 @@ export const NavBar: FC = () => {
       <div style={divTopStyle}>
         <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         <h1 style={h1TitleStyle}>Nutriguide</h1>
-        <ButtonLogIn      
+        <ButtonLogIn variant="text" endIcon={<AccountCircle />}>
           variant="text" 
           endIcon={<AccountCircle />}
         >
