@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 interface Props {
   cardImage: string;
