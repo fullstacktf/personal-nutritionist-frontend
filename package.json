@@ -5,7 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.2",
+    "@mui/icons-material": "^5.2.1",
+    "@mui/material": "^5.2.3",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -30,7 +31,13 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "quotes": ["error", "double"],
+      "semi": ["error", "always"],
+      "comma-dangle": ["error", "only-multiline"],
+      "space-before-function-paren": ["error", "never"]
+    }
   },
   "browserslist": {
     "production": [
