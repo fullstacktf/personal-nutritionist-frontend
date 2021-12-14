@@ -1,57 +1,53 @@
-import * as React from 'react';
+import * as React from "react";
 import { FC } from "react";
-import { Grid, Button, Divider, ListItem, ListItemText } from "@mui/material"
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListSubheader from '@mui/material/ListSubheader';
-import HomeIcon from '@mui/icons-material/Home';
-import PeopleIcon from '@mui/icons-material/People';
-import EventIcon from '@mui/icons-material/Event';
-import SettingsIcon from '@mui/icons-material/Settings';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 
-export const Menu: FC = () => {
+import { Grid, Button, ListSubheader, Typography } from "@mui/material";
+import { Close, Menu, Home, People, Event, Settings, MenuBook, SupervisedUserCircle } from "@mui/icons-material";
+
+import { styled } from "@mui/material/styles";
+
+import { IconMenu } from "./IconMenu";
+
+export const SideMenu: FC = () => {
   const [open, setOpen] = React.useState(true);
-  let menuIcon;
-  open? menuIcon = "Cerrar" : menuIcon = "Abrir";
-  if(open) {
+
+  const menuIcon = open ? <Close></Close> : <Menu></Menu>;
+  const items = [
+    { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader> },
+    { icon: <Event color="info" />, name: "Calendar" },
+    { icon: <Settings color="info" />, name: "Settings" },
+    { icon: <People color="info" />, name: "Users", separator: <ListSubheader>Services</ListSubheader>  },
+    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionists" },
+    { icon: <MenuBook color="info" />, name: "Recipes" },
+  ];
+
+  const GridMenu = styled(Grid)(() => ({
+    background: "#21252B",
+    height: "100vh",
+    flexDirection: "column",
+    color: "white",
+    display: "flex",
+  }));
+
+  if(!open) {
     return (
-      <Grid container sx={{background: "orange", height: "100vh", width: 70, flexDirection: "column"}}>
-        <Button onClick={() => setOpen(!open)}> {menuIcon} </Button>
-      </Grid>
+      <GridMenu width={60} item>
+        <Button onClick={() => setOpen(!open)}>{menuIcon}</Button>
+        {items.map((item) => (
+          <IconMenu icon={item.icon}></IconMenu>
+        ))}
+      </GridMenu>
     );
   }
-  else{
+  else {
     return (
-      <Grid container sx={{background: "orange", height: "100vh", width: 270, flexDirection: "column"}}>
-        <Button onClick={() => setOpen(!open)}> {menuIcon} </Button>
-        <Divider />
-        <ListSubheader>Personal</ListSubheader>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <EventIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Calendar" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Users" />
-          </ListItem>
-      </Grid>
+      <GridMenu width={270}>
+        <Button sx={{ display: "flex", justifyContent: "flex-end" }} onClick={() => setOpen(!open)}>{menuIcon}</Button>
+        <Typography align="center"><b>Nutriguide</b></Typography>
+        {items.map((item) => (
+          <IconMenu icon={item.icon} name={item.name} separator={item.separator}></IconMenu>
+        ))}
+      </GridMenu>
     );
   }
 };
