@@ -33,7 +33,7 @@ export const PersonalForm: FC = () => {
       <FormControl>
         <Avatar sx={{ bgcolor: colors.deepOrange[500] }}>AV</Avatar>
         <Button variant="contained">Cambiar foto</Button>
-        <InputForm onChange={handleDataChange} name="username" placeholder="Nombre de usuario" type="username" validation={true} />
+        <InputForm onChange={handleDataChange} name="name" placeholder="Escribe tu nombre" type="text" />
         <InputForm onChange={handleDataChange} name="phone" placeholder="+641585416" type="tel" validation={true} />
         <InputForm onChange={handleDataChange} name="Descripcion" placeholder="Añade una descripción" type="text" />
         <Button variant="contained" type="submit">Guardar Cambios</Button>
