@@ -6,6 +6,7 @@ import { green, brown } from "@mui/material/colors";
 import { Home } from "./pages/Home/Home";
 import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
+import { PersonalForm } from "./components/PersonalForm/PersonalForm";
 
 const theme = createTheme ({
   palette: {
@@ -24,6 +25,7 @@ function App() {
       <NavBar />
       <Home />
       <Footer />
+      <PersonalForm />
     </ThemeProvider>
   );
 }
