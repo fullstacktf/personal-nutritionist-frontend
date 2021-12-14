@@ -1,6 +1,5 @@
 import { Button, Grid, Box } from "@mui/material";
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
-
 export default function Home() {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor:"#fffffe" }}>

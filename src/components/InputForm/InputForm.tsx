@@ -1,7 +1,6 @@
 import { FC, useState, ChangeEvent } from "react";
-import { Input } from "@mui/material";
+import { Input, FormControl,InputLabel } from "@mui/material";
 import { isValidated } from "./validation";
-
 interface Props {
   type: string;
   placeholder: string;
@@ -10,7 +9,7 @@ interface Props {
   validation?: boolean;
 }
 
-export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, validation=false }) => {  
+export const InputForm: FC<Props> = ({type, placeholder, name, onChange, validation=false }) => {  
   const [message, setMessage] = useState<string>("");
 
   const isValid = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,10 +26,10 @@ export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, valida
   };
 
   return (
-    <div>
-      <h2>{type}</h2>
+    <FormControl variant="filled" >
+      <InputLabel>{name}</InputLabel>
       <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} />
       <p>{message}</p>
-    </div>
+    </FormControl>
   );
 };
