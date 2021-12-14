@@ -16,7 +16,7 @@ const imgLogo: CSSProperties = {
 };
 
 export const Footer: FC = () => {
-  return(
+  return (
     <GridFooterContainer container spacing={3}>
       <Grid item xs={12} md={4}>
         <Grid container spacing={2}>
