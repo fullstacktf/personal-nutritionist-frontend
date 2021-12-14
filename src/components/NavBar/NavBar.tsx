@@ -24,7 +24,8 @@ const h1TitleStyle: CSSProperties = {
 };
 
 const ButtonLogIn = styled(Button)(() => ({
-  padding: "1em"
+  padding: "1em",
+  color: "white"
 }));
 
 export const NavBar: FC = () => {
@@ -36,10 +37,6 @@ export const NavBar: FC = () => {
         <ButtonLogIn      
           variant="text" 
           endIcon={<AccountCircle />}
-          sx={{
-            padding: "1em",
-            color: "white"
-          }}
         >
           Log In
         </ButtonLogIn>

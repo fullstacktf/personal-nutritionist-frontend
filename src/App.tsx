@@ -1,10 +1,11 @@
 import React from "react";
-import "./App.css";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { green, brown } from "@mui/material/colors";
+
 import { Home } from "./pages/Home/Home";
 import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { green, brown } from "@mui/material/colors";
 
 const theme = createTheme ({
   palette: {
