@@ -1,9 +1,9 @@
 import { useState, ChangeEvent } from "react";
-import Button from "@mui/material/Button";
+import { Button, FormControl } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
 import { FC } from "react";
 
-const LogIn: FC = () => {
+export const LogIn: FC = () => {
   const [data, setData] = useState({
     name: "",
     password: ""
@@ -21,14 +21,12 @@ const LogIn: FC = () => {
   };
 
   return (
-    <form className="Login">
+    <FormControl>
       <h2>Bienvenido a Nutriguide</h2>
       <p>¿Eres nuevo?<a href="a">Crear una cuenta</a></p>
       <InputForm onChange={handleDataChange} name="name" placeholder="Usuario" type="username" validation={true} />
       <InputForm onChange={handleDataChange} name="password" placeholder="Contraseña" type="password" validation={true} />
       <Button onClick={submitData} variant="contained" >Iniciar Sesión</Button>
-    </form>
+    </FormControl>
   );
 };
-
-export default LogIn;
