@@ -1,12 +1,11 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FC } from "react";
 import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
-import { FC } from "react";
 
 export const SignUp: FC = () => {
   const [data, setData] = useState({
     usuario: "",
-    Contraseña: "",
+    contraseña: "",
     email: "",
     isNutritionist: ""
   });
@@ -17,9 +16,9 @@ export const SignUp: FC = () => {
       [event.target.name] : event.target.value,
     });
   };
-
+  
   const submitData = () => {
-    console.log(data);
+      console.log(data);
   };
 
   return (
@@ -28,8 +27,8 @@ export const SignUp: FC = () => {
       <p>¿Ya tienes una cuenta?<a href="a">LogIn</a></p>
       <InputForm onChange={handleDataChange} name="email" placeholder="Usuario@correo.com" type="email" validation={true} />
       <InputForm onChange={handleDataChange} name="usuario" placeholder="Usuario" type="username" validation={true} />
-      <InputForm onChange={handleDataChange} name="Contraseña" placeholder="Contraseña" type="password" validation={true} />
-      <InputForm onChange={handleDataChange} name="Repite contraseña" placeholder="Contraseña" type="password" validation={true} />
+      <InputForm onChange={handleDataChange} name="contraseña" placeholder="Contraseña" type="password" validation={true} />
+      <InputForm onChange={handleDataChange} name="repite" placeholder="Contraseña" type="password" validation={true} />
       <RadioGroup onChange={handleDataChange} row aria-label="gender" name="isNutritionist">
         <FormLabel component="legend">Eres nutricionista?</FormLabel>
         <FormControlLabel value="no" control={<Radio />} label="no" />

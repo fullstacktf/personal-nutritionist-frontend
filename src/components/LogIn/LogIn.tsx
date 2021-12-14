@@ -18,6 +18,7 @@ const LogIn: FC = () => {
 
   const submitData = () => {
     console.log(data);
+    
   };
 
   return (
