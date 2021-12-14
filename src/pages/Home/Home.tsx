@@ -30,7 +30,7 @@ const divTopStyle: CSSProperties = {
 };
 
 const GridMarketingContainer = styled(Grid)(() => ({
-  backgroundColor:"#f8f5f2",
+  backgroundColor: "#f8f5f2",
   textAlign: "center",
   alignItems: "center",
   justifyContent: "center"
