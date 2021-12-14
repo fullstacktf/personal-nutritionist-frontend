@@ -40,7 +40,7 @@ export const MarketingCard: FC<Props> = ({ name, cardImage, info, altInfo }) => 
       <CardContainer>
         <CardMedia
           component="img"
-          sx={{ width:{xs: 150, md: 300, lg: 400} }}
+          sx={{ width: {xs: 150, md: 300, lg: 400} }}
           image={cardImage}
           alt={altInfo}
         />
