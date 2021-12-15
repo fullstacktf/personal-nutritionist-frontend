@@ -1,15 +1,9 @@
 name: CD
 
-on: [push]
-  # push:
-  #   branches:
-  #     - main
-
-  # 
-  # docker rmi ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
-  # doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
-  # docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
-  # docker-compose up -d
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build_and_push:
