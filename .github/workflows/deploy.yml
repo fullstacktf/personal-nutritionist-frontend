@@ -5,7 +5,7 @@ on: [push]
   #   branches:
   #     - main
 
-  #   docker-compose down
+  # 
   # docker rmi ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
   # doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
   # docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
@@ -50,4 +50,8 @@ jobs:
         key: ${{ secrets.DROPLET_ELENA_KEY }}
         script: |
           cd ../nutriguide-project
-
+          docker-compose down
+          docker rmi ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
+          doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
+          docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
+          docker-compose up -d
