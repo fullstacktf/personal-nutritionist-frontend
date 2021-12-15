@@ -3,7 +3,6 @@ import { FC } from "react";
 
 import { Grid, Button, ListSubheader, Typography } from "@mui/material";
 import { Close, Menu, Home, People, Event, Settings, MenuBook, SupervisedUserCircle } from "@mui/icons-material";
-
 import { styled } from "@mui/material/styles";
 
 import { IconMenu } from "./IconMenu";
