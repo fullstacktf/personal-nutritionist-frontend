@@ -1,9 +1,15 @@
 name: CD
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+  # push:
+  #   branches:
+  #     - main
+
+  #   docker-compose down
+  # docker rmi ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
+  # doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
+  # docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
+  # docker-compose up -d
 
 jobs:
   build_and_push:
@@ -32,7 +38,6 @@ jobs:
       - name: Push image to DO Container Registry
         run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
 
-
   run_new_app_containers:
     runs-on: ubuntu-latest
     needs: build_and_push
@@ -45,8 +50,4 @@ jobs:
         key: ${{ secrets.DROPLET_ELENA_KEY }}
         script: |
           cd ../nutriguide-project
-          docker-compose down
-          docker rmi ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
-          doctl registry login -t ${{ secrets.DIGITALOCEAN_TOKEN }}
-          docker pull ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
-          docker-compose up -d
+
