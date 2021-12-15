@@ -47,7 +47,7 @@ const imgNutritionist: CSSProperties = {
   height: 400,
 };
 
-export const Home: FC = () => {
+export const WebPage: FC = () => {
   return (
     <Box>
       <GridPhoto container>

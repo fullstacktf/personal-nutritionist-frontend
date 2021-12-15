@@ -9,6 +9,7 @@ interface Props {
   info: string;
   altInfo: string;
 }
+
 const CardContainer = styled(Card)(() => ({
   height: 200,
   display: "flex",
