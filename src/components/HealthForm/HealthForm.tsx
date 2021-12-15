@@ -1,32 +1,39 @@
 import { useState, ChangeEvent, FC } from "react";
-import { Button, FormControl, FormControlLabel, FormGroup, Checkbox, Select, InputLabel, SelectChangeEvent, MenuItem } from "@mui/material";
+import { Button, FormControl, FormGroup, Select, InputLabel, SelectChangeEvent, MenuItem } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
+import { Tags } from "../Autocomplete/Autocomplete";
 
 export const HealthForm: FC = () => {
-  const [dieta, setDiet] = useState("");
   const [data, setData] = useState({
-    intolerances: [],
+    intolerances: ["","","",""],
     height: 0,
     diet: "",
-    weigth: 0
+    weight: 0
   });
+  const intolerances = [ "Huevos", "Leche", "Nueces", "Marisco" ];
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+
     setData({
       ...data,
-      [event.target.name] : event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleDietChange = (event: SelectChangeEvent<string>) => {
-    setDiet(event.target.value);
-    console.log(`state dieta: ${dieta}`);
-    setData({ 
+  const handleIntoleranceChange = (event: ChangeEvent<HTMLInputElement>, value: any) => {
+    const newIntolerances = value;
+    setData({
       ...data,
-      diet : dieta,
+      intolerances: newIntolerances,
     });
   };
-  
+  const handleDietChange = (event: SelectChangeEvent<string>) => {
+    const newDiet = event.target.value;
+    setData({ 
+      ...data,
+      diet: newDiet,
+    });
+  };
   const submitData = (event: any ) => {
     event.preventDefault();
     console.log(data);
@@ -34,23 +41,21 @@ export const HealthForm: FC = () => {
 
   return (
     <form onSubmit={submitData}>
+      <h2>Información de salud</h2>
+      <p>Actualiza tu información</p>
       <FormControl>
         <InputForm onChange={handleDataChange} name="weight" placeholder="Escribe tu peso" type="username" validation={true} />
         <InputForm onChange={handleDataChange} name="height" placeholder="Escribe tu altura" type="number" validation={true} />
         <FormGroup>
-          ¿Cuales son tus intolerancias?
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Huevos" />
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Leche" />
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Nueces" />
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Marisco" />
+          <Tags onChange={handleIntoleranceChange} name="intolerances" label="Intolerancias" placeholder="Selecciona tus intolerancias" data={intolerances}></Tags>
         </FormGroup>
-        {/* <InputForm onChange={handleDataChange} name="Diet" placeholder="escribe tu email" type="number" validation={true} /> */}
+
         <FormControl>
         <InputLabel id="demo-simple-select-label">Dieta</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={dieta}
+            value={data.diet}
             label="Diet"
             onChange={handleDietChange}
           >
