@@ -1,6 +1,7 @@
-import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { FC } from "react";
-import {styled} from "@mui/material/styles";
+
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 interface Props {
   cardImage: string;
@@ -8,7 +9,8 @@ interface Props {
   info: string;
   altInfo: string;
 }
-const Container = styled(Card)(() => ({
+
+const CardContainer = styled(Card)(() => ({
   height: 200,
   display: "flex",
 }));
@@ -20,32 +22,34 @@ const ContainerInfo = styled(CardContent)(() => ({
   justifyContent: "center",
 }));
 
-const Text = styled(Typography)(({theme}) => ({
+const TypographyH3Text = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold"
+  }
+}));
+
+const TypographySubtitle1Text = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down("md")]: {
+    fontSize: 12,
   }
 }));
 
 export const MarketingCard: FC<Props> = ({ name, cardImage, info, altInfo }) => {
   return (
     <Grid item xs={11} md={11} lg={7}>
-      <Container>
+      <CardContainer>
         <CardMedia
           component="img"
-          sx={{ width:{xs: 150, md: 300, lg: 400} }}
+          sx={{ width: {xs: 150, md: 300, lg: 400} }}
           image={cardImage}
           alt={altInfo}
         />
         <ContainerInfo>
-          <Text align="left" variant="h4">
-            {name}
-          </Text>
-          <Typography align="left" variant="subtitle1">
-            {info}
-          </Typography>
+          <TypographyH3Text align="left" variant="h3">{name}</TypographyH3Text>
+          <TypographySubtitle1Text align="left" variant="subtitle1">{info}</TypographySubtitle1Text>
         </ContainerInfo>
-      </Container>
+      </CardContainer>
     </Grid>
   );
 };
