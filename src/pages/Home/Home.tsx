@@ -44,7 +44,6 @@ const imgNutritionist: CSSProperties = {
 };
 
 export const Home: FC = () => {
-=======
 export default function Home() {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor:"#fffffe" }}>
