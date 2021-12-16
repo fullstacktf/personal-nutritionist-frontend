@@ -38,7 +38,6 @@ function App() {
       </BrowserRouter>
       <Footer />
       <SignUp />
-      <NutritionistList />
     </ThemeProvider>
   );
 }
