@@ -4,7 +4,11 @@ const hasCapitalLetters = (event: ChangeEvent<HTMLInputElement>) => {
   const upperCaseLetters = /[A-Z]/g;
   return event.target.value.match(upperCaseLetters);
 };
+const isaPhone = (event: ChangeEvent<HTMLInputElement>) => {
+  const phoneNumber = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
+  return event.target.value.match(phoneNumber);
 
+};
 const hasNumbers = (event: ChangeEvent<HTMLInputElement>) => {
   const numbers = /[0-9]/g;
   return event.target.value.match(numbers);
@@ -33,6 +37,7 @@ export const isValidated = (event: ChangeEvent<HTMLInputElement>, type: string) 
     
     if(!hasCapitalLetters(event)) 
       return [false, "La contraseña debe tener al menos una mayúscula"];
+
   }
 
   if(type === "username") {
@@ -43,6 +48,11 @@ export const isValidated = (event: ChangeEvent<HTMLInputElement>, type: string) 
   if(type === "email") {
     if(!isValidEmail(event))
       return [false, "El email no es válido"];
+  }
+
+  if(type === "tel") {
+    if(!isaPhone(event))
+      return [false, "El número de teléfono es incorrecto"];
   }
       
   return [true, ""];

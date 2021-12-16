@@ -9,7 +9,7 @@ interface Props {
   validation?: boolean;
 }
 
-export const InputForm: FC<Props> = ({type, placeholder, name, onChange, validation=false }) => {  
+export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, validation=false }) => {  
   const [message, setMessage] = useState<string>("");
 
   const isValid = (event: ChangeEvent<HTMLInputElement>) => {
