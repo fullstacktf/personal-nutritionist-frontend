@@ -1,6 +1,5 @@
 import { Button, Grid, Box } from "@mui/material";
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
-<<<<<<< HEAD
 
 const GridPhoto = styled(Grid)(() => ({
   height: 900,
