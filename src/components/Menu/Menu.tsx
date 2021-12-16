@@ -23,7 +23,7 @@ export const SideMenu: FC = () => {
   const GridMenu = styled(Grid)(() => ({
     background: "#21252B",
     display: "flex",
-    height: "100vh",
+    height: "98%",
     flexDirection: "column",
     color: "white",
   }));
