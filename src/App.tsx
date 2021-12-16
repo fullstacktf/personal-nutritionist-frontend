@@ -7,7 +7,7 @@ import { WebPage } from "./pages/WebPage/WebPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
-
+import { SignUp } from "./components/SignUp/SignUp";
 const theme = createTheme ({
   palette: {
     primary: {
@@ -33,6 +33,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Footer />
+      <SignUp />
     </ThemeProvider>
   );
 }
