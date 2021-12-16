@@ -46,7 +46,6 @@ const imgNutritionist: CSSProperties = {
 export const Home: FC = () => {
 =======
 export default function Home() {
->>>>>>> 72709cca36c823420dbde0844bf16c6e7ae0aea5
   return (
     <Box sx={{ flexGrow: 1, backgroundColor:"#fffffe" }}>
       <h1>La web del cuidado personal</h1>
