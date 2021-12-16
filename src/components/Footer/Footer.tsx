@@ -16,7 +16,7 @@ const imgLogo: CSSProperties = {
 
 export const Footer: FC = () => {
   return (
-    <GridFooterContainer container spacing={3}>
+    <GridFooterContainer container spacing={0}>
       <Grid item xs={12} md={4}>
         <Grid container spacing={2}>
           <Grid container item xs={12} md={12} flexDirection="column">
@@ -44,7 +44,7 @@ export const Footer: FC = () => {
         <a href="a">Contáctanos</a>
       </Grid>
       <Grid item container xs={12} md={4} alignItems="center">
-        <p>2021 © Personal Nutricionist</p> 
+        <p>2021 © Nutriguide</p> 
       </Grid>
     </GridFooterContainer>
   );

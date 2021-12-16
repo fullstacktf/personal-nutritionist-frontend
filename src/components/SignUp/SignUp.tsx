@@ -1,7 +1,11 @@
 import { useState, ChangeEvent, FC, useEffect } from "react";
-import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel } from "@mui/material";
-import { InputForm } from "../InputForm/InputForm";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
+import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel, Typography } from "@mui/material";
+
+import { InputForm } from "../InputForm/InputForm";
+
 export const SignUp: FC = () => {
   const [data, setData] = useState({
     usuario: "",
@@ -30,19 +34,17 @@ export const SignUp: FC = () => {
 
   return (
     <FormControl>
-      <h2>Bienvenido a Nutriguide</h2>
-      <p>¿Ya tienes una cuenta?<a href="a">LogIn</a></p>
-      <InputForm onChange={handleDataChange} name="email" placeholder="Usuario@correo.com" type="email" validation={true} />
-      <InputForm onChange={handleDataChange} name="usuario" placeholder="Usuario" type="username" validation={true} />
-      <InputForm onChange={handleDataChange} name="contraseña" placeholder="Contraseña" type="password" validation={true} />
-      <InputForm onChange={handleDataChange} name="repite" placeholder="Contraseña" type="password" validation={true} />
-      <RadioGroup onChange={handleDataChange} row aria-label="gender" name="isNutritionist">
-        <FormLabel component="legend">Eres nutricionista?</FormLabel>
-        <FormControlLabel value="no" control={<Radio />} label="no" />
-        <FormControlLabel value="si" control={<Radio />} label="si" />
+      <Typography variant="h4">Bienvenido a Nutriguide</Typography>
+      <Typography variant="subtitle1">¿Ya tienes una cuenta? <Link to="/login">LogIn</Link> </Typography>
+      <InputForm onChange={handleDataChange} name="Email" placeholder="Usuario@correo.com" type="email" validation={true} />
+      <InputForm onChange={handleDataChange} name="Usuario" placeholder="Usuario" type="username" validation={true} />
+      <InputForm onChange={handleDataChange} name="Contraseña" placeholder="Contraseña" type="password" validation={true} />
+      <FormLabel component="legend">Eres nutricionista?</FormLabel>
+      <RadioGroup onChange={handleDataChange} row aria-label="gender" name="isNutritionist" sx={{ display:"flex", justifyContent:"center", marginBottom: 4 }}>
+        <FormControlLabel value="no" control={<Radio />} label="No" />
+        <FormControlLabel value="si" control={<Radio />} label="Sí" />
       </RadioGroup>
-      <Button onClick={submitData} variant="contained" >Registrarse</Button>
-      <Button variant="contained" >back</Button>
+      <Button onClick={submitData} variant="contained">Crea tu nueva cuenta</Button>
     </FormControl>
   );
 };
