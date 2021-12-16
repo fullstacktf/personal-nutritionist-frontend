@@ -9,7 +9,6 @@ import { Page404 } from "./pages/Page404/Page404";
 import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
 import { SignUp } from "./components/SignUp/SignUp";
-import { NutritionistList } from "./components/NutritionistList/NutritionistList";
 
 const theme = createTheme ({
   palette: {
