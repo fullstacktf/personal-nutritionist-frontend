@@ -6,7 +6,7 @@ import { Grid }  from "@mui/material";
 const GridFooterContainer = styled(Grid)(() => ({
   backgroundColor: "#937A61",
   textAlign: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 }));
 
 const imgLogo: CSSProperties = {
@@ -16,9 +16,9 @@ const imgLogo: CSSProperties = {
 
 export const Footer: FC = () => {
   return (
-    <GridFooterContainer container spacing={3}>
+    <GridFooterContainer container>
       <Grid item xs={12} md={4}>
-        <Grid container spacing={2}>
+        <Grid container spacing={0}>
           <Grid container item xs={12} md={12} flexDirection="column">
             <h3>Conoce Nutriguide</h3>
             <a href="a">Acerca de</a>
