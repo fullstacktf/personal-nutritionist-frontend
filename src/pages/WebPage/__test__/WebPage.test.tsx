@@ -1,9 +1,8 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import { Home } from "../Home";
+import { WebPage } from "../WebPage";
 
-test("Home has catchword", () => {
-  render(<Home />);
+test("WebPage has catchword", () => {
+  render(<WebPage />);
   const catchWord = screen.getByText(/La web del cuidado personal/i);
   expect(catchWord).toBeInTheDocument();
 });

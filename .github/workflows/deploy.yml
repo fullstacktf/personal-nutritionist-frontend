@@ -32,7 +32,6 @@ jobs:
       - name: Push image to DO Container Registry
         run: docker push ${{ secrets.DOCKER_IMAGE_REGISTRY }}:latest
 
-
   run_new_app_containers:
     runs-on: ubuntu-latest
     needs: build_and_push

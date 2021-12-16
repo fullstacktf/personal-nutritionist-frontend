@@ -1,13 +1,13 @@
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { green, brown } from "@mui/material/colors";
 
-import { Home } from "./pages/Home/Home";
+import { WebPage } from "./pages/WebPage/WebPage";
+import { Page404 } from "./pages/Page404/Page404";
 import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { PersonalForm } from "./components/PersonalForm/PersonalForm";
-
+import { SignUp } from "./components/SignUp/SignUp";
 const theme = createTheme ({
   palette: {
     primary: {
@@ -15,17 +15,25 @@ const theme = createTheme ({
     },
     secondary: {
       main: brown[500],
-    }
+    },
+    info: {
+      main: "#FFFFFF"
+    },
   }
 });
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <NavBar />
-      <Home />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<WebPage />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </BrowserRouter>
       <Footer />
-      <PersonalForm />
+      <SignUp />
     </ThemeProvider>
   );
 }
