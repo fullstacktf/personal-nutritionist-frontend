@@ -1,5 +1,49 @@
 import { Button, Grid, Box } from "@mui/material";
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
+
+const GridPhoto = styled(Grid)(() => ({
+  height: 900,
+  backgroundImage: "url(/assets/mainphoto.jpg)",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  textAlign: "center",
+  alignItems: "center",
+  color: "white",
+}));
+
+const TypographyTitle = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.down("md")]: {
+    fontSize: 40,
+  }
+}));
+
+const ButtonLogIn = styled(Button) (() => ({
+  color: "white",
+}));
+
+const divTopStyle: CSSProperties = {
+  backgroundColor: "rgb(146, 102, 52, 0.7)",
+};
+
+const GridMarketingContainer = styled(Grid)(() => ({
+  backgroundColor: "#f8f5f2",
+  textAlign: "center",
+  alignItems: "center",
+  justifyContent: "center"
+}));
+
+const GridNutritionistContainer = styled(Grid)(() => ({
+  backgroundColor: "#ede7d3",
+  textAlign: "center",
+  alignItems: "center",
+  justifyContent: "center"
+}));
+
+const imgNutritionist: CSSProperties = {
+  height: 400,
+};
+
+export const Home: FC = () => {
 export default function Home() {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor:"#fffffe" }}>
