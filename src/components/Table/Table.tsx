@@ -49,7 +49,6 @@ export const StickyHeadTable: FC<Props> = ({ titles, data }) => {
   const rows: Data[] = data.map((item) => {
     return { name: item.name, specialties: item.specialties, contact: item.email, calendar: item.username };
   });
-
   console.log(data);
 
   const [page, setPage] = useState(0);
