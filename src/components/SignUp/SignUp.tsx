@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FC, FormEventHandler } from "react";
+import { useState, ChangeEvent, FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -39,7 +39,7 @@ export const SignUp: FC = () => {
   
   const submitData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     axios.post("https://api.nutriguide.es/auth/signup", data)
     .then(res => {
       localStorage.setItem("token", res.data);
