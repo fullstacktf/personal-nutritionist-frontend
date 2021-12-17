@@ -1,6 +1,7 @@
 import { FC, useState, ChangeEvent, CSSProperties } from "react";
-import { Input, FormControl, InputLabel } from "@mui/material";
+import { Input, FormControl,InputLabel } from "@mui/material";
 import { isValidated } from "./validation";
+
 interface Props {
   name: string;
   type: string;
@@ -15,9 +16,9 @@ const pStyle: CSSProperties = {
   color: "red"
 };
 
-export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, validation=false, title="Lexa", isRequired=false }) => {  
-  const [message, setMessage] = useState<string>("");
+export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", onChange, validation=false, isRequired=false }) => {  
   const [isActive, setActive] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   const isEmpty = (event: ChangeEvent<HTMLInputElement>) => {
     const newData = event.target.value;
@@ -25,7 +26,6 @@ export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, valida
       setActive(false);
     else
       setActive(true);
-
   };
 
   const isValid = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,11 +40,11 @@ export const InputForm: FC<Props> = ({ type, placeholder, name, onChange, valida
       isValid(event);
     }
     onChange(event);
-  };
+  }; 
 
   return (
     <FormControl variant="filled" error={message !== ""} margin="normal">
-      <InputLabel>{title} { isRequired ? "*" : null }</InputLabel>
+      <InputLabel>{title}{ isRequired ? "*" : null }</InputLabel>
       <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
       { isActive ? <p style={pStyle}>{message}</p> : null }
     </FormControl>

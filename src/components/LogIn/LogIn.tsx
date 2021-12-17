@@ -7,9 +7,10 @@ import axios from "axios";
 import { InputForm } from "../InputForm/InputForm";
 
 export const LogIn: FC = () => {
-  const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   const [isWrongRequest, setIsWrongRequest] = useState<boolean>();
+  const navigate = useNavigate();
+  
   const [data, setData] = useState({
     email: "",
     password: ""

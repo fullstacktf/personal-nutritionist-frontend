@@ -5,6 +5,7 @@ import { green, brown } from "@mui/material/colors";
 
 import { WebPage } from "./pages/WebPage/WebPage";
 import { HomePage } from "./pages/HomePage/HomePage";
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
@@ -31,8 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<WebPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/LogIn" element={<LogInPage />} />
+          <Route path="/login" element={<LogInPage />} />
           {/* <Route path="/LogIn" element={<LogInPage />} /> */}
         </Routes>
       </BrowserRouter>

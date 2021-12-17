@@ -44,7 +44,7 @@ export const Footer: FC = () => {
         <a href="a">Contáctanos</a>
       </Grid>
       <Grid item container xs={12} md={4} alignItems="center">
-        <p>2021 © Personal Nutricionist</p> 
+        <p>2021 © Nutriguide</p> 
       </Grid>
     </GridFooterContainer>
   );
