@@ -1,8 +1,7 @@
 
 import { FC } from "react";
 
-import { styled } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 
 import { LogIn } from "../../components/LogIn/LogIn";
 import { Footer } from "../../components/Footer/Footer";
