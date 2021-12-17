@@ -7,7 +7,7 @@ import { LogIn } from "../../components/LogIn/LogIn";
 import { Footer } from "../../components/Footer/Footer";
 export const LogInPage: FC = () => {
 
-  const GridImage = styled(Grid)(() => ({
+  const GridImage = styled(Grid)(({ theme }) => ({
     display: "flex",
     height: "100%",
     backgroundImage: "url(/assets/login.jpg)",
@@ -17,6 +17,9 @@ export const LogInPage: FC = () => {
     alignItems: "center",
     justifyContent: "center",
     color: "white",
+    [theme.breakpoints.down("md")]: {
+      height: "40%",
+    }
   }));
   const GridForm = styled(Grid)(() => ({
     display: "flex",

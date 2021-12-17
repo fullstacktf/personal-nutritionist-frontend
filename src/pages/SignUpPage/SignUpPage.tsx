@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import { SignUp } from "../../components/SignUp/SignUp";
 import { Footer } from "../../components/Footer/Footer";
 
-const GridSideImg = styled(Grid)(() => ({
+const GridSideImg = styled(Grid)(({ theme }) => ({
   display: "flex",
   height: "100vh",
   backgroundImage: "url(/assets/login.jpg)",
@@ -16,6 +16,9 @@ const GridSideImg = styled(Grid)(() => ({
   alignItems: "center",
   justifyContent: "center",
   color: "white",
+  [theme.breakpoints.down("md")]: {
+    height: "40%",
+  }
 }));
 
 const GridForm = styled(Grid)(() => ({
