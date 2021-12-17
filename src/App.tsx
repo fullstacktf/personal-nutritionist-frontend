@@ -5,10 +5,9 @@ import { green, brown } from "@mui/material/colors";
 
 import { WebPage } from "./pages/WebPage/WebPage";
 import { HomePage } from "./pages/HomePage/HomePage";
+import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
-import { Footer } from "./components/Footer/Footer";
 import { NavBar } from "./components/NavBar/NavBar";
-import { SignUp } from "./components/SignUp/SignUp";
 
 const theme = createTheme ({
   palette: {
@@ -32,11 +31,10 @@ function App() {
         <Routes>
           <Route path="/" element={<WebPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
-      <SignUp />
     </ThemeProvider>
   );
 }

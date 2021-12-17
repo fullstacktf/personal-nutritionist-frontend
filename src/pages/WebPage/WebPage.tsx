@@ -2,8 +2,10 @@ import { CSSProperties, FC } from "react";
 
 import { styled } from "@mui/material/styles";
 import { Button, Grid, Box, Typography } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
+import { Footer } from "../../components/Footer/Footer";
 
 const GridPhoto = styled(Grid)(() => ({
   height: 900,
@@ -56,7 +58,7 @@ export const WebPage: FC = () => {
             <TypographyTitle variant="h1">La web del cuidado personal</TypographyTitle>
             <TypographyTitle gutterBottom variant="h2">Cómoda, accesible y la mejor manera de cuidarte a ti mismo.</TypographyTitle>
           </div>
-          <ButtonLogIn variant="contained" size="large">Inicia sesión</ButtonLogIn>
+          <ButtonLogIn variant="contained" size="large" endIcon={<AccountCircle />}>Inicia sesión</ButtonLogIn>
         </Grid>
       </GridPhoto>
     
@@ -94,6 +96,7 @@ export const WebPage: FC = () => {
           <ButtonLogIn variant="contained" size="large">Comienza ahora</ButtonLogIn>
         </Grid>
       </GridNutritionistContainer>
+      <Footer />
     </Box>
   );
 };

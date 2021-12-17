@@ -1,48 +1,71 @@
-import { useState, ChangeEvent, FC, useEffect } from "react";
-import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel } from "@mui/material";
-import { InputForm } from "../InputForm/InputForm";
+import { useState, ChangeEvent, FC } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel, Typography, Alert } from "@mui/material";
+
+import { InputForm } from "../InputForm/InputForm";
+
 export const SignUp: FC = () => {
+  const [message, setMessage] = useState<string>("");
+  const [isWrongRequest, setIsWrongRequest] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
-    usuario: "",
-    contraseña: "",
+    username: "",
+    name: "",
+    password: "",
     email: "",
-    isNutritionist: ""
+    role: "Cliente"
   });
 
+  const handleisWrongRequest = (error: number) => {
+    if (error !== 200) {
+      setMessage("El usuario ya existe");
+      setIsWrongRequest(true);
+    }
+    else {
+      setMessage("El usuario se ha creado correctamente");
+      setIsWrongRequest(false);
+    }
+  };
+  
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
       [event.target.name] : event.target.value,
     });
   };
-  useEffect(() => {
-    console.log("me ejecuto");
-  });
   
-  const submitData = (event: any) => {
+  const submitData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post("http://localhost:5000/auth/signup", data)
+
+    axios.post("https://api.nutriguide.es/auth/signup", data)
     .then(res => {
-      console.log(res.data);
+      localStorage.setItem("token", res.data);
+      navigate("/home", { replace: true });
+    }).catch(function(error) {
+        handleisWrongRequest(error.response.status);
     });
   };
 
   return (
-    <FormControl>
-      <h2>Bienvenido a Nutriguide</h2>
-      <p>¿Ya tienes una cuenta?<a href="a">LogIn</a></p>
-      <InputForm onChange={handleDataChange} name="email" placeholder="Usuario@correo.com" type="email" validation={true} />
-      <InputForm onChange={handleDataChange} name="usuario" placeholder="Usuario" type="username" validation={true} />
-      <InputForm onChange={handleDataChange} name="contraseña" placeholder="Contraseña" type="password" validation={true} />
-      <InputForm onChange={handleDataChange} name="repite" placeholder="Contraseña" type="password" validation={true} />
-      <RadioGroup onChange={handleDataChange} row aria-label="gender" name="isNutritionist">
-        <FormLabel component="legend">Eres nutricionista?</FormLabel>
-        <FormControlLabel value="no" control={<Radio />} label="no" />
-        <FormControlLabel value="si" control={<Radio />} label="si" />
-      </RadioGroup>
-      <Button onClick={submitData} variant="contained" >Registrarse</Button>
-      <Button variant="contained" >back</Button>
-    </FormControl>
+    <form onSubmit={submitData}>
+      <FormControl>
+        { isWrongRequest ? <Alert severity="error">{message}</Alert> : "" } 
+        <Typography variant="h4">Bienvenido a Nutriguide</Typography>
+        <Typography variant="subtitle1">¿Ya tienes una cuenta? <Link to="/login">LogIn</Link> </Typography>
+        <InputForm onChange={handleDataChange} name="email" title="E-mail" placeholder="Alex@correo.com" type="email" validation={true} isRequired={true} />
+        <InputForm onChange={handleDataChange} name="password" title="Contraseña" placeholder="Contraseña" type="password" validation={true} isRequired={true} />
+        <InputForm onChange={handleDataChange} name="username" title="Nombre de usuario" placeholder="Alex93" type="username" validation={true} isRequired={true} />
+        <InputForm onChange={handleDataChange} name="name" title="Nombre y apellidos" placeholder="Alex Sanz" type="text" validation={false} isRequired={true} />
+        <FormLabel component="legend">Eres nutricionista?*</FormLabel>
+        <RadioGroup defaultValue={"Cliente"} onChange={handleDataChange} row aria-label="gender" name="role" sx={{ display:"flex", justifyContent:"center", marginBottom: 4 }}>
+          <FormControlLabel value="Cliente" control={<Radio required={true} />} label="No" />
+          <FormControlLabel value="Nutricionista" control={<Radio required={true} />} label="Sí" />
+        </RadioGroup>
+        <Button type="submit" variant="contained">Crea tu nueva cuenta</Button>
+      </FormControl>
+    </form>
   );
 };

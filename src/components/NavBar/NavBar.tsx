@@ -1,8 +1,8 @@
 import { CSSProperties, FC } from "react";
+import { Link } from "react-router-dom";
 
-import { styled } from "@mui/material/styles";
-import { Button } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { Button, Typography } from "@mui/material";
+import { ExitToApp } from "@mui/icons-material";
 
 import CustomizedBreadcrumbs from "../Breadcrumb/Breadcrumb";
 
@@ -19,24 +19,19 @@ const imgLogoStyle: CSSProperties = {
   height: "40px"
 };
 
-const h1TitleStyle: CSSProperties = {
+const TypographyTitleStyle: CSSProperties = {
   fontSize: "1.5em"
 };
-
-const ButtonLogIn = styled(Button)(() => ({
-  padding: "1em",
-  color: "white"
-}));
 
 export const NavBar: FC = () => {
   return (
     <div>
       <div style={divTopStyle}>
         <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
-        <h1 style={h1TitleStyle}>Nutriguide</h1>
-        <ButtonLogIn variant="text" endIcon={<AccountCircle />}>
-          Log In
-        </ButtonLogIn>
+        <Typography style={TypographyTitleStyle} variant="h1">Nutriguide</Typography>
+        <Button variant="text" endIcon={<ExitToApp />} component={Link} to="/signup" sx={{ padding: "1em", color: "white"}}>
+          Regístrate
+        </Button>
       </div>
       <CustomizedBreadcrumbs />
     </div>
