@@ -1,7 +1,7 @@
 import { CSSProperties, FC, useEffect, useState } from "react";
 import axios from "axios";
 
-import { StickyHeadTable } from "../Table/Table"; 
+import { StickyHeadTable } from "../Table/Table";
 
 const BoxStyle: CSSProperties = {
   flexGrow: 1,
@@ -21,27 +21,28 @@ const BorderStyle: CSSProperties = {
   alignItems: "center"
 };
 
-export const NutritionistList: FC = () => {
+export const ClientList: FC = () => {
   const titles = [
     { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
-    { id: "specialties", label: "ESPECIALIDADES", minWidth: 100, align: "center" },
+    { id: "typeDiet", label: "DIETA", minWidth: 100, align: "center" },
+    { id: "intolerances", label: "INTOLERANCIAS", minWidth: 100, align: "center" },
     { id: "contact", label: "CONTACTO", minWidth: 100, align: "center" },
     { id: "calendar", label: "", minWidth: 20, align: "center" },
   ];
 
-  const [nutritionists, setNutritionists] = useState();
+  const [clients, setClients] = useState();
 
   useEffect(() => {
-    axios.get("https://api.nutriguide.es/users/role/Nutricionista")
-      .then((res) => { setNutritionists(res.data); });
+    axios.get("https://api.nutriguide.es/users/role/Cliente")
+      .then((res) => { setClients(res.data); });
   }, []);
   
-  if (!nutritionists) return <div>No hay nutricionistas</div>;
+  if (!clients) return <div>No hay clientes</div>;
 
   return (
     <div style={BoxStyle}>
       <div style={BorderStyle}>
-        <StickyHeadTable name="Lista de Nutricionistas" titles={titles} data={nutritionists} />
+        <StickyHeadTable name="Lista de Clientes" titles={titles} data={clients} />
       </div>
     </div>
   );

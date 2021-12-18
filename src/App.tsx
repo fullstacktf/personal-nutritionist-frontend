@@ -11,6 +11,7 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
+import { Footer } from "./components/Footer/Footer";
 
 const theme = createTheme ({
   palette: {
@@ -28,18 +29,19 @@ const theme = createTheme ({
 
 function App() {
   const userLogged = useAppSelector((state) => state.user.token);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<WebPage />} />
-          { userLogged !== "" ? <Route path="/home" element={<HomePage />} /> : "" }
+          <Route path="/" element={ userLogged !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/login" element={<LogInPage />} />
           {/* <Route path="/LogIn" element={<LogInPage />} /> */}
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

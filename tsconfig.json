@@ -21,6 +21,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "public/assets/__tests__"  ]
+    "src", 
+    "public/assets/__tests__"
+  ]
 }

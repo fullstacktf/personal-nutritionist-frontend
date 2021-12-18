@@ -5,7 +5,6 @@ import { styled } from "@mui/material/styles";
 import { Button, Grid, Box, Typography } from "@mui/material";
 
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
-import { Footer } from "../../components/Footer/Footer";
 
 const GridPhoto = styled(Grid)(() => ({
   height: 900,
@@ -92,7 +91,6 @@ export const WebPage: FC = () => {
           <Button sx={{ color:"white" }} component={Link} to="/login" variant="contained" size="large">Comienza ahora</Button>
         </Grid>
       </GridNutritionistContainer>
-      <Footer />
     </Box>
   );
 };

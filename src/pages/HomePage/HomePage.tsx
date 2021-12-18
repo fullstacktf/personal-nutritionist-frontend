@@ -1,7 +1,9 @@
 import { CSSProperties, FC } from "react";
 
 import { Box } from "@mui/material";
+
 import { SideMenu } from "../../components/Menu/Menu";
+
 const BoxStyle: CSSProperties = {
   display: "flex",
   flexGrow: 1,
@@ -13,7 +15,7 @@ const BoxStyle: CSSProperties = {
 export const HomePage: FC = () => {
   return (
     <Box style={BoxStyle}>
-        <SideMenu></SideMenu>
+      <SideMenu />
     </Box>
   );
 };
