@@ -47,7 +47,7 @@ export const LogIn: FC = () => {
       // localStorage.setItem("token", res.data);
       console.log(res.data.token);
       dispatch(login(res.data));
-      navigate("/home", { replace: true });   
+      navigate("/home", { replace: true });
 
     }).catch( (error) => {
       handleIsWrongRequestChange(error.response.status);

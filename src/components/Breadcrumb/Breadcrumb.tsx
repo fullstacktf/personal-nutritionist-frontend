@@ -1,7 +1,9 @@
-import * as React from "react";
+import { FC } from "react";
+
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
-import { Home, ExpandMore } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -23,28 +25,28 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 }) as typeof Chip;
 
-function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
+interface Props {
+  
 }
-
-export default function CustomizedBreadcrumbs() {
+export const CustomizedBreadcrumbs: FC<Props> = () => {
+  const location = useLocation();
+  function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
+    event.preventDefault();
+    console.log(location);
+  }
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
         <StyledBreadcrumb
-          component="a"
-          href="#"
-          label="Home"
-          icon={<Home fontSize="small" />}
+          component={Link}
+          label="Nutriguide"
+          icon={<Home color="success" fontSize="small" />}
+          to="/"
         />
-        <StyledBreadcrumb component="a" href="#" label="Catalog" />
-        <StyledBreadcrumb
-          label="Accessories"
-          deleteIcon={<ExpandMore />}
-          onDelete={handleClick}
-        />
+        { location.pathname === "/login" ? <StyledBreadcrumb component={Link} to={location.pathname} label="login" /> : null }
+        { location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to={location.pathname} label="signup" /> : null }
+        { location.pathname === "/home" ? <StyledBreadcrumb component={Link} to={location.pathname} label="home" /> : null }
       </Breadcrumbs>
     </div>
   );
-}
+};
