@@ -1,8 +1,8 @@
 import { CSSProperties, FC } from "react";
+import { Link } from "react-router-dom";
 
 import { styled } from "@mui/material/styles";
 import { Button, Grid, Box, Typography } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
 
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
 import { Footer } from "../../components/Footer/Footer";
@@ -21,10 +21,6 @@ const TypographyTitle = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("md")]: {
     fontSize: 40,
   }
-}));
-
-const ButtonLogIn = styled(Button) (() => ({
-  color: "white",
 }));
 
 const divTopStyle: CSSProperties = {
@@ -58,7 +54,7 @@ export const WebPage: FC = () => {
             <TypographyTitle variant="h1">La web del cuidado personal</TypographyTitle>
             <TypographyTitle gutterBottom variant="h2">Cómoda, accesible y la mejor manera de cuidarte a ti mismo.</TypographyTitle>
           </div>
-          <ButtonLogIn variant="contained" size="large" endIcon={<AccountCircle />}>Inicia sesión</ButtonLogIn>
+          <Button sx={{ color:"white" }} component={Link} to="/login" variant="contained" size="large">Inicia sesión</Button>
         </Grid>
       </GridPhoto>
     
@@ -93,7 +89,7 @@ export const WebPage: FC = () => {
         </Grid>
         <Grid item xs={12} md={12} lg={4}>
           <Typography gutterBottom variant="h4">¿Eres nutricionista?</Typography>
-          <ButtonLogIn variant="contained" size="large">Comienza ahora</ButtonLogIn>
+          <Button sx={{ color:"white" }} component={Link} to="/login" variant="contained" size="large">Comienza ahora</Button>
         </Grid>
       </GridNutritionistContainer>
       <Footer />

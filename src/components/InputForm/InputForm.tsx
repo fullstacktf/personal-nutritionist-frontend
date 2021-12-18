@@ -33,7 +33,7 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", on
     setMessage(`${validateInfo[1]}`);
     return validateInfo[0];
   };
-
+  
   const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
     isEmpty(event);
     if(validation) {

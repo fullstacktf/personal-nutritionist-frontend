@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { useAppSelector } from "./app/hooks";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { green, brown } from "@mui/material/colors";
 
@@ -8,6 +10,7 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
+import { LogInPage } from "./pages/LogInPage/LogInPage";
 
 const theme = createTheme ({
   palette: {
@@ -24,14 +27,15 @@ const theme = createTheme ({
 });
 
 function App() {
+  const userLogged = useAppSelector((state) => state.user.token);
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<WebPage />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={ userLogged !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

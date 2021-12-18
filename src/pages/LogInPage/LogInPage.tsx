@@ -1,14 +1,13 @@
 import { FC } from "react";
 
-import { styled } from "@mui/material/styles";
-import { Grid } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 
-import { SignUp } from "../../components/SignUp/SignUp";
+import { LogIn } from "../../components/LogIn/LogIn";
 import { Footer } from "../../components/Footer/Footer";
 
-const GridSideImg = styled(Grid)(({ theme }) => ({
+const GridImage = styled(Grid)(({ theme }) => ({
   display: "flex",
-  height: "100vh",
+  height: "100%",
   backgroundImage: "url(/assets/login.jpg)",
   backgroundPosition: "center",
   backgroundSize: "cover",
@@ -30,14 +29,14 @@ const GridForm = styled(Grid)(() => ({
   justifyContent: "center",
 }));
 
-export const SignUpPage: FC = () => {
-  return (
-      <Grid item container sx={{height:"100vh", alignItems: "center", textAlign: "center"}}>
-        <GridSideImg item xs={12} md={6} lg={6}></GridSideImg>
-        <GridForm item  xs={12} md={6} lg={6}>
-          <SignUp></SignUp>
-        </GridForm>      
-        <Footer />
-      </Grid>
+export const LogInPage: FC = () => {
+  return(
+    <Grid item container sx={{ height:"100vh", alignItems: "center", textAlign: "center" }}>
+      <GridImage item xs={12} sm={6} md={6}></GridImage>
+      <GridForm item xs={12} sm={6} md={6}>
+        <LogIn />
+      </GridForm>
+      <Footer />
+    </Grid>
   );
 };
