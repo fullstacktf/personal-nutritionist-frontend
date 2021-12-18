@@ -1,9 +1,12 @@
 import { useState, ChangeEvent, FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+
 import { Button, FormControl, Typography, Alert } from "@mui/material";
 
 import axios from "axios";
 
+import { login } from "../../features/user/userSlice";
 import { InputForm } from "../InputForm/InputForm";
 
 export const LogIn: FC = () => {
@@ -33,15 +36,19 @@ export const LogIn: FC = () => {
     });
   };
 
+  const dispatch = useAppDispatch();
+
   const submitData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     axios.post("https://api.nutriguide.es/auth/login", data)
     .then(res => {
       handleIsWrongRequestChange(res.status);
-      localStorage.setItem("token", res.data);
-
+      // localStorage.setItem("token", res.data);
+      console.log(res.data.token);
+      dispatch(login(res.data));
       navigate("/home", { replace: true });   
+
     }).catch( (error) => {
       handleIsWrongRequestChange(error.response.status);
     });

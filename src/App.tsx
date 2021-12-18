@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { useAppSelector } from "./app/hooks";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { green, brown } from "@mui/material/colors";
 
@@ -25,13 +27,14 @@ const theme = createTheme ({
 });
 
 function App() {
+  const userLogged = useAppSelector((state) => state.user.token);
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path="/" element={<WebPage />} />
-          <Route path="/home" element={<HomePage />} />
+          { userLogged !== "" ? <Route path="/home" element={<HomePage />} /> : "" }
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/login" element={<LogInPage />} />

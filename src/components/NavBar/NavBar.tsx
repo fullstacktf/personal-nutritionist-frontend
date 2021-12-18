@@ -1,6 +1,9 @@
 import { CSSProperties, FC } from "react";
 import { Link } from "react-router-dom";
 
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { logout } from "../../features/user/userSlice";
+
 import { Button, Typography, Avatar } from "@mui/material";
 import { ExitToApp, AccountCircle } from "@mui/icons-material";
 
@@ -19,7 +22,7 @@ const divTopSideStyle: CSSProperties = {
   display: "flex",
   width: "20%",
   alignItems: "center",
-  justifyContent: "space-around",
+  justifyContent: "center",
 };
 
 const imgLogoStyle: CSSProperties = {
@@ -36,6 +39,13 @@ const TypographyTitleStyle: CSSProperties = {
 };
 
 export const NavBar: FC = () => {
+  const userLogged = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
+  
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
+
   return (
     <div>
       <div style={divTopStyle}>
@@ -43,16 +53,21 @@ export const NavBar: FC = () => {
           <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         </div>
         <Typography style={TypographyTitleStyle} variant="h1">Nutriguide</Typography>
-        <div style={divTopSideStyle}>
-          <Button variant="text" endIcon={<AccountCircle />} component={Link} to="/signup" sx={{ padding: "1em", color: "white"}}>
-            Regístrate
-          </Button>
-
-          <Avatar variant="square">A</Avatar>
-          <Button variant="contained" color="error" endIcon={<ExitToApp />} component={Link} to="/logout" sx={{ padding: "1em", margin: "0.5em"}}>
-            Cierra Sesión
-          </Button>
-        </div>
+        
+        { userLogged !== "" ? 
+            <div style={divTopSideStyle}>
+              <Avatar variant="square">A</Avatar>
+              <Button onClick={handleLogOut} variant="contained" color="error" endIcon={<ExitToApp />} component={Link} to="/" sx={{ padding: "1em", margin: "0.5em"}}>
+                Cierra Sesión
+              </Button>
+            </div>
+          :  
+            <div style={divTopSideStyle}>
+              <Button variant="text" endIcon={<AccountCircle />} component={Link} to="/signup" sx={{ padding: "1em", color: "white"}}>
+                Regístrate
+              </Button>
+            </div>
+        }
       </div>
       <CustomizedBreadcrumbs />
     </div>
