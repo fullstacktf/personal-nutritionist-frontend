@@ -33,9 +33,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          {/* Jugar con las rutas */}
-          <Route path="/" element={<WebPage />} />
-          { userLogged !== "" ? <Route path="/home" element={<HomePage />} /> : "" }
+          <Route path="/" element={ userLogged !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />

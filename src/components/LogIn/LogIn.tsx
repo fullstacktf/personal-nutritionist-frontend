@@ -44,11 +44,8 @@ export const LogIn: FC = () => {
     axios.post("https://api.nutriguide.es/auth/login", data)
     .then(res => {
       handleIsWrongRequestChange(res.status);
-      // localStorage.setItem("token", res.data);
-      console.log(res.data.token);
       dispatch(login(res.data));
-      navigate("/home", { replace: true });   
-
+      navigate("/", { replace: true });   
     }).catch( (error) => {
       handleIsWrongRequestChange(error.response.status);
     });
@@ -59,7 +56,7 @@ export const LogIn: FC = () => {
       { isWrongRequest ? <Alert severity="error">{message}</Alert> : null }
       <FormControl>
         <Typography variant="h4">Bienvenido a Nutriguide</Typography>
-        <Typography variant="subtitle1">¿Eres nuevo?<a href="a">Crear una cuenta</a></Typography>
+        <Typography variant="subtitle1">¿Eres nuevo? <a href="a">Crear una cuenta</a></Typography>
         <InputForm onChange={handleDataChange} title="E-mail" name="email" placeholder="Escribe tu email" type="email" validation={true} />
         <InputForm onChange={handleDataChange} title="Contraseña" name="password" placeholder="Escribe tu contraseña" type="password" validation={false} />
         <Button sx={{marginTop: 4}} type="submit" variant="contained" >Iniciar Sesión</Button>
