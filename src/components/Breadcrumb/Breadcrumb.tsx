@@ -4,14 +4,15 @@ import { Link, useLocation} from "react-router-dom";
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
 import { Home } from "@mui/icons-material";
+import { grey } from "@mui/material/colors";
 
 import { useAppSelector } from "../../app/hooks";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
     theme.palette.mode === "light"
-      ? theme.palette.grey[100]
-      : theme.palette.grey[800];
+      ? grey[100]
+      : grey[800];
   return {
     backgroundColor,
     height: theme.spacing(3),
