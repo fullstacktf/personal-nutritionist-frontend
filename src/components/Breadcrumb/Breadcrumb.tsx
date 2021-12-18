@@ -1,9 +1,9 @@
 import { FC } from "react";
+import { Link, useLocation} from "react-router-dom";
 
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
 import { Home } from "@mui/icons-material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -43,9 +43,9 @@ export const CustomizedBreadcrumbs: FC<Props> = () => {
           icon={<Home color="success" fontSize="small" />}
           to="/"
         />
-        { location.pathname === "/login" ? <StyledBreadcrumb component={Link} to={location.pathname} label="login" /> : null }
-        { location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to={location.pathname} label="signup" /> : null }
-        { location.pathname === "/home" ? <StyledBreadcrumb component={Link} to={location.pathname} label="home" /> : null }
+        { location.pathname === "/login" ? <StyledBreadcrumb component={Link} to="login" label="Iniciar Sesión" /> : null }
+        { location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to="/signup" label="Registrarse" /> : null }
+        { location.pathname === "/home" ? <StyledBreadcrumb component={Link} to="/home" label="home" /> : null }
       </Breadcrumbs>
     </div>
   );
