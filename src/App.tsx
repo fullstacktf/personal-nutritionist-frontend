@@ -33,12 +33,12 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+          {/* Jugar con las rutas */}
           <Route path="/" element={<WebPage />} />
           { userLogged !== "" ? <Route path="/home" element={<HomePage />} /> : "" }
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<Page404 />} />
           <Route path="/login" element={<LogInPage />} />
-          {/* <Route path="/LogIn" element={<LogInPage />} /> */}
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
