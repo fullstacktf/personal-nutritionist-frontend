@@ -5,6 +5,8 @@ import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
 import { Home } from "@mui/icons-material";
 
+import { useAppSelector } from "../../app/hooks";
+
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
     theme.palette.mode === "light"
@@ -25,27 +27,22 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 }) as typeof Chip;
 
-interface Props {
-  
-}
-export const CustomizedBreadcrumbs: FC<Props> = () => {
+export const CustomizedBreadcrumbs: FC = () => {
   const location = useLocation();
-  function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
+  const userLogged = useAppSelector((state) => state.user);
+
+  const handleClick = (event: React.MouseEvent<Element, MouseEvent>) => {
     event.preventDefault();
     console.log(location);
-  }
+  };
+
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <StyledBreadcrumb
-          component={Link}
-          label="Nutriguide"
-          icon={<Home color="success" fontSize="small" />}
-          to="/"
-        />
-        { location.pathname === "/login" ? <StyledBreadcrumb component={Link} to="login" label="Iniciar Sesión" /> : null }
-        { location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to="/signup" label="Registrarse" /> : null }
-        { location.pathname === "/home" ? <StyledBreadcrumb component={Link} to="/home" label="home" /> : null }
+        {userLogged.token === "" ?  <StyledBreadcrumb component={Link} label="Nutriguide" icon={<Home fontSize="small" />} to="/" /> :null}
+        {location.pathname === "/login" ? <StyledBreadcrumb component={Link} to="/login" label="Iniciar Sesión" /> : null}
+        {location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to="/signup" label="Registrarse" /> : null}
+        {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} component={Link} to="/" label={userLogged.name}/> : null}
       </Breadcrumbs>
     </div>
   );

@@ -23,7 +23,7 @@ export const SideMenu: FC = () => {
     { icon: <MenuBook color="info" />, name: "Recipes" },
   ];
 
-  if (userRole === "Nutricionista"){
+  if (userRole === "Nutricionista") {
     items[3].icon = <People color="info" />;
     items[3].name = "Clients";
   }
