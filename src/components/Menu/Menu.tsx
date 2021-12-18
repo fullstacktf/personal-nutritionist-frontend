@@ -11,7 +11,7 @@ import { IconMenu } from "./IconMenu";
 
 export const SideMenu: FC = () => {
   const [open, setOpen] = React.useState(true);
-  const userRole = useAppSelector((state) => state.user.role);
+  const userInfo = useAppSelector((state) => state.user.userInfo);
 
   const menuIcon = open ? <Close></Close> : <Menu></Menu>;
   
@@ -23,7 +23,7 @@ export const SideMenu: FC = () => {
     { icon: <MenuBook color="info" />, name: "Recipes" },
   ];
 
-  if (userRole === "Nutricionista") {
+  if (userInfo.role === "Nutricionista") {
     items[3].icon = <People color="info" />;
     items[3].name = "Clients";
   }
@@ -31,7 +31,6 @@ export const SideMenu: FC = () => {
   const GridMenu = styled(Grid)(() => ({
     background: "#21252B",
     display: "flex",
-    height: "98%",
     flexDirection: "column",
     color: "white",
   }));
