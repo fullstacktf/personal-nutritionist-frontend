@@ -7,7 +7,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
-//   <React.StrictMode>
 //     <App />
 //   </React.StrictMode>,
 //   document.getElementById("root")
