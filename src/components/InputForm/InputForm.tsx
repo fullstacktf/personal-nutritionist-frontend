@@ -1,6 +1,8 @@
 import { FC, useState, ChangeEvent, CSSProperties } from "react";
 import { Input, FormControl,InputLabel } from "@mui/material";
 import { isValidated } from "./validation";
+import { styled } from "@mui/material/styles";
+import { useAppSelector } from "../../app/hooks";
 
 interface Props {
   name: string;
@@ -16,9 +18,14 @@ const pStyle: CSSProperties = {
   color: "red"
 };
 
+const FormControlStyled = styled(FormControl)(() => ({
+  width: "90%",
+}));
+
 export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", onChange, validation=false, isRequired=false }) => {  
   const [isActive, setActive] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+  const userLogged = useAppSelector((state) => state.user);
 
   const isEmpty = (event: ChangeEvent<HTMLInputElement>) => {
     const newData = event.target.value;
@@ -43,10 +50,10 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", on
   }; 
 
   return (
-    <FormControl variant="filled" error={message !== ""} margin="normal">
+    <FormControlStyled variant="filled" error={message !== ""} margin="normal">
       <InputLabel>{title}{ isRequired ? "*" : null }</InputLabel>
       <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
       { isActive ? <p style={pStyle}>{message}</p> : null }
-    </FormControl>
+    </FormControlStyled>
   );
 };

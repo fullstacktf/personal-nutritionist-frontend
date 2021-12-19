@@ -1,13 +1,18 @@
-import * as React from "react";
+import { FC } from "react";
+import { Link, useLocation} from "react-router-dom";
+
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
-import { Home, ExpandMore } from "@mui/icons-material";
+import { Home } from "@mui/icons-material";
+import { grey } from "@mui/material/colors";
+
+import { useAppSelector } from "../../app/hooks";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
     theme.palette.mode === "light"
-      ? theme.palette.grey[100]
-      : theme.palette.grey[800];
+      ? grey[100]
+      : grey[800];
   return {
     backgroundColor,
     height: theme.spacing(3),
@@ -23,28 +28,24 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 }) as typeof Chip;
 
-function handleClick(event: React.MouseEvent<Element, MouseEvent>) {
-  event.preventDefault();
-  console.info("You clicked a breadcrumb.");
-}
+export const CustomizedBreadcrumbs: FC = () => {
+  const location = useLocation();
+  const userLogged = useAppSelector((state) => state.user);
 
-export default function CustomizedBreadcrumbs() {
+  const handleClick = (event: React.MouseEvent<Element, MouseEvent>) => {
+    event.preventDefault();
+    console.log(location);
+  };
+
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        <StyledBreadcrumb
-          component="a"
-          href="#"
-          label="Home"
-          icon={<Home fontSize="small" />}
-        />
-        <StyledBreadcrumb component="a" href="#" label="Catalog" />
-        <StyledBreadcrumb
-          label="Accessories"
-          deleteIcon={<ExpandMore />}
-          onDelete={handleClick}
-        />
+        {userLogged.token === "" ?  <StyledBreadcrumb component={Link} label="Nutriguide" icon={<Home fontSize="small" />} to="/" /> :null}
+        {location.pathname === "/login" ? <StyledBreadcrumb component={Link} to="/login" label="Iniciar Sesión" /> : null}
+        {location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to="/signup" label="Registrarse" /> : null}
+        {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} component={Link} to="/" label={userLogged.name}/> : null}
+        {location.pathname === "/personal" ? <StyledBreadcrumb component={Link} to="/personal" label="Información personal" /> : null}
       </Breadcrumbs>
     </div>
   );
-}
+};
