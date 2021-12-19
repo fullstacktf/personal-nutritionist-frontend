@@ -2,7 +2,7 @@ import { FC, useState, ChangeEvent, CSSProperties } from "react";
 import { Input, FormControl,InputLabel } from "@mui/material";
 import { isValidated } from "./validation";
 import { styled } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import { useAppSelector } from "../../app/hooks";
 
 interface Props {
   name: string;
@@ -25,7 +25,9 @@ const FormControlStyled = styled(FormControl)(() => ({
 export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", onChange, validation=false, isRequired=false }) => {  
   const [isActive, setActive] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
+  const userLogged = useAppSelector((state) => state.user);
 
+  console.log(userLogged);
   const isEmpty = (event: ChangeEvent<HTMLInputElement>) => {
     const newData = event.target.value;
     if(newData === "")
