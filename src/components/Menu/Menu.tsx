@@ -19,7 +19,7 @@ export const SideMenu: FC = () => {
     { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader> },
     { icon: <Event color="info" />, name: "Calendario" },
     { icon: <Settings color="info" />, name: "Configuración" },
-    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionistas", separator: <ListSubheader>Servicios</ListSubheader> },
+    { icon: <SupervisedUserCircle color="info" />, name: "Nutricionistas", separator: <ListSubheader>Servicios</ListSubheader> },
     { icon: <MenuBook color="info" />, name: "Recetas" },
   ];
 
