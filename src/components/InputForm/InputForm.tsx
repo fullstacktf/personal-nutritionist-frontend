@@ -27,7 +27,6 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", on
   const [message, setMessage] = useState<string>("");
   const userLogged = useAppSelector((state) => state.user);
 
-  console.log(userLogged);
   const isEmpty = (event: ChangeEvent<HTMLInputElement>) => {
     const newData = event.target.value;
     if(newData === "")
