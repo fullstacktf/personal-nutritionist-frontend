@@ -13,7 +13,6 @@ import { InputForm } from "../InputForm/InputForm";
 const FormContainer: CSSProperties = {
   display: "flex",
   flexGrow: 1,
-  // width: "100vh",
   // height: "70vh",
   justifyContent: "center",
   alignItems: "center",
