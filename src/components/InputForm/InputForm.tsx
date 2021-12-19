@@ -52,7 +52,7 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", on
   return (
     <FormControlStyled variant="filled" error={message !== ""} margin="normal">
       <InputLabel>{title}{ isRequired ? "*" : null }</InputLabel>
-      <Input id="input-with-sx" onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
+      <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
       { isActive ? <p style={pStyle}>{message}</p> : null }
     </FormControlStyled>
   );
