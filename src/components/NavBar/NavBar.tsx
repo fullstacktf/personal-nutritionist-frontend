@@ -57,7 +57,7 @@ export const NavBar: FC = () => {
         
         { userToken !== "" ? 
             <div style={divTopSideStyle}>
-              <Avatar variant="rounded" >{userInfo.name.charAt(0).toUpperCase()}</Avatar>
+              <Avatar variant="rounded" src={userInfo.photo}> {userInfo.name.charAt(0).toUpperCase()}</Avatar>
               <Button 
                 onClick={handleLogOut}
                 variant="contained" 

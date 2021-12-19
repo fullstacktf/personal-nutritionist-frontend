@@ -1,12 +1,11 @@
 import * as React from "react";
 import { FC } from "react";
 
-import { useAppSelector } from "../../app/hooks";
-
 import { Grid, Button, ListSubheader, Typography } from "@mui/material";
 import { Close, Menu, Home, People, Event, Settings, MenuBook, SupervisedUserCircle } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
+import { useAppSelector } from "../../app/hooks";
 import { IconMenu } from "./IconMenu";
 
 export const SideMenu: FC = () => {
