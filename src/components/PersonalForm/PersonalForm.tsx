@@ -41,7 +41,7 @@ export const PersonalForm: FC = () => {
   const [data, setData] = useState({
     name: "",
     phone: 0,
-    Descripcion: ""
+    description: ""
   });
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
