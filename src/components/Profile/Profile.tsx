@@ -1,10 +1,12 @@
 import { FC } from "react";
 
-import { useAppSelector } from "../../app/hooks";
-
 import { Grid, Avatar, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Phone, Mail } from "@mui/icons-material";
+
+interface Props {
+  userInfo: any;
+}
 
 const GridContainer = styled(Grid) (() => ({
   display: "flex",
@@ -24,9 +26,7 @@ const GridProfileContainer = styled(Grid) (() => ({
   borderRadius: "5px",
 }));
 
-export const Profile: FC = () => {
-  const userInfo = useAppSelector((state) => state.user.userInfo);
-
+export const Profile: FC<Props> = ({ userInfo }) => {
   return (
     <GridContainer container>
       <GridProfileContainer container item >
