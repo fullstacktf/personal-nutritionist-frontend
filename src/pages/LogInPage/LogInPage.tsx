@@ -16,22 +16,22 @@ const GridImage = styled(Grid)(({ theme }) => ({
   justifyContent: "center",
   color: "white",
   [theme.breakpoints.down("md")]: {
-    height: "40%",
+    height: "40%"
   }
 }));
 
 const GridForm = styled(Grid)(() => ({
   display: "flex",
-  height: "100vh",
+  height: "100%",
   backgroundColor: "#efefef",
   textAlign: "center",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "center"
 }));
 
 export const LogInPage: FC = () => {
   return(
-    <Grid item container sx={{ height:"100vh", alignItems: "center", textAlign: "center" }}>
+    <Grid item container sx={{ height:"88vh", alignItems: "center", textAlign: "center" }}>
       <GridImage item xs={12} sm={6} md={6}></GridImage>
       <GridForm item xs={12} sm={6} md={6}>
         <LogIn />

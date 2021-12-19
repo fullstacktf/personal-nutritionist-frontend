@@ -1,99 +1,39 @@
 import { CSSProperties, FC } from "react";
 
 import { styled } from "@mui/material/styles";
-import { Grid }  from "@mui/material";
+import { Grid, Link, Typography }  from "@mui/material";
 
-// const GridFooterContainer = styled(Grid)(() => ({
-//   backgroundColor: "#937A61",
-//   textAlign: "center",
-//   justifyContent: "center",
-// }));
+const GridFooterContainer = styled(Grid)(() => ({
+  backgroundColor: "#21252B",
+  textAlign: "center",
+  justifyContent: "space-between",
+  alignItems: "center",
+  color: "white"
+}));
 
-const FooterContainer: CSSProperties = {
-  backgroundColor: "#937A61",
-  display: "flex",
+const GridLeftItems = styled(Grid)(() => ({
   justifyContent: "space-evenly",
-  alignItems: "center",
-  paddingBottom: "5px"
-};
+  alignItems: "center"
+}));
 
-const FlexContainer: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  paddingBottom: "10px"
-};
-
-const imgLogo: CSSProperties = {
+const LogoStyle: CSSProperties = {
   height: 40,
   width: 40
 };
 
 export const Footer: FC = () => {
   return (
-    // <GridFooterContainer container>
-    //   <Grid item xs={12} md={4}>
-    //     <Grid container spacing={0}>
-    //       <Grid container item xs={12} md={12} flexDirection="column">
-    //         <h3>Conoce Nutriguide</h3>
-    //         <a href="a">Acerca de</a>
-    //         <a href="a">Preguntas Frecuentes</a>
-    //       </Grid>
-    //       <Grid item xs={12} md={12}>
-    //         <a href="a">
-    //           <img style={imgLogo} src='/assets/Facebook.png' alt="facebook icon"/>
-    //         </a>
-    //         <a href="a">
-    //           <img style={imgLogo} src='/assets/Twitter.png' alt="twitter icon"/>
-    //         </a>
-    //         <a href="https://www.instagram.com/nutriguide_es/">
-    //           <img style={imgLogo} src="/assets/Instagram.png" alt="instragram icon"/>
-    //         </a>
-    //       </Grid>
-    //     </Grid>
-    //   </Grid>
-    //   <Grid item container xs={12} md={4} flexDirection="column">
-    //     <h3>¿Quiénes somos?</h3>
-    //     <a href="a">Equipo</a>
-    //     <a href="a">Documentación</a>
-    //     <a href="a">Contáctanos</a>
-    //   </Grid>
-    //   <Grid item container xs={12} md={4} alignItems="center">
-    //     <p>2021 © Nutriguide</p> 
-    //   </Grid>
-    // </GridFooterContainer>
-
-    <div style={FooterContainer}>
-      <div style={FlexContainer}>
-        <div style={FlexContainer}>
-          <h3>Conoce Nutriguide</h3>
-          <a href="a">Acerca de</a>
-          <a href="a">Preguntas Frecuentes</a>
-        </div>
-        <div>
-          <a href="a">
-            <img style={imgLogo} src='/assets/Facebook.png' alt="facebook icon"/>
-          </a>
-          <a href="a">
-            <img style={imgLogo} src='/assets/Twitter.png' alt="twitter icon"/>
-          </a>
-          <a href="https://www.instagram.com/nutriguide_es/">
-            <img style={imgLogo} src="/assets/Instagram.png" alt="instragram icon"/>
-          </a>
-        </div>
-      </div>
-
-      <div style={FlexContainer}>
-        <h3>¿Quiénes somos?</h3>
-        <a href="a">Equipo</a>
-        <a href="a">Documentación</a>
-        <a href="a">Contáctanos</a>
-      </div>
-
-      <div>
-        <p>2021 © Nutriguide</p>
-      </div>
-    </div>
+    <GridFooterContainer container>
+      <GridLeftItems container item xs={2} md={2} lg={2}>
+        <Link href="https://docs.nutriguide.es" underline="hover" color="white"><b>Docs</b></Link>
+        <Link href="a" underline="hover" color="white"><b>Team</b></Link>
+        <Link href="https://www.instagram.com/nutriguide_es/">
+          <img style={LogoStyle} src="/assets/Instagram.png" alt="instragram icon"/>
+        </Link>
+      </GridLeftItems>
+      <Grid container item xs={2} md={2} lg={2} sx={{ justifyContent:"center" }}>
+        <Typography variant="subtitle1">2021 © Nutriguide</Typography> 
+      </Grid>
+    </GridFooterContainer>
   );
 };

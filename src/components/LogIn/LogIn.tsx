@@ -1,8 +1,9 @@
 import { useState, ChangeEvent, FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 
 import { Button, FormControl, Typography, Alert } from "@mui/material";
+import ALink from "@mui/material/Link";
 
 import axios from "axios";
 
@@ -54,9 +55,11 @@ export const LogIn: FC = () => {
   return (
     <form onSubmit={submitData}>
       { isWrongRequest ? <Alert severity="error">{message}</Alert> : null }
-      <FormControl>
+      <FormControl sx={{ marginTop: {xs: "-350px", md: "0px", lg: "0px", xl: "0px"} }}>
         <Typography variant="h4">Bienvenido a Nutriguide</Typography>
-        <Typography variant="subtitle1">¿Eres nuevo?<a href="a">Crear una cuenta</a></Typography>
+        <Typography variant="subtitle1">
+          ¿Eres nuevo? <ALink underline="hover" component={Link} to="/signup" color="black"><b>Crear una cuenta</b></ALink>
+        </Typography>
         <InputForm onChange={handleDataChange} title="E-mail" name="email" placeholder="Escribe tu email" type="email" validation={true} />
         <InputForm onChange={handleDataChange} title="Contraseña" name="password" placeholder="Escribe tu contraseña" type="password" validation={false} />
         <Button sx={{marginTop: 4}} type="submit" variant="contained" >Iniciar Sesión</Button>

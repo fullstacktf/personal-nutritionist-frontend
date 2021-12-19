@@ -7,7 +7,7 @@ import { Button, Grid, Box, Typography } from "@mui/material";
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
 
 const GridPhoto = styled(Grid)(() => ({
-  height: 900,
+  height: "95vh",
   backgroundImage: "url(/assets/mainphoto.jpg)",
   backgroundPosition: "center",
   backgroundSize: "cover",
@@ -22,7 +22,7 @@ const TypographyTitle = styled(Typography)(({ theme }) => ({
   }
 }));
 
-const divTopStyle: CSSProperties = {
+const DivTopStyle: CSSProperties = {
   backgroundColor: "rgb(146, 102, 52, 0.7)",
 };
 
@@ -30,18 +30,21 @@ const GridMarketingContainer = styled(Grid)(() => ({
   backgroundColor: "#f8f5f2",
   textAlign: "center",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+  marginBottom: "15px"
 }));
 
 const GridNutritionistContainer = styled(Grid)(() => ({
   backgroundColor: "#ede7d3",
   textAlign: "center",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+  marginBottom: "-10px"
 }));
 
 const imgNutritionist: CSSProperties = {
-  height: 400,
+  height: 350,
+  marginTop: "-30px"
 };
 
 export const WebPage: FC = () => {
@@ -49,7 +52,7 @@ export const WebPage: FC = () => {
     <Box>
       <GridPhoto container>
         <Grid item xs={12} md={12} lg={12}>
-          <div style={divTopStyle}>
+          <div style={DivTopStyle}>
             <TypographyTitle variant="h1">La web del cuidado personal</TypographyTitle>
             <TypographyTitle gutterBottom variant="h2">Cómoda, accesible y la mejor manera de cuidarte a ti mismo.</TypographyTitle>
           </div>
@@ -62,6 +65,7 @@ export const WebPage: FC = () => {
           cardImage="/assets/profesionals.jpg"  
           name="Los mejores profesionales" 
           info="La web en la que encontrarás a los verdaderos expertos"
+          style={{ marginTop: "-35px" }}
           altInfo="Nutricionista atendiendo a cliente"
         />
         <MarketingCard 

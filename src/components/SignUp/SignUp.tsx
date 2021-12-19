@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel, Typography, Alert } from "@mui/material";
+import ALink from "@mui/material/Link";
 
 import { InputForm } from "../InputForm/InputForm";
 
@@ -33,7 +34,7 @@ export const SignUp: FC = () => {
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
-      [event.target.name] : event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
   
@@ -51,10 +52,12 @@ export const SignUp: FC = () => {
 
   return (
     <form onSubmit={submitData}>
-      <FormControl>
+      <FormControl sx={{ marginTop: {xs: "-250px", md: "0px", lg: "0px", xl: "0px"} }}>
         { isWrongRequest ? <Alert severity="error">{message}</Alert> : "" } 
         <Typography variant="h4">Bienvenido a Nutriguide</Typography>
-        <Typography variant="subtitle1">¿Ya tienes una cuenta? <Link to="/login">LogIn</Link> </Typography>
+        <Typography variant="subtitle1">
+          ¿Ya tienes una cuenta? <ALink underline="hover" component={Link} to="/login" color="black"><b>Inicia sesión</b></ALink>
+        </Typography>
         <InputForm onChange={handleDataChange} name="email" title="E-mail" placeholder="Alex@correo.com" type="email" validation={true} isRequired={true} />
         <InputForm onChange={handleDataChange} name="password" title="Contraseña" placeholder="Contraseña" type="password" validation={true} isRequired={true} />
         <InputForm onChange={handleDataChange} name="username" title="Nombre de usuario" placeholder="Alex93" type="username" validation={true} isRequired={true} />
