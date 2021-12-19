@@ -7,7 +7,7 @@ import { logout } from "../../features/user/userSlice";
 import { Button, Typography, Avatar } from "@mui/material";
 import { ExitToApp, AccountCircle } from "@mui/icons-material";
 
-import CustomizedBreadcrumbs from "../Breadcrumb/Breadcrumb";
+import { CustomizedBreadcrumbs } from "../Breadcrumb/Breadcrumb";
 
 const divTopStyle: CSSProperties = {
   backgroundColor: "#937A61",
