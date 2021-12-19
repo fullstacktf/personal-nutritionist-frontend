@@ -38,7 +38,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/personal" element={<PersonalPage/>} />
+          <Route path="/personal" element={ userLogged !== "" ? <PersonalPage/> : <WebPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
