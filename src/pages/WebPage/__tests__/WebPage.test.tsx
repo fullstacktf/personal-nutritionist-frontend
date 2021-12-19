@@ -1,9 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import { WebPage } from "../WebPage";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import { store } from "../../../app/store";
+import { WebPage } from "../WebPage";
 
 test("WebPage has catchword", () => {
-  // render(<BrowserRouter><WebPage/></BrowserRouter>);
-  // const catchWord = screen.getByText(/La web del cuidado personal/i);
-  // expect(catchWord).toBeInTheDocument();
+  render(<Provider store={store}><BrowserRouter><WebPage /></BrowserRouter></Provider>);
+  const catchWord = screen.getByText(/La web del cuidado personal/i);
+  expect(catchWord).toBeInTheDocument();
 });
