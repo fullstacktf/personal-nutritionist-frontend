@@ -17,15 +17,15 @@ export const SideMenu: FC = () => {
   
   const items = [
     { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader> },
-    { icon: <Event color="info" />, name: "Calendar" },
-    { icon: <Settings color="info" />, name: "Settings" },
-    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionists", separator: <ListSubheader>Services</ListSubheader> },
-    { icon: <MenuBook color="info" />, name: "Recipes" },
+    { icon: <Event color="info" />, name: "Calendario" },
+    { icon: <Settings color="info" />, name: "Configuración" },
+    { icon: <SupervisedUserCircle color="info" />, name: "Nutricionistas", separator: <ListSubheader>Servicios</ListSubheader> },
+    { icon: <MenuBook color="info" />, name: "Recetas" },
   ];
 
   if (userRole === "Nutricionista") {
     items[3].icon = <People color="info" />;
-    items[3].name = "Clients";
+    items[3].name = "Clientes";
   }
 
   const GridMenu = styled(Grid)(() => ({

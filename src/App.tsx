@@ -11,6 +11,7 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
+import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
 
 const theme = createTheme ({
   palette: {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
+          <Route path="/personal" element={ userLogged !== "" ? <PersonalPage/> : <WebPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
