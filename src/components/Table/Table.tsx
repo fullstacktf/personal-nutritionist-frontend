@@ -61,6 +61,7 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
   const rows: Data[] = data.map((item) => {
     const specialties = item.specialties != null ? item.specialties.join(", ") : item.specialties;
     const intolerances = item.intolerances != null ? item.intolerances.join(", ") : item.intolerances;
+    const phone = item.phone === 0 ? "-" : item.phone;
 
     return {
       name: 
@@ -74,7 +75,7 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
       contact:
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div style={{ background: "#ffa726", borderRadius: "5px" }}>{item.email}</div>
-          <div style={{ background: "#1de9b6", borderRadius: "5px" }}>{item.phone}</div>
+          <div style={{ background: "#1de9b6", borderRadius: "5px" }}>{phone}</div>
         </div>,
       calendar: 
         <IconButton aria-label="fingerprint" color="secondary">

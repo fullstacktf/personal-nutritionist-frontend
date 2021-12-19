@@ -44,11 +44,8 @@ export const LogIn: FC = () => {
     axios.post("https://api.nutriguide.es/auth/login", data)
     .then(res => {
       handleIsWrongRequestChange(res.status);
-      // localStorage.setItem("token", res.data);
-      console.log(res.data.token);
       dispatch(login(res.data));
       navigate("/", { replace: true });   
-
     }).catch( (error) => {
       handleIsWrongRequestChange(error.response.status);
     });
