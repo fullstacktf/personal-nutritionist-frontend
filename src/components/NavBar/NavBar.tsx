@@ -47,7 +47,7 @@ export const NavBar: FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ height: "7.6vh" }}>
       <div style={divTopStyle}>
         <div style={divTopSideStyle}>
           <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />

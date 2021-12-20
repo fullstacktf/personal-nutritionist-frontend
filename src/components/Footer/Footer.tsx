@@ -8,7 +8,8 @@ const GridFooterContainer = styled(Grid)(() => ({
   textAlign: "center",
   justifyContent: "space-between",
   alignItems: "center",
-  color: "white"
+  color: "white",
+  height: "4.4vh"
 }));
 
 const GridLeftItems = styled(Grid)(() => ({
