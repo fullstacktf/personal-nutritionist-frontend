@@ -1,9 +1,3 @@
-<<<<<<< HEAD:src/components/Forms/HealthForm/HealthForm.tsx
-import { useState, ChangeEvent, FC } from "react";
-import { Button, FormControl, FormGroup, Select, InputLabel, SelectChangeEvent, MenuItem } from "@mui/material";
-import { InputForm } from "../../InputForm/InputForm";
-import { Tags } from "../../Autocomplete/Autocomplete";
-=======
 import { useState, ChangeEvent, FC, CSSProperties  } from "react";
 import { Button, FormControl, Box, Select, MenuItem, InputLabel, SelectChangeEvent } from "@mui/material";
 
@@ -15,7 +9,7 @@ import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { styled } from "@mui/material/styles";
 
-import { Tags } from "../Autocomplete/Autocomplete";
+import { Tags } from "../../../components/Autocomplete/Autocomplete";
 import { InputForm } from "../InputForm/InputForm";
 
 const FormContainer: CSSProperties = {
@@ -45,7 +39,6 @@ const ButtonStyled = styled(Button)(() => ({
   color: "white",
 }));
 
->>>>>>> ae014caa00d64195815a7f34098c4811e330664d:src/components/HealthForm/HealthForm.tsx
 
 export const HealthForm: FC = () => {
   const [data, setData] = useState({

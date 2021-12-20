@@ -2,8 +2,8 @@ import { CSSProperties, FC } from "react";
 
 import { Box } from "@mui/material";
 
-import { SideMenu } from "../../components/Menu/Menu";
-import { VerificationForm } from "../../components/VerificationForm/VerificationForm";
+import { SideMenu } from "../../../components/Menu/Menu";
+import { PersonalForm } from "../../../components/Forms/PersonalForm/PersonalForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
@@ -51,8 +51,8 @@ const TitleContainerStyle: CSSProperties = {
 
 const SeparatorStyle: CSSProperties = {
   borderBottom: "3px solid #CCC4C5",
-  width: "100%",
-  height: "1%"
+  width:"100%",
+  height:"1%"
 };
 
 
@@ -80,22 +80,22 @@ const PersonalFormContainerStyle: CSSProperties = {
   alignItems: "center",
 };
 
-export const VerificationPage: FC = () => {
+export const PersonalPage: FC = () => {
   return (
     <Box style={BoxStyle}>
-      <SideMenu />
+      <SideMenu></SideMenu>
       <div style={BorderStyle}>
         <div style={FormContainerStyle}>
           <div style={HeaderStyle}>
-            <div style={TitleContainerStyle}><h2>Verifícate</h2></div>
+            <div style={TitleContainerStyle}><h2>Tu información personal</h2></div>
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
             <div style={DescriptionContainerStyle}>
-              <p>Aquí puedes modificar tu información personal</p>
+              <p >Aquí puedes modificar tu información personal</p>
             </div>
             <div style={PersonalFormContainerStyle}>
-              <VerificationForm />
+              <PersonalForm />
             </div>
           </div>
         </div>

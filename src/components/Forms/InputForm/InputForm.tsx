@@ -2,7 +2,6 @@ import { FC, useState, ChangeEvent, CSSProperties } from "react";
 import { Input, FormControl,InputLabel } from "@mui/material";
 import { isValidated } from "./validation";
 import { styled } from "@mui/material/styles";
-import { useAppSelector } from "../../app/hooks";
 
 interface Props {
   name: string;

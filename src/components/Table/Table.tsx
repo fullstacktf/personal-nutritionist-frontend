@@ -1,5 +1,6 @@
 import { CSSProperties, FC, useState, ChangeEvent } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -93,10 +94,16 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
         </div>,
       actions:
         <div>
-          <IconButton aria-label="calendar" color="secondary">
+          <IconButton 
+            aria-label="calendar" 
+            color="secondary"
+            onClick={() => handleUser(user._id)}
+            component={Link} 
+            to={`/calendar/event/create/${user._id}`}
+          >
             <InsertInvitation />
           </IconButton>
-          <IconButton aria-label="profile" color="secondary" onClick={() => handleProfile(user._id)}>
+          <IconButton aria-label="profile" color="secondary" onClick={() => handleUser(user._id)}>
             <AssignmentInd />
           </IconButton>
         </div>
@@ -115,11 +122,11 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
     setPage(0);
   };
 
-  const handleProfile = (id: any) => {
+  const handleUser = (id: any) => {
     axios.get(`https://api.nutriguide.es/users/${id}`)
       .then((res) => { console.log(res.data); });
   };
-
+  
   return (
     <StyledPaper>
       <div style={TitleContainerStyle}>

@@ -8,7 +8,7 @@ import ALink from "@mui/material/Link";
 import axios from "axios";
 
 import { login } from "../../features/user/userSlice";
-import { InputForm } from "../InputForm/InputForm";
+import { InputForm } from "../Forms/InputForm/InputForm";
 
 export const LogIn: FC = () => {
   const [message, setMessage] = useState<string>("");

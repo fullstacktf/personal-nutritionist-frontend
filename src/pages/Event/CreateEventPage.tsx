@@ -1,9 +1,10 @@
-import { CSSProperties, FC } from "react";
-import { Link } from "react-router-dom";
+import { CSSProperties, FC, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import { useAppSelector } from "../../app/hooks";
 
 import { Box, Button } from "@mui/material";
 import { Cancel } from "@mui/icons-material";
-
 
 import { SideMenu } from "../../components/Menu/Menu";
 import { CreateEventForm } from "../../components/Forms/CreateEventForm/CreateEventForm";
@@ -70,6 +71,27 @@ const FormBodyStyle: CSSProperties = {
 };
 
 export const CreateEventPage: FC = () => {
+  let url = useLocation();
+  const [participants, setParticipants] = useState<any>();
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+
+  useEffect(() => {
+    const handleUser = async(id: any) => {
+      await axios.get(`https://api.nutriguide.es/users/${id}`)
+        .then((res) => { 
+          const basicUsers = [
+            { _id: userInfo._id, name: userInfo.name, email: userInfo.email, phone: userInfo.phone, photo:userInfo.photo, isVerified: userInfo.isVerified },
+            { _id: res.data._id, name: res.data.name, email: res.data.email, phone: res.data.phone, photo:res.data.photo, isVerified: res.data.isVerified },
+          ];
+          setParticipants(basicUsers);
+
+        });
+    };
+
+    handleUser(url.pathname.split("/").pop());
+  }, [url, userInfo]);
+
+  if (participants == null) return <div>No hay participantes</div>;
 
   return (
     <Box style={BoxStyle}>
@@ -83,7 +105,7 @@ export const CreateEventPage: FC = () => {
                 color="error" 
                 startIcon={<Cancel />}
                 component={Link}
-                to="/calendar"
+                to="/list"
                 sx={{ marginRight:"1em" }}
               >
                 Cancelar
@@ -93,7 +115,7 @@ export const CreateEventPage: FC = () => {
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
-            <CreateEventForm owner="61bd278898bc9546b484b879" participant="61be0b7bb49873b63d4852a7"/>
+            <CreateEventForm participants={participants}/>
           </div>
         </div>
       </div>
