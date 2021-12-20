@@ -1,6 +1,10 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+
 import { Footer } from "../Footer";
 
-test("renders learn react link", () => {
+test("renders team link", () => {
   render(<Footer />);
+  
+  const catchWord = screen.getByText(/Team/i);
+  expect(catchWord).toBeInTheDocument();
 });

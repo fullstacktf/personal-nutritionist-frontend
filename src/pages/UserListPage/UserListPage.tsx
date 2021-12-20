@@ -4,7 +4,8 @@ import { Box } from "@mui/material";
 
 import { useAppSelector } from "../../app/hooks";
 import { SideMenu } from "../../components/Menu/Menu";
-import { Profile } from "../../components/Profile/Profile";
+import { NutritionistList } from "../../components/NutritionistList/NutritionistList";
+import { ClientList } from "../../components/ClientList/ClientList";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
@@ -14,13 +15,13 @@ const BoxStyle: CSSProperties = {
   height: "87.5vh"
 };
 
-export const HomePage: FC = () => {
+export const UserListPage: FC = () => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
-  
+
   return (
     <Box style={BoxStyle}>
       <SideMenu />
-      <Profile userInfo={userInfo} />
+      {userInfo.role === "Nutricionista" ? <ClientList /> : <NutritionistList />}
     </Box>
   );
 };

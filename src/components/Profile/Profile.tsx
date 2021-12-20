@@ -14,7 +14,8 @@ const GridContainer = styled(Grid) (() => ({
   alignItems: "center",
   justifyContent: "center",
   color: "black",
-  flexDirection: "column"
+  flexDirection: "column",
+  height: "100%"
 }));
 
 const GridProfileContainer = styled(Grid) (() => ({

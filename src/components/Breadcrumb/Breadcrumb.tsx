@@ -40,13 +40,13 @@ export const CustomizedBreadcrumbs: FC = () => {
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        {userLogged.token === "" ?  <StyledBreadcrumb component={Link} label="Nutriguide" icon={<Home fontSize="small" />} to="/" /> :null}
-        {location.pathname === "/login" ? <StyledBreadcrumb component={Link} to="/login" label="Iniciar Sesión" /> : null}
-        {location.pathname === "/signup" ? <StyledBreadcrumb component={Link} to="/signup" label="Registrarse" /> : null}
-        {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} component={Link} to="/" label={userLogged.name}/> : null}
-        {location.pathname === "/personal" ? <StyledBreadcrumb component={Link} to="/personal" label="Información personal" /> : null}
-        {location.pathname === "/health" ? <StyledBreadcrumb component={Link} to="/health" label="Información de salud" /> : null}
-        {location.pathname === "/verification" ? <StyledBreadcrumb component={Link} to="/verification" label="Verificación" /> : null}
+        {userLogged.token === "" ?  <StyledBreadcrumb icon={<Home fontSize="small" />} label="Nutriguide" component={Link} to="/" /> :null}
+        {location.pathname === "/login" ? <StyledBreadcrumb label="Iniciar Sesión" component={Link} to="/login" /> : null}
+        {location.pathname === "/signup" ? <StyledBreadcrumb label="Registrarse" component={Link} to="/signup" /> : null}
+        {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} label={userLogged.userInfo.name} component={Link} to="/" /> : null}
+        {location.pathname === "/personal" ? <StyledBreadcrumb label="Información personal" component={Link} to="/personal" /> : null}
+        {location.pathname === "/health" ? <StyledBreadcrumb label="Información de salud" component={Link} to="/health" /> : null}
+        {location.pathname === "/verification" ? <StyledBreadcrumb label="Verificación" component={Link} to="/verification" /> : null}
       </Breadcrumbs>
     </div>
   );

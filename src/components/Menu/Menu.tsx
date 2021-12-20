@@ -15,11 +15,11 @@ export const SideMenu: FC = () => {
   const menuIcon = open ? <Close></Close> : <Menu></Menu>;
   
   const items = [
-    { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader> },
-    { icon: <Event color="info" />, name: "Calendario" },
-    { icon: <Settings color="info" />, name: "Configuración" },
-    { icon: <SupervisedUserCircle color="info" />, name: "Nutricionistas", separator: <ListSubheader>Servicios</ListSubheader> },
-    { icon: <MenuBook color="info" />, name: "Recetas" },
+    { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader>, url: "/" },
+    { icon: <Event color="info" />, name: "Calendar", url: "/calendar" },
+    { icon: <Settings color="info" />, name: "Settings", url: "/settings" },
+    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionists", separator: <ListSubheader>Services</ListSubheader>, url: "/list" },
+    { icon: <MenuBook color="info" />, name: "Recipes", url: "/recipes" },
   ];
 
   if (userInfo.role === "Nutricionista") {
@@ -37,9 +37,9 @@ export const SideMenu: FC = () => {
   if(!open) {
     return (
       <GridMenu width={60} item>
-        <Button onClick={() => setOpen(!open)}>{menuIcon}</Button>
+        <Button onClick={() => setOpen(!open)} style={{ marginLeft: "-5px", marginTop: "5px" }}>{menuIcon}</Button>
         {items.map((item) => (
-          <IconMenu icon={item.icon}></IconMenu>
+          <IconMenu icon={item.icon} url={item.url}></IconMenu>
         ))}
       </GridMenu>
     );
@@ -48,9 +48,9 @@ export const SideMenu: FC = () => {
     return (
       <GridMenu width={270}>
         <Button sx={{ display: "flex", justifyContent: "flex-end" }} onClick={() => setOpen(!open)}>{menuIcon}</Button>
-        <Typography align="center"><b>Nutriguide</b></Typography>
+        <Typography align="center" sx={{ marginBottom: "10px" }}><b>Nutriguide</b></Typography>
         {items.map((item) => ( 
-          <IconMenu icon={item.icon} name={item.name} separator={item.separator}></IconMenu>
+          <IconMenu icon={item.icon} name={item.name} separator={item.separator} url={item.url}></IconMenu>
         ))}
       </GridMenu>
     );
