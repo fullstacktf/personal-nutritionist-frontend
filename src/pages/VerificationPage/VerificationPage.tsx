@@ -83,7 +83,7 @@ const PersonalFormContainerStyle: CSSProperties = {
 export const VerificationPage: FC = () => {
   return (
     <Box style={BoxStyle}>
-      <SideMenu></SideMenu>
+      <SideMenu />
       <div style={BorderStyle}>
         <div style={FormContainerStyle}>
           <div style={HeaderStyle}>
