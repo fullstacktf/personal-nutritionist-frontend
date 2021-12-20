@@ -29,18 +29,18 @@ const theme = createTheme ({
 });
 
 function App() {
-  const userLogged = useAppSelector((state) => state.user.token);
+  const userToken = useAppSelector((state) => state.user.token);
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={ userLogged !== "" ? <HomePage /> : <WebPage />} />
+          <Route path="/" element={ userToken !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/personal" element={ userLogged !== "" ? <PersonalPage/> : <WebPage />} />
-          <Route path="/health" element={ userLogged !== "" ? <HealthPage/> : <HealthPage />} />
+          <Route path="/personal" element={ userToken !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="/health" element={ userToken !== "" ? <HealthPage/> : <HealthPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
