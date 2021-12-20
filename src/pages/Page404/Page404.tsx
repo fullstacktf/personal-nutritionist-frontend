@@ -8,7 +8,7 @@ const BoxStyle: CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   flexGrow: 1,
-  height: "100vh",
+  height: "87.5vh",
   color: "white"
 };
 

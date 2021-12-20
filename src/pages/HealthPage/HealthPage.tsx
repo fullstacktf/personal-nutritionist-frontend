@@ -1,19 +1,16 @@
 import { CSSProperties, FC } from "react";
-import { Link } from "react-router-dom";
 
-import { Box, Button } from "@mui/material";
-import { Cancel } from "@mui/icons-material";
-
+import { Box } from "@mui/material";
 
 import { SideMenu } from "../../components/Menu/Menu";
-import { CreateEventForm } from "../../components/Forms/CreateEventForm/CreateEventForm";
+import { HealthForm } from "../../components/HealthForm/HealthForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
   flexGrow: 1,
   color: "white",
   background: "#dbdbdb",
-  height: "100vh",
+  height: "87.5vh"
 };
 
 const BorderStyle: CSSProperties = {
@@ -22,7 +19,7 @@ const BorderStyle: CSSProperties = {
   display: "flex",
   flexDirection: "row",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 };
 
 const FormContainerStyle: CSSProperties = {
@@ -30,12 +27,10 @@ const FormContainerStyle: CSSProperties = {
   color: "black",
   background: "#FFFFFF",
   borderRadius: "10px",
-  height: "80%",
-  width: "50%",
+  height: "70%",
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "5px",
 };
 
 const HeaderStyle: CSSProperties = {
@@ -60,6 +55,7 @@ const SeparatorStyle: CSSProperties = {
   height:"1%"
 };
 
+
 const FormBodyStyle: CSSProperties = {
   display: "flex",
   flexDirection: "column",
@@ -69,31 +65,38 @@ const FormBodyStyle: CSSProperties = {
   alignItems: "center",
 };
 
-export const CreateEventPage: FC = () => {
+const DescriptionContainerStyle: CSSProperties = {
+  display: "flex",
+  width: "95%",
+  height: "10%",
+  alignItems: "start",
+  marginBottom:"50px",
+};
 
+const PersonalFormContainerStyle: CSSProperties = {
+  display: "flex",
+  width: "95%",
+  height: "60%",
+  alignItems: "center",
+};
+
+export const HealthPage: FC = () => {
   return (
     <Box style={BoxStyle}>
       <SideMenu></SideMenu>
       <div style={BorderStyle}>
         <div style={FormContainerStyle}>
           <div style={HeaderStyle}>
-            <div style={TitleContainerStyle}>
-              <Button 
-                variant="contained" 
-                color="error" 
-                startIcon={<Cancel />}
-                component={Link}
-                to="/calendar"
-                sx={{ marginRight:"1em" }}
-              >
-                Cancelar
-              </Button>
-              <h2>Crea un nuevo evento</h2>
-            </div>
+            <div style={TitleContainerStyle}><h2>Tu información sobre salud</h2></div>
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
-            <CreateEventForm owner="61bd278898bc9546b484b879" participant="61be0b7bb49873b63d4852a7"/>
+            <div style={DescriptionContainerStyle}>
+              <p >Aquí puedes modificar tu información sobre salud</p>
+            </div>
+            <div style={PersonalFormContainerStyle}>
+              <HealthForm />
+            </div>
           </div>
         </div>
       </div>

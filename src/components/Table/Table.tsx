@@ -1,52 +1,106 @@
-import { FC, useState, ChangeEvent } from "react";
+import { CSSProperties, FC, useState, ChangeEvent } from "react";
+import axios from "axios";
 
-import { Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination } from "@mui/material";
+import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
 
 interface Props {
+  name: string;
   titles: Array<any>;
   data: Array<any>;
 }
 
 interface Column {
-  id: "name" | "specialties" | "contact" | "calendar";
+  id: "name" | "specialties" | "typeDiet" | "intolerances" | "email" | "phone" | "actions";
   label: string;
   minWidth?: number;
+  align: "left";
 }
 
 interface Data {
-  name: string;
-  specialties: Array<string>;
-  contact: string;
-  calendar: string;
+  name: any;
+  specialties?: Array<string>;
+  typeDiet?: string;
+  intolerances?: Array<string>;
+  email: JSX.Element;
+  phone: JSX.Element;
+  actions: JSX.Element;
 }
+
+const TitleContainerStyle: CSSProperties = {
+  padding: "30px 0 30px 30px"
+};
+
+const SeparatorStyle: CSSProperties = {
+  borderBottom: "3px solid #CCC4C5",
+  width:"100%",
+  height:"1%"
+};
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  width: "100%",
+  overflow: "hidden",
+  display: "flex",
+  flexDirection: "column"
+}));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    border: 0
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
+    border: 0,
+    fontSize: 14
+  }
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  "&:last-child td, &:last-child th": {
+  "& td, & th": {
     border: 0,
-  },
+  }
 }));
 
-export const StickyHeadTable: FC<Props> = ({ titles, data }) => {
-  const columns: readonly Column[] = titles.map((title) => {
-    return { id: title.id, label: title.label, minWidth: title.minWidth }; 
+export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
+  const columns: Column[] = titles.map((title) => {
+    return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
 
-  const rows: Data[] = data.map((item) => {
-    return { name: item.name, specialties: item.specialties, contact: item.email, calendar: item.username };
+  const rows: Data[] = data.map((user) => {
+    const specialties = user.specialties != null ? user.specialties.join(", ") : user.specialties;
+    const intolerances = user.intolerances != null ? user.intolerances.join(", ") : user.intolerances;
+    const phone = user.phone === 0 ? "-" : user.phone;
+
+    return {
+      name: 
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Avatar style={{ marginRight: "10px" }} variant="rounded" src={user.photo}>{user.name.charAt(0).toUpperCase()}</Avatar>
+          {user.name}
+        </div>,
+      specialties: specialties,
+      typeDiet: user.typeDiet,
+      intolerances: intolerances,
+      email:
+        <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+          {user.email}
+        </div>,
+      phone:
+        <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+          {phone}
+        </div>,
+      actions:
+        <div>
+          <IconButton aria-label="calendar" color="secondary">
+            <InsertInvitation />
+          </IconButton>
+          <IconButton aria-label="profile" color="secondary" onClick={() => handleProfile(user._id)}>
+            <AssignmentInd />
+          </IconButton>
+        </div>
+    };
   });
 
   const [page, setPage] = useState(0);
@@ -61,15 +115,25 @@ export const StickyHeadTable: FC<Props> = ({ titles, data }) => {
     setPage(0);
   };
 
+  const handleProfile = (id: any) => {
+    axios.get(`https://api.nutriguide.es/users/${id}`)
+      .then((res) => { console.log(res.data); });
+  };
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer>
+    <StyledPaper>
+      <div style={TitleContainerStyle}>
+        <Typography variant="h4">{name}</Typography>
+      </div>
+      <div style={SeparatorStyle}></div>
+      <TableContainer sx={{ minHeight: "350px" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <StyledTableCell
                   key={column.id}
+                  align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -84,7 +148,7 @@ export const StickyHeadTable: FC<Props> = ({ titles, data }) => {
                 return (
                   <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                     {columns.map((column) => (
-                      <StyledTableCell key={column.id}>
+                      <StyledTableCell key={column.id} align={column.align}>
                         {row[column.id]}
                       </StyledTableCell>
                     ))}
@@ -95,14 +159,15 @@ export const StickyHeadTable: FC<Props> = ({ titles, data }) => {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[3, 10, 25, 100]}
+        rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        style={{ minHeight: "55px" }}
       />
-    </Paper>
+    </StyledPaper>
   );
 };

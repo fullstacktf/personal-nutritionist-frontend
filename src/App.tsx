@@ -11,8 +11,12 @@ import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
+import { Footer } from "./components/Footer/Footer";
+import { UserListPage } from "./pages/UserListPage/UserListPage";
 import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
 import { CreateEventPage } from "./pages/Event/CreateEventPage";
+import { HealthPage } from "./pages/HealthPage/HealthPage";
+import { VerificationPage } from "./pages/VerificationPage/VerificationPage";
 
 const theme = createTheme ({
   palette: {
@@ -29,20 +33,31 @@ const theme = createTheme ({
 });
 
 function App() {
-  const userLogged = useAppSelector((state) => state.user.token);
+  const userToken = useAppSelector((state) => state.user.token);
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={userLogged !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/personal" element={userLogged !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="/" element={ userToken !== "" ? <HomePage /> : <WebPage />} />
+          <Route path="/list" element={<UserListPage />} />
+          <Route path="/personal" element={<PersonalPage />} />
+          <Route path="/health" element={<HealthPage />} />
+          <Route path="/personal" element={<PersonalPage/>} />
+          <Route path="/verification" element={<VerificationPage />} />
           <Route path="calendar/event/create" element={<CreateEventPage/>} />
+          {/* <Route path="/list" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
+          <Route path="/personal" element={ userToken !== "" ? <PersonalPage /> : <WebPage />} />
+          <Route path="/health" element={ userToken !== "" ? <HealthPage /> : <WebPage />} />
+          <Route path="/personal" element={ userToken !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} /> */}
           {/* <Route path="/event/create" element={userLogged !== "" ? <CreateEventPage/> : <WebPage />} /> */}
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

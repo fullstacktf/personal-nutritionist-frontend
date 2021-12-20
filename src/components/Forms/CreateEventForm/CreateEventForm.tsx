@@ -2,9 +2,13 @@ import { useState, ChangeEvent, FC, CSSProperties } from "react";
 
 import axios from "axios";
 
-import { Button, FormControl, FormGroup, Select, InputLabel, SelectChangeEvent, MenuItem, Alert, styled, Grid, Typography } from "@mui/material";
+import { Button, FormControl, Alert, Grid } from "@mui/material";
 import { InputForm } from "../../InputForm/InputForm";
-import { Tags } from "../../Autocomplete/Autocomplete";
+
+interface Props {
+  owner: string;
+  participant: string;
+}
 
 const FormBodyStyle: CSSProperties = {
   display: "flex",
@@ -12,19 +16,18 @@ const FormBodyStyle: CSSProperties = {
   width: "60%",
 };
 
-export const CreateEventForm: FC = () => {
+export const CreateEventForm: FC<Props> = ({owner, participant}) => {
   const [message, setMessage] = useState<string>("");
   const [isWrongRequest, setIsWrongRequest] = useState<boolean>();
   const [data, setData] = useState({
     title: "",
     description: "",
-    owner: "",
-    status: "",
-    participants: [],
+    owner: owner,
+    status: "started",
+    participants: [owner, participant],
     startingDate: "",
     endingDate: ""
   });
-    // owner** Eliminar status? pending?
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -42,14 +45,6 @@ export const CreateEventForm: FC = () => {
       setMessage("¡Formulario enviado con éxito!");
     }
   };
-
-  // const handleIntoleranceChange = (event: ChangeEvent<HTMLInputElement>, value: any) => {
-  //   const newIntolerances = value;
-  //   setData({
-  //     ...data,
-  //     intolerances: newIntolerances,
-  //   });
-  // };
   
   const submitData = (event: any ) => {
     event.preventDefault();
@@ -57,7 +52,7 @@ export const CreateEventForm: FC = () => {
     axios.post("https://api.nutriguide.es/calendar/event", data)
     .then(res => {
       handleIsWrongRequestChange(res.status);
-      // navigate("/", { replace: true });   
+      // navigate("/calendar", { replace: true });   
     }).catch( (error) => {
       console.log("Error", error.response);
       handleIsWrongRequestChange(error.response.status);
@@ -65,7 +60,7 @@ export const CreateEventForm: FC = () => {
   };
 
   return (
-    <Grid sx={{width: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+    <Grid sx={{width: "100%", height: "100%", display: "flex", alignItems: "center"}}>
       <Grid sx={{width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", color: "black"}}>
         <form onSubmit={submitData} style={FormBodyStyle}>
           { isWrongRequest ? <Alert severity="error">{message}</Alert> : null }
@@ -74,23 +69,7 @@ export const CreateEventForm: FC = () => {
             <InputForm onChange={handleDataChange} name="description" placeholder="Descripción del evento" title="Descripción" type="text" validation={true} />
             <InputForm onChange={handleDataChange} name="startingDate" placeholder="Fecha y hora de inicio" title="Fecha de Inicio" type="datetime-local" validation={true} />
             <InputForm onChange={handleDataChange} name="endingDate" placeholder="Fecha y hora de fin" title="Fecha de Fin" type="datetime-local" validation={true} />
-
-            {/* <FormControl>
-            <InputLabel id="demo-simple-select-label">Dieta</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={data.diet}
-                label="Diet"
-                onChange={handleDietChange}
-              >
-                <MenuItem value={"Carnivora"}>Carnivora</MenuItem>
-                <MenuItem value={"Vegetariana"}>Vegetariana</MenuItem>
-                <MenuItem value={"Omnivora"}>Omnivora</MenuItem>
-              </Select>
-            </FormControl> */}
-            <Button onClick={submitData} variant="contained" type="submit">Guardar Cambios</Button>
-            <Button variant="contained">Cancelar</Button>
+            <Button onClick={submitData} variant="contained" type="submit" sx={{marginTop: "1em"}}>Guardar Cambios</Button>
           </FormControl>
         </form>
       </Grid>

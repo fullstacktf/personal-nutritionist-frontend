@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { NutritionistList } from "../NutritionistList";
 
-test("app has component home", () => {
+test("nutritionits list has default text", () => {
   render(<NutritionistList />);
 
-  const catchWord = screen.getByText(/No nutritionists/i);
+  const catchWord = screen.getByText(/No hay nutricionistas/i);
   expect(catchWord).toBeInTheDocument();
 });
