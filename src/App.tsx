@@ -13,6 +13,7 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
 import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
 import { HealthPage } from "./pages/HealthPage/HealthPage";
+import { VerificationPage } from "./pages/VerificationPage/VerificationPage";
 
 const theme = createTheme ({
   palette: {
@@ -39,8 +40,9 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/personal" element={ userToken !== "" ? <PersonalPage/> : <WebPage />} />
-          <Route path="/health" element={ userToken !== "" ? <HealthPage/> : <HealthPage />} />
+          <Route path="/personal" element={ userLogged !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="/health" element={ userLogged !== "" ? <HealthPage/> : <HealthPage />} />
+          <Route path="/verification" element={ userLogged !== "" ? <VerificationPage/> : <VerificationPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
