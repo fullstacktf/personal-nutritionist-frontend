@@ -23,44 +23,41 @@ const BorderStyle: CSSProperties = {
   alignItems: "center"
 };
 
-export const RecipeListClient: FC = () => {
+export const EventList: FC = () => {
   const titles = [
-    { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
-    { id: "date", label: "FECHA", minWidth: 100, align: "center" },
-    { id: "typeMeal", label: "COMIDA", minWidth: 100, align: "center" },
-    { id: "alergens", label: "ALÉRGENOS", minWidth: 100, align: "center" },
+    { id: "title", label: "TÍTULO", minWidth: 170, align: "left" },
+    { id: "status", label: "ESTADO", minWidth: 100, align: "center" },
+    { id: "startingDate", label: "FECHA DE INICIO", minWidth: 100, align: "center" },
+    { id: "endingDate", label: "FECHA DE FIN", minWidth: 100, align: "center" },
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
   const userInfo = useAppSelector((state) => state.user.userInfo);
-  const [recipes, setRecipes] = useState<any>();
+  const [events, setEvents] = useState<any>();
 
-  if (userInfo.recipes == null) return <div>No hay recetas</div>;
+  if (userInfo.events == null) return <div>No hay eventos</div>;
   
   const rows = [];
-  for (let item of userInfo.recipes) {
-    const alergens = item.specialties != null ? item.alergens.join(", ") : item.alergens;
+  for (let item of userInfo.events) {
     rows.push([
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.name.charAt(0).toUpperCase()}</Avatar>
-        {item.name}
+        <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.title.charAt(0).toUpperCase()}</Avatar>
+        {item.title}
       </div>,
       <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-        {item.date}
+        {item.status}
       </div>,
-      <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-        {item.typeMeal}
-      </div>,
-      alergens,
+      item.startingDate,
+      item.endingDate,
       item._id
     ]);
   }
-  setRecipes(rows);
+  setEvents(rows);
 
   return (
     <div style={BoxStyle}>
       <div style={BorderStyle}>
-        <StickyHeadTable name="Lista de Recetas" titles={titles} data={recipes} />
+        <StickyHeadTable name="Lista de Eventos" titles={titles} data={events} />
       </div>
     </div>
   );

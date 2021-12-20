@@ -41,7 +41,7 @@ export const RecipeListNutritionist: FC = () => {
     const alergens = item.specialties != null ? item.alergens.join(", ") : item.alergens;
     rows.push([
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Avatar style={{ marginRight: "10px" }} variant="rounded" src={item.photo}>{item.name.charAt(0).toUpperCase()}</Avatar>
+        <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.name.charAt(0).toUpperCase()}</Avatar>
         {item.name}
       </div>,
       <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>

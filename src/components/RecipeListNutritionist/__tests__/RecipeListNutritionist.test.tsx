@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "../../../app/store";
 import { RecipeListNutritionist } from "../RecipeListNutritionist";
 
-test("nutritionits list has default text", () => {
+test("nutritionits recipes list has default text", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>

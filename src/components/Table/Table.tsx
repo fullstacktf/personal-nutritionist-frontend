@@ -12,7 +12,7 @@ interface Props {
 }
 
 interface Column {
-  id: "name" | "specialties" | "typeDiet" | "intolerances" | "email" | "phone" | "actions";
+  id: "name" | "actions" | "specialties" | "email" | "phone" | "intolerances" | "typeDiet" | "typeMeal" | "alergens";
   label: string;
   minWidth?: number;
   align: "left";
@@ -20,12 +20,14 @@ interface Column {
 
 interface Data {
   name: any;
-  specialties?: Array<string>;
-  typeDiet?: string;
-  intolerances?: Array<string>;
-  email: JSX.Element;
-  phone: JSX.Element;
   actions: JSX.Element;
+  specialties?: Array<string>;
+  email?: JSX.Element;
+  phone?: JSX.Element;
+  intolerances?: Array<string>;
+  typeDiet?: string;
+  typeMeal?: string;
+  alergens?: string;
 }
 
 const TitleContainerStyle: CSSProperties = {

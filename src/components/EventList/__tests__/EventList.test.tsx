@@ -3,17 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { store } from "../../../app/store";
-import { RecipeListClient } from "../RecipeListClient";
+import { EventList } from "../EventList";
 
-test("client recipes list has default text", () => {
+test("events list has default text", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <RecipeListClient />
+        <EventList />
       </BrowserRouter>
     </Provider>
   );
 
-  const catchWord = screen.getByText(/No hay recetas/i);
+  const catchWord = screen.getByText(/No hay eventos/i);
   expect(catchWord).toBeInTheDocument();
 });
