@@ -22,10 +22,9 @@ const FormControlStyled = styled(FormControl)(() => ({
   width: "90%",
 }));
 
-export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", onChange, validation=false, isRequired=false }) => {  
+export const InputForm: FC<Props> = ({ name, type, placeholder, title="", onChange, validation=false, isRequired=false }) => {  
   const [isActive, setActive] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-  const userLogged = useAppSelector((state) => state.user);
 
   const isEmpty = (event: ChangeEvent<HTMLInputElement>) => {
     const newData = event.target.value;

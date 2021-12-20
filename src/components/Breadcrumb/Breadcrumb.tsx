@@ -46,6 +46,7 @@ export const CustomizedBreadcrumbs: FC = () => {
         {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} label={userLogged.userInfo.name} component={Link} to="/" /> : null}
         {location.pathname === "/personal" ? <StyledBreadcrumb label="Información personal" component={Link} to="/personal" /> : null}
         {location.pathname === "/health" ? <StyledBreadcrumb label="Información de salud" component={Link} to="/health" /> : null}
+        {location.pathname === "/verification" ? <StyledBreadcrumb label="Verificación" component={Link} to="/verification" /> : null}
       </Breadcrumbs>
     </div>
   );
