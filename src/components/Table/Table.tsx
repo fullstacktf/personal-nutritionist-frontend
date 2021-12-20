@@ -1,8 +1,9 @@
-import { FC, useState, ChangeEvent } from "react";
+import { CSSProperties, FC, useState, ChangeEvent } from "react";
+import axios from "axios";
 
-import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination } from "@mui/material";
+import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { InsertInvitation } from "@mui/icons-material";
+import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
 
 interface Props {
   name: string;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 interface Column {
-  id: "name" | "specialties" | "contact" | "calendar";
+  id: "name" | "specialties" | "typeDiet" | "intolerances" | "email" | "phone" | "actions";
   label: string;
   minWidth?: number;
   align: "left";
@@ -22,16 +23,26 @@ interface Data {
   specialties?: Array<string>;
   typeDiet?: string;
   intolerances?: Array<string>;
-  contact: JSX.Element;
-  calendar: JSX.Element;
+  email: JSX.Element;
+  phone: JSX.Element;
+  actions: JSX.Element;
 }
+
+const TitleContainerStyle: CSSProperties = {
+  padding: "30px 0 30px 30px"
+};
+
+const SeparatorStyle: CSSProperties = {
+  borderBottom: "3px solid #CCC4C5",
+  width:"100%",
+  height:"1%"
+};
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   width: "100%",
   overflow: "hidden",
   display: "flex",
-  flexDirection: "column",
-  alignItems: "center"
+  flexDirection: "column"
 }));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,29 +69,37 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
     return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
 
-  const rows: Data[] = data.map((item) => {
-    const specialties = item.specialties != null ? item.specialties.join(", ") : item.specialties;
-    const intolerances = item.intolerances != null ? item.intolerances.join(", ") : item.intolerances;
-    const phone = item.phone === 0 ? "-" : item.phone;
+  const rows: Data[] = data.map((user) => {
+    const specialties = user.specialties != null ? user.specialties.join(", ") : user.specialties;
+    const intolerances = user.intolerances != null ? user.intolerances.join(", ") : user.intolerances;
+    const phone = user.phone === 0 ? "-" : user.phone;
 
     return {
       name: 
-        <div style={{display: "flex", alignItems: "center" }}>
-          <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.name.charAt(0).toUpperCase()}</Avatar>
-          {item.name}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Avatar style={{ marginRight: "10px" }} variant="rounded" src={user.photo}>{user.name.charAt(0).toUpperCase()}</Avatar>
+          {user.name}
         </div>,
       specialties: specialties,
-      typeDiet: item.typeDiet,
+      typeDiet: user.typeDiet,
       intolerances: intolerances,
-      contact:
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-          <div style={{ background: "#ffa726", borderRadius: "5px" }}>{item.email}</div>
-          <div style={{ background: "#1de9b6", borderRadius: "5px" }}>{phone}</div>
+      email:
+        <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+          {user.email}
         </div>,
-      calendar: 
-        <IconButton aria-label="fingerprint" color="secondary">
-          <InsertInvitation />
-        </IconButton>
+      phone:
+        <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+          {phone}
+        </div>,
+      actions:
+        <div>
+          <IconButton aria-label="calendar" color="secondary">
+            <InsertInvitation />
+          </IconButton>
+          <IconButton aria-label="profile" color="secondary" onClick={() => handleProfile(user._id)}>
+            <AssignmentInd />
+          </IconButton>
+        </div>
     };
   });
 
@@ -96,10 +115,18 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
     setPage(0);
   };
 
+  const handleProfile = (id: any) => {
+    axios.get(`https://api.nutriguide.es/users/${id}`)
+      .then((res) => { console.log(res.data); });
+  };
+
   return (
     <StyledPaper>
-      <h1>{name}</h1>
-      <TableContainer>
+      <div style={TitleContainerStyle}>
+        <Typography variant="h4">{name}</Typography>
+      </div>
+      <div style={SeparatorStyle}></div>
+      <TableContainer sx={{ minHeight: "350px" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -139,6 +166,7 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        style={{ minHeight: "55px" }}
       />
     </StyledPaper>
   );

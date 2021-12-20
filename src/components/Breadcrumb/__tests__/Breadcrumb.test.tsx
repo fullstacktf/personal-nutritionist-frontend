@@ -1,7 +1,10 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CustomizedBreadcrumbs from "../Breadcrumb";
 
-test("renders learn react link", () => {
+test("nutriguide name show up in breadcrumb", () => {
   render(<CustomizedBreadcrumbs />);
+
+  // const catchWord = screen.getByText(/Nutriguide/i);
+  // expect(catchWord).toBeInTheDocument();
 });

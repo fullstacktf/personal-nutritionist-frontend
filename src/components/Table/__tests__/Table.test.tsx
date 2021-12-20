@@ -4,7 +4,7 @@ import { StickyHeadTable } from "../Table";
 
 const setup = () => {
   const titles = [{ id: "name", label: "NOMBRE", minWidth: 170, align: "left" }];
-  const data = [{ name: "Alex", specialties: ["Siesta"], email: "alex@nutriguide.es", phone: 123456789 }];
+  const data = [{ name: "Alex", specialties: ["Siesta", "Comidita"], email: "alex@nutriguide.es", phone: 123456789 }];
 
   render(
     <StickyHeadTable 

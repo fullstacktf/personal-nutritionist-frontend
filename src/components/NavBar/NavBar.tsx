@@ -49,7 +49,7 @@ export const NavBar: FC = () => {
   return (
     <div>
       <div style={divTopStyle}>
-        <div  style={divTopSideStyle}>
+        <div style={divTopSideStyle}>
           <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         </div>
         <Typography style={TypographyTitleStyle} variant="h1">Nutriguide</Typography>

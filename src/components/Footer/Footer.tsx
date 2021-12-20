@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { Grid, Link, Typography }  from "@mui/material";
 
 const GridFooterContainer = styled(Grid)(() => ({
-  backgroundColor: "#21252B",
+  backgroundColor: "#0f1114",
   textAlign: "center",
   justifyContent: "space-between",
   alignItems: "center",

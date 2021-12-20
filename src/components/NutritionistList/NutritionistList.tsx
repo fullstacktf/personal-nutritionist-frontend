@@ -25,8 +25,9 @@ export const NutritionistList: FC = () => {
   const titles = [
     { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
     { id: "specialties", label: "ESPECIALIDADES", minWidth: 100, align: "center" },
-    { id: "contact", label: "CONTACTO", minWidth: 100, align: "center" },
-    { id: "calendar", label: "", minWidth: 20, align: "center" },
+    { id: "email", label: "EMAIL", minWidth: 100, align: "center" },
+    { id: "phone", label: "TELÉFONO", minWidth: 100, align: "center" },
+    { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
   const [nutritionists, setNutritionists] = useState();

@@ -36,7 +36,7 @@ const TypographySubtitle1Text = styled(Typography)(({ theme }) => ({
   }
 }));
 
-export const MarketingCard: FC<Props> = ({ name, cardImage, info, altInfo, style="" }) => {
+export const MarketingCard: FC<Props> = ({ name, cardImage, info, altInfo, style }) => {
   return (
     <Grid item xs={11} md={11} lg={7} sx={style}>
       <CardContainer>

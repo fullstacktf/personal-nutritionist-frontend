@@ -9,7 +9,7 @@ const BoxStyle: CSSProperties = {
   flexGrow: 1,
   color: "white",
   backgroundColor: "#dbdbdb",
-  height: "100vh"
+  height: "86.6vh"
 };
 
 export const HomePage: FC = () => {

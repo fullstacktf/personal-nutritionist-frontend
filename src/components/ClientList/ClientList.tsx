@@ -26,8 +26,9 @@ export const ClientList: FC = () => {
     { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
     { id: "typeDiet", label: "DIETA", minWidth: 100, align: "center" },
     { id: "intolerances", label: "INTOLERANCIAS", minWidth: 100, align: "center" },
-    { id: "contact", label: "CONTACTO", minWidth: 100, align: "center" },
-    { id: "calendar", label: "", minWidth: 20, align: "center" },
+    { id: "email", label: "EMAIL", minWidth: 100, align: "center" },
+    { id: "phone", label: "TELÉFONO", minWidth: 100, align: "center" },
+    { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
   const [clients, setClients] = useState();
