@@ -9,7 +9,7 @@ import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { styled } from "@mui/material/styles";
 
-import { Tags } from "../Autocomplete/Autocomplete";
+import { Tags } from "../../../components/Autocomplete/Autocomplete";
 import { InputForm } from "../InputForm/InputForm";
 
 const FormContainer: CSSProperties = {

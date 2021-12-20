@@ -5,7 +5,9 @@ import axios from "axios";
 import { Button, Radio, RadioGroup,FormControlLabel, FormControl, FormLabel, Typography, Alert } from "@mui/material";
 import ALink from "@mui/material/Link";
 
-import { InputForm } from "../InputForm/InputForm";
+import { login } from "../../features/user/userSlice";
+import { useAppDispatch } from "../../app/hooks";
+import { InputForm } from "../Forms/InputForm/InputForm";
 
 export const SignUp: FC = () => {
   const [message, setMessage] = useState<string>("");
@@ -21,13 +23,13 @@ export const SignUp: FC = () => {
   });
 
   const handleisWrongRequest = (error: number) => {
-    if (error !== 200) {
-      setMessage("El usuario ya existe");
-      setIsWrongRequest(true);
-    }
-    else {
+    if (error === 201 || error === 200) {
       setMessage("El usuario se ha creado correctamente");
       setIsWrongRequest(false);
+    }
+    else {
+      setMessage("El usuario ya existe");
+      setIsWrongRequest(true);
     }
   };
   
@@ -37,14 +39,17 @@ export const SignUp: FC = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+  const dispatch = useAppDispatch();
   
   const submitData = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     axios.post("https://api.nutriguide.es/auth/signup", data)
     .then(res => {
-      localStorage.setItem("token", res.data);
-      navigate("/home", { replace: true });
+      handleisWrongRequest(res.status);
+      dispatch(login(res.data));
+      navigate("/", { replace: true });   
     }).catch(function(error) {
         handleisWrongRequest(error.response.status);
     });

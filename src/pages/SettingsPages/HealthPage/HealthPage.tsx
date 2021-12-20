@@ -2,8 +2,8 @@ import { CSSProperties, FC } from "react";
 
 import { Box } from "@mui/material";
 
-import { SideMenu } from "../../components/Menu/Menu";
-import { PersonalForm } from "../../components/PersonalForm/PersonalForm";
+import { SideMenu } from "../../../components/Menu/Menu";
+import { HealthForm } from "../../../components/Forms/HealthForm/HealthForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
@@ -80,22 +80,22 @@ const PersonalFormContainerStyle: CSSProperties = {
   alignItems: "center",
 };
 
-export const PersonalPage: FC = () => {
+export const HealthPage: FC = () => {
   return (
     <Box style={BoxStyle}>
       <SideMenu></SideMenu>
       <div style={BorderStyle}>
         <div style={FormContainerStyle}>
           <div style={HeaderStyle}>
-            <div style={TitleContainerStyle}><h2>Tu información personal</h2></div>
+            <div style={TitleContainerStyle}><h2>Tu información sobre salud</h2></div>
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
             <div style={DescriptionContainerStyle}>
-              <p >Aquí puedes modificar tu información personal</p>
+              <p >Aquí puedes modificar tu información sobre salud</p>
             </div>
             <div style={PersonalFormContainerStyle}>
-              <PersonalForm />
+              <HealthForm />
             </div>
           </div>
         </div>
