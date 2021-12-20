@@ -14,6 +14,7 @@ import { LogInPage } from "./pages/LogInPage/LogInPage";
 import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
 import { HealthPage } from "./pages/HealthPage/HealthPage";
 import { VerificationPage } from "./pages/VerificationPage/VerificationPage";
+
 const theme = createTheme ({
   palette: {
     primary: {
