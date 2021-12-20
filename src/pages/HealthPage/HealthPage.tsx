@@ -10,7 +10,7 @@ const BoxStyle: CSSProperties = {
   flexGrow: 1,
   color: "white",
   background: "#dbdbdb",
-  height: "100vh"
+  height: "87.5vh"
 };
 
 const BorderStyle: CSSProperties = {

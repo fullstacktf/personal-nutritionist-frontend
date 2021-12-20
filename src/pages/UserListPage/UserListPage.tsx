@@ -12,7 +12,7 @@ const BoxStyle: CSSProperties = {
   flexGrow: 1,
   color: "white",
   backgroundColor: "#dbdbdb",
-  height: "86.6vh"
+  height: "87.5vh"
 };
 
 export const UserListPage: FC = () => {

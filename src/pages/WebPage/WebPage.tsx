@@ -7,7 +7,7 @@ import { Button, Grid, Box, Typography } from "@mui/material";
 import { MarketingCard } from "../../components/MarketingCard/MarketingCard";
 
 const GridPhoto = styled(Grid)(() => ({
-  height: "95vh",
+  height: "94.4vh",
   backgroundImage: "url(/assets/mainphoto.jpg)",
   backgroundPosition: "center",
   backgroundSize: "cover",

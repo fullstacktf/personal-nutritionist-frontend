@@ -32,7 +32,7 @@ const GridForm = styled(Grid)(() => ({
 
 export const SignUpPage: FC = () => {
   return (
-      <Grid item container sx={{height:"88vh", alignItems: "center", textAlign: "center"}}>
+      <Grid item container sx={{height:"87.5vh", alignItems: "center", textAlign: "center"}}>
         <GridSideImg item xs={12} md={6} lg={6}></GridSideImg>
         <GridForm item  xs={12} md={6} lg={6}>
           <SignUp></SignUp>
