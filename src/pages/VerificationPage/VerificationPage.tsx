@@ -51,7 +51,7 @@ const TitleContainerStyle: CSSProperties = {
 
 const SeparatorStyle: CSSProperties = {
   borderBottom: "3px solid #CCC4C5",
-  width:"100%",
+  width: "100%",
   height:"1%"
 };
 
