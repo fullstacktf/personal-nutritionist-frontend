@@ -19,7 +19,7 @@ const pStyle: CSSProperties = {
 };
 
 const FormControlStyled = styled(FormControl)(() => ({
-  width: "90%",
+  width: "100%",
 }));
 
 export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", onChange, validation=false, isRequired=false }) => {  
@@ -51,7 +51,7 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="lexa", on
 
   return (
     <FormControlStyled variant="filled" error={message !== ""} margin="normal">
-      <InputLabel>{title}{ isRequired ? "*" : null }</InputLabel>
+      <InputLabel shrink>{title}{ isRequired ? "*" : null }</InputLabel>
       <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
       { isActive ? <p style={pStyle}>{message}</p> : null }
     </FormControlStyled>

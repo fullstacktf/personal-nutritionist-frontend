@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FC } from "react";
 import { Button, FormControl, FormGroup, Select, InputLabel, SelectChangeEvent, MenuItem } from "@mui/material";
-import { InputForm } from "../InputForm/InputForm";
-import { Tags } from "../Autocomplete/Autocomplete";
+import { InputForm } from "../../InputForm/InputForm";
+import { Tags } from "../../Autocomplete/Autocomplete";
 
 export const HealthForm: FC = () => {
   const [data, setData] = useState({

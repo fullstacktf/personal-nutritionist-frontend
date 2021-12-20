@@ -12,6 +12,7 @@ import { Page404 } from "./pages/Page404/Page404";
 import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
 import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
+import { CreateEventPage } from "./pages/Event/CreateEventPage";
 
 const theme = createTheme ({
   palette: {
@@ -34,11 +35,13 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={ userLogged !== "" ? <HomePage /> : <WebPage />} />
+          <Route path="/" element={userLogged !== "" ? <HomePage /> : <WebPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
-          <Route path="/personal" element={ userLogged !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="/personal" element={userLogged !== "" ? <PersonalPage/> : <WebPage />} />
+          <Route path="calendar/event/create" element={<CreateEventPage/>} />
+          {/* <Route path="/event/create" element={userLogged !== "" ? <CreateEventPage/> : <WebPage />} /> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
