@@ -24,7 +24,7 @@ export const SideMenu: FC = () => {
 
   if (userInfo.role === "Nutricionista") {
     items[3].icon = <People color="info" />;
-    items[3].name = "Clients";
+    items[3].name = "Clientes";
   }
 
   const GridMenu = styled(Grid)(() => ({

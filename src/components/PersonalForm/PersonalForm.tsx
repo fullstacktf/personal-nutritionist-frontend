@@ -1,13 +1,47 @@
-import { useState, ChangeEvent, FC } from "react";
-import { Button, FormControl, Avatar, colors } from "@mui/material";
+import { useState, ChangeEvent, FC, CSSProperties  } from "react";
+import { Button, FormControl, Box } from "@mui/material";
+
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PersonIcon from "@mui/icons-material/Person";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { styled } from "@mui/material/styles";
+
 import { InputForm } from "../InputForm/InputForm";
+
+const FormContainer: CSSProperties = {
+  display: "flex",
+  flexGrow: 1,
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const InputsContainer: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  width: "100vh",
+  height: "40vh",
+};
+
+const ButtonsContainer: CSSProperties = {
+  display: "flex",
+  margin: "30px 10px 12px 12px",
+
+};
+
+const ButtonStyled = styled(Button)(() => ({
+  display: "flex",
+  marginRight: "15px",
+  background: "#187DE4",
+  color: "white",
+}));
 
 export const PersonalForm: FC = () => {
   const [data, setData] = useState({
-    username: "adan",
-    email: "axeltaj@gmail.com",
-    phone: 35711533,
-    Descripcion: "Especialista en nutrición deportiva, ¿necesitas consejo?,¡llamame! <3"
+    name: "",
+    phone: 0,
+    description: ""
   });
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,15 +63,32 @@ export const PersonalForm: FC = () => {
   };
 
   return (
-    <form onSubmit={submitData}>
+    <form style={FormContainer} onSubmit={submitData}>
       <FormControl>
-        <Avatar sx={{ bgcolor: colors.deepOrange[500] }}>AV</Avatar>
-        <Button variant="contained">Cambiar foto</Button>
-        <InputForm onChange={handleDataChange} name="name" placeholder="Escribe tu nombre" type="text" />
-        <InputForm onChange={handleDataChange} name="phone" placeholder="+641585416" type="tel" validation={true} />
-        <InputForm onChange={handleDataChange} name="Descripcion" placeholder="Añade una descripción" type="text" />
-        <Button variant="contained" type="submit">Guardar Cambios</Button>
-        <Button onClick={submitData} variant="contained">Cancelar</Button>
+        <div style={InputsContainer}>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <PersonIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+            <InputForm onChange={handleDataChange} title="Nombre" name="name" placeholder="Escribe tu nombre y apellidos" type="text" validation={true} />
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <LocalPhoneIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+            <InputForm onChange={handleDataChange} title="Teléfono" name="phone" placeholder="Escribe tu telefono" type="tel" validation={true} />
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <DescriptionIcon sx={{ borderRadius: "5px", color: "action.active",background: "#F3F6F9", mr: 1, my: 1.5 }} />
+            <InputForm onChange={handleDataChange} title="Descripción" name="Descripcion" placeholder="Añade una descripción" type="text" />
+          </Box>
+          <div style={ButtonsContainer}>
+            <ButtonStyled variant="contained" type="submit">
+              <SaveIcon sx={{ color: "white", mr: 1, my: 1.5 }} />
+              Guardar Cambios
+            </ButtonStyled >
+            <Button sx={{ background: "#D7DAE7" }} onClick={submitData} variant="contained">
+            <CancelIcon sx={{ color: "action.active", mr: 1, my: 1.5 }} />
+              Cancelar
+            </Button>
+          </div>
+        </div>
       </FormControl>
     </form>
   );
