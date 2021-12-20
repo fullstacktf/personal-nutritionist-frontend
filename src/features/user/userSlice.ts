@@ -1,22 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
 
 interface UserState {
-  name: string;
-  username: string;
-  email: string;
-  isLogged: boolean;
   token: string;
-  role: string;
+  userInfo: any;
 }
 
 const initialState: UserState = {
-  name: "",
-  username: "",
-  email: "",
-  isLogged: false,
   token: "",
-  role: ""
+  userInfo: {},
 };
 
 export const userSlice = createSlice ({
@@ -24,21 +15,16 @@ export const userSlice = createSlice ({
   initialState,
   reducers: {
     login: (state, data) => {
-      console.log(data.payload.user.name);
       state.token = data.payload.token;
-      state.role = data.payload.user.role;
-      state.name = data.payload.user.name;
+      state.userInfo = data.payload.user;
     },
     logout: (state) => {
       state.token = "";
-      state.role =  "";
-      state.name = "";
+      state.userInfo = {};
     },
   },
 });
 
 export const { login, logout } = userSlice.actions;
-
-export const selectUser = (state: RootState) => state.user.isLogged;
 
 export default userSlice.reducer;

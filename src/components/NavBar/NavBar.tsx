@@ -38,7 +38,8 @@ const TypographyTitleStyle: CSSProperties = {
 };
 
 export const NavBar: FC = () => {
-  const userLogged = useAppSelector((state) => state.user);
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
   const dispatch = useAppDispatch();
   
   const handleLogOut = () => {
@@ -54,9 +55,9 @@ export const NavBar: FC = () => {
         
         <Typography style={TypographyTitleStyle} variant="h1">Nutriguide</Typography>
         
-        { userLogged.token !== "" ? 
+        { userToken !== "" ? 
             <div style={divTopSideStyle}>
-              <Avatar variant="rounded" >{userLogged.name.charAt(0).toUpperCase()}</Avatar>
+              <Avatar variant="rounded" src={userInfo.photo}> {userInfo.name.charAt(0).toUpperCase()}</Avatar>
               <Button 
                 onClick={handleLogOut}
                 variant="contained" 
