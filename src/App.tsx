@@ -16,6 +16,7 @@ import { UserListPage } from "./pages/UserListPage/UserListPage";
 import { PersonalPage } from "./pages/PersonalPage/PersonalPage";
 import { HealthPage } from "./pages/HealthPage/HealthPage";
 import { VerificationPage } from "./pages/VerificationPage/VerificationPage";
+import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
 
 const theme = createTheme ({
   palette: {
@@ -48,11 +49,13 @@ function App() {
           <Route path="/health" element={<HealthPage />} />
           <Route path="/personal" element={<PersonalPage/>} />
           <Route path="/verification" element={<VerificationPage />} />
+          <Route path="/recipes" element={<RecipeListPage />} />
           {/* <Route path="/list" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/personal" element={ userToken !== "" ? <PersonalPage /> : <WebPage />} />
           <Route path="/health" element={ userToken !== "" ? <HealthPage /> : <WebPage />} />
           <Route path="/personal" element={ userToken !== "" ? <PersonalPage/> : <WebPage />} />
-          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} /> */}
+          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} />
+          <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

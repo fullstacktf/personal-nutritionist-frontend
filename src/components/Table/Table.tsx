@@ -1,7 +1,7 @@
 import { CSSProperties, FC, useState, ChangeEvent } from "react";
 import axios from "axios";
 
-import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
+import { IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
 
@@ -69,38 +69,24 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
     return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
 
-  const rows: Data[] = data.map((user) => {
-    const specialties = user.specialties != null ? user.specialties.join(", ") : user.specialties;
-    const intolerances = user.intolerances != null ? user.intolerances.join(", ") : user.intolerances;
-    const phone = user.phone === 0 ? "-" : user.phone;
-
-    return {
-      name: 
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Avatar style={{ marginRight: "10px" }} variant="rounded" src={user.photo}>{user.name.charAt(0).toUpperCase()}</Avatar>
-          {user.name}
-        </div>,
-      specialties: specialties,
-      typeDiet: user.typeDiet,
-      intolerances: intolerances,
-      email:
-        <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-          {user.email}
-        </div>,
-      phone:
-        <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-          {phone}
-        </div>,
-      actions:
-        <div>
-          <IconButton aria-label="calendar" color="secondary">
-            <InsertInvitation />
-          </IconButton>
-          <IconButton aria-label="profile" color="secondary" onClick={() => handleProfile(user._id)}>
-            <AssignmentInd />
-          </IconButton>
-        </div>
-    };
+  const rows: Data[] = data.map((item) => {
+    let element: any = {};
+    columns.forEach((title, index) => {
+      const id = title.id;
+      (title.id !== "actions") ?
+        element[id] = item[index]
+      :
+        element[id] = 
+          <div>
+            <IconButton aria-label="calendar" color="secondary">
+              <InsertInvitation />
+            </IconButton>
+            <IconButton aria-label="profile" color="secondary" onClick={() => handleProfile(item[titles.length-1])}>
+              <AssignmentInd />
+            </IconButton>
+          </div>;
+    });
+    return (element);
   });
 
   const [page, setPage] = useState(0);
@@ -154,7 +140,8 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
                     ))}
                   </StyledTableRow>
                 );
-              })}
+              })
+            }
           </TableBody>
         </Table>
       </TableContainer>

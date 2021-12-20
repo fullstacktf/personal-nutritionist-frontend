@@ -3,17 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { store } from "../../../app/store";
-import { NavBar } from "../NavBar";
+import { RecipeListClient } from "../RecipeListClient";
 
-test("renders sign up button", () => {
+test("nutritionits list has default text", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <NavBar />
+        <RecipeListClient />
       </BrowserRouter>
     </Provider>
   );
 
-  const catchWord = screen.getByText(/Regístrate/i);
+  const catchWord = screen.getByText(/No hay recetas/i);
   expect(catchWord).toBeInTheDocument();
 });

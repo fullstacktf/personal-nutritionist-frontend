@@ -1,7 +1,9 @@
 import { CSSProperties, FC, useEffect, useState } from "react";
 import axios from "axios";
 
-import { StickyHeadTable } from "../Table/Table"; 
+import { Avatar } from "@mui/material";
+
+import { StickyHeadTable } from "../Table/Table";
 
 const BoxStyle: CSSProperties = {
   flexGrow: 1,
@@ -30,14 +32,39 @@ export const NutritionistList: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const [nutritionists, setNutritionists] = useState();
+  const [nutritionists, setNutritionists] = useState<any>();
 
   useEffect(() => {
-    axios.get("https://api.nutriguide.es/users/role/Nutricionista")
-      .then((res) => { setNutritionists(res.data); });
+    const getData = async() => {
+      await axios.get("https://api.nutriguide.es/users/role/Nutricionista")
+        .then((res) => {
+          const rows = [];
+          for (let item of res.data) {
+            const specialties = item.specialties != null ? item.specialties.join(", ") : item.specialties;
+            const phone = item.phone === 0 ? "-" : item.phone;
+            rows.push([
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <Avatar style={{ marginRight: "10px" }} variant="rounded" src={item.photo}>{item.name.charAt(0).toUpperCase()}</Avatar>
+                {item.name}
+              </div>,
+              specialties,
+              <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+                {item.email}
+              </div>,
+              <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
+                {phone}
+              </div>,
+              item._id
+            ]);
+          }
+          setNutritionists(rows);
+        });
+    };
+
+    getData();
   }, []);
   
-  if (!nutritionists) return <div>No hay nutricionistas</div>;
+  if (nutritionists == null) return <div>No hay nutricionistas</div>;
 
   return (
     <div style={BoxStyle}>
