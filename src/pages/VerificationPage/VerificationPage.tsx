@@ -92,7 +92,7 @@ export const VerificationPage: FC = () => {
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
             <div style={DescriptionContainerStyle}>
-              <p >Aquí puedes modificar tu información personal</p>
+              <p>Aquí puedes modificar tu información personal</p>
             </div>
             <div style={PersonalFormContainerStyle}>
               <VerificationForm />
