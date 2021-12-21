@@ -75,10 +75,15 @@ export const CreateEventPage: FC = () => {
   const [basicUsers, setBasicUsers] = useState<any>();
   const [participant, setParticipant] = useState<any>();
   const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
 
   useEffect(() => {
     const handleUser = async(id: any) => {
-      await axios.get(`https://api.nutriguide.es/users/${id}`)
+      const config = {
+        headers: { Authorization: `Bearer ${userToken}` }
+      };
+
+      await axios.get(`https://api.nutriguide.es/users/${id}`, config)
         .then((res) => { 
           const basicUsersAux = [
             { _id: userInfo._id, name: userInfo.name, email: userInfo.email, phone: userInfo.phone, photo:userInfo.photo, isVerified: userInfo.isVerified },
@@ -90,7 +95,7 @@ export const CreateEventPage: FC = () => {
     };
 
     handleUser(url.pathname.split("/").pop());
-  }, [url, userInfo]);
+  }, [url, userInfo, userToken]);
 
   if (basicUsers == null) return <div>No hay participantes</div>;
 
