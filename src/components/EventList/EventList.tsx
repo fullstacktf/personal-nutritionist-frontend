@@ -1,6 +1,8 @@
-import { CSSProperties, FC, useState } from "react";
+import { CSSProperties, FC } from "react";
+import axios from "axios";
 
-import { Avatar } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
 
 import { useAppSelector } from "../../app/hooks";
 import { StickyHeadTable } from "../Table/Table";
@@ -24,6 +26,10 @@ const BorderStyle: CSSProperties = {
 };
 
 export const EventList: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
+  const events = [];
+
   const titles = [
     { id: "title", label: "TÍTULO", minWidth: 170, align: "left" },
     { id: "status", label: "ESTADO", minWidth: 100, align: "center" },
@@ -32,14 +38,19 @@ export const EventList: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const userInfo = useAppSelector((state) => state.user.userInfo);
-  const [events, setEvents] = useState<any>();
+  const handleDeleleEvent = (id: any) => {
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+
+    axios.delete(`https://api.nutriguide.es/calendar/event/${id}`, config)
+      .then(res => { console.log(res.data); });
+  };
 
   if (userInfo.events == null) return <div>No hay eventos</div>;
   
-  const rows = [];
   for (let item of userInfo.events) {
-    rows.push([
+    events.push([
       <div style={{ display: "flex", alignItems: "center" }}>
         <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.title.charAt(0).toUpperCase()}</Avatar>
         {item.title}
@@ -49,10 +60,13 @@ export const EventList: FC = () => {
       </div>,
       item.startingDate,
       item.endingDate,
-      item._id
+      <div>
+        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleleEvent(item._id)}>
+          <DeleteOutline />
+        </IconButton>
+      </div>
     ]);
   }
-  setEvents(rows);
 
   return (
     <div style={BoxStyle}>

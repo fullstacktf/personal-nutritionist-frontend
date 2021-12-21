@@ -1,6 +1,8 @@
-import { CSSProperties, FC, useState } from "react";
+import { CSSProperties, FC } from "react";
+import axios from "axios";
 
-import { Avatar } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
+import { DeleteOutline } from "@mui/icons-material";
 
 import { useAppSelector } from "../../app/hooks";
 import { StickyHeadTable } from "../Table/Table";
@@ -24,6 +26,10 @@ const BorderStyle: CSSProperties = {
 };
 
 export const RecipeListNutritionist: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
+  const recipes = [];
+
   const titles = [
     { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
     { id: "typeDiet", label: "TIPO DE DIETA", minWidth: 100, align: "center" },
@@ -31,15 +37,20 @@ export const RecipeListNutritionist: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const userInfo = useAppSelector((state) => state.user.userInfo);
-  const [recipes, setRecipes] = useState<any>();
+  const handleDeleleRecipe = (id: any) => {
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+
+    axios.delete(`https://api.nutriguide.es/weekmeal/recipe/${id}`, config)
+      .then(res => { console.log(res.data); });
+  };
 
   if (userInfo.recipes == null) return <div>No hay recetas</div>;
   
-  const rows = [];
   for (let item of userInfo.recipes) {
     const alergens = item.specialties != null ? item.alergens.join(", ") : item.alergens;
-    rows.push([
+    recipes.push([
       <div style={{ display: "flex", alignItems: "center" }}>
         <Avatar style={{ marginRight: "10px" }} variant="rounded">{item.name.charAt(0).toUpperCase()}</Avatar>
         {item.name}
@@ -48,10 +59,13 @@ export const RecipeListNutritionist: FC = () => {
         {item.typeDiet}
       </div>,
       alergens,
-      item._id
+      <div>
+        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleleRecipe(item._id)}>
+          <DeleteOutline />
+        </IconButton>
+      </div>
     ]);
   }
-  setRecipes(rows);
 
   return (
     <div style={BoxStyle}>

@@ -1,15 +1,13 @@
 import { CSSProperties, FC, useState, ChangeEvent } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
 
-import { IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
 
 interface Props {
   name: string;
   titles: Array<any>;
   data: Array<any>;
+  create?: JSX.Element;
 }
 
 interface Column {
@@ -67,7 +65,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
+export const StickyHeadTable: FC<Props> = ({ name, titles, data, create }) => {
   const columns: Column[] = titles.map((title) => {
     return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
@@ -76,24 +74,7 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
     let element: any = {};
     columns.forEach((title, index) => {
       const id = title.id;
-      (title.id !== "actions") ?
-        element[id] = item[index]
-      :
-        element[id] = 
-          <div>
-            <IconButton 
-              aria-label="calendar" 
-              color="secondary"
-              onClick={() => handleUser(item[titles.length-1])}
-              component={Link} 
-              to={`/calendar/event/create/${item[titles.length-1]}`}
-            >
-              <InsertInvitation />
-            </IconButton>
-            <IconButton aria-label="profile" color="secondary" onClick={() => handleUser(item[titles.length-1])}>
-              <AssignmentInd />
-            </IconButton>
-          </div>;
+      element[id] = item[index];
     });
     return (element);
   });
@@ -108,11 +89,6 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const handleUser = (id: any) => {
-    axios.get(`https://api.nutriguide.es/users/${id}`)
-      .then((res) => { console.log(res.data); });
   };
   
   return (

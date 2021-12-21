@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useState } from "react";
+import { CSSProperties, FC } from "react";
 
 import { Avatar } from "@mui/material";
 
@@ -24,6 +24,9 @@ const BorderStyle: CSSProperties = {
 };
 
 export const RecipeListClient: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const rows = [];
+
   const titles = [
     { id: "name", label: "NOMBRE", minWidth: 170, align: "left" },
     { id: "date", label: "FECHA", minWidth: 100, align: "center" },
@@ -32,12 +35,8 @@ export const RecipeListClient: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const userInfo = useAppSelector((state) => state.user.userInfo);
-  const [recipes, setRecipes] = useState<any>();
-
   if (userInfo.recipes == null) return <div>No hay recetas</div>;
   
-  const rows = [];
   for (let item of userInfo.recipes) {
     const alergens = item.specialties != null ? item.alergens.join(", ") : item.alergens;
     rows.push([
@@ -52,15 +51,14 @@ export const RecipeListClient: FC = () => {
         {item.typeMeal}
       </div>,
       alergens,
-      item._id
+      <div></div>
     ]);
   }
-  setRecipes(rows);
 
   return (
     <div style={BoxStyle}>
       <div style={BorderStyle}>
-        <StickyHeadTable name="Lista de Recetas" titles={titles} data={recipes} />
+        <StickyHeadTable name="Lista de Recetas" titles={titles} data={rows} />
       </div>
     </div>
   );
