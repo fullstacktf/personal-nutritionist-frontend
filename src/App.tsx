@@ -53,7 +53,7 @@ function App() {
           <Route path="/verification" element={<VerificationPage />} />
           <Route path="/recipes" element={<RecipeListPage />} />
           <Route path="/calendar" element={<EventListPage />} />
-          <Route path={"/calendar/event/create/:participant"} element={<CreateEventPage />} />
+          <Route path="/calendar/event/create/:participant" element={<CreateEventPage />} />
 
           {/* <Route path="/list" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/personal" element={ userToken !== "" ? <PersonalPage /> : <WebPage />} />
