@@ -46,6 +46,7 @@ function App() {
           <Route path="/login" element={<LogInPage />} />
           <Route path="*" element={<Page404 />} />
           <Route path="/" element={ userToken !== "" ? <HomePage /> : <WebPage />} />
+          
           <Route path="/list" element={<UserListPage />} />
           <Route path="/personal" element={<PersonalPage />} />
           <Route path="/health" element={<HealthPage />} />

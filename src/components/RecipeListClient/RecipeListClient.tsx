@@ -35,7 +35,15 @@ export const RecipeListClient: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  if (userInfo.recipes == null) return <div>No hay recetas</div>;
+  if (!userInfo.recipes) {
+    return (
+      <div style={BoxStyle}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          No hay recetas
+        </div>
+      </div>
+    );
+  }
   
   for (let item of userInfo.recipes) {
     const alergens = item.specialties != null ? item.alergens.join(", ") : item.alergens;

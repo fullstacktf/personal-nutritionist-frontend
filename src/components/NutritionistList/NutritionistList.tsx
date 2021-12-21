@@ -52,7 +52,15 @@ export const NutritionistList: FC = () => {
     getData();
   }, [userToken]);
   
-  if (nutritionists == null) return <div>No hay nutricionistas</div>;
+  if (!nutritionists) {
+    return (
+      <div style={BoxStyle}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          No hay nutricionistas
+        </div>
+      </div>
+    );
+  }
   
   for (let item of nutritionists) {
     const specialties = item.specialties != null ? item.specialties.join(", ") : item.specialties;

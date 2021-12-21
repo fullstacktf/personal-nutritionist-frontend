@@ -53,7 +53,15 @@ export const ClientList: FC = () => {
     getData();
   }, [userToken]);
   
-  if (!clients) return <div>No hay clientes</div>;
+  if (!clients) {
+    return (
+      <div style={BoxStyle}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          No hay clientes
+        </div>
+      </div>
+    );
+  }
 
   for (let item of clients) {
     const intolerances = item.intolerances != null ? item.intolerances.join(", ") : item.intolerances;

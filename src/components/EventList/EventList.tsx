@@ -47,7 +47,15 @@ export const EventList: FC = () => {
       .then(res => { console.log(res.data); });
   };
 
-  if (userInfo.events == null) return <div>No hay eventos</div>;
+  if (!userInfo.events) {
+    return (
+      <div style={BoxStyle}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          No hay eventos
+        </div>
+      </div>
+    );
+  }
   
   for (let item of userInfo.events) {
     events.push([
