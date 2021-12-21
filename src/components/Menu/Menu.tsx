@@ -40,7 +40,7 @@ export const SideMenu: FC = () => {
       <GridMenu width={60} item>
         <Button onClick={() => setOpen(!open)} style={{ marginLeft: "-5px", marginTop: "5px" }}>{menuIcon}</Button>
         {items.map((item) => (
-          <IconMenu icon={item.icon} url={item.url}></IconMenu>
+          <IconMenu icon={item.icon} url={item.url} />
         ))}
       </GridMenu>
     );
@@ -51,7 +51,7 @@ export const SideMenu: FC = () => {
         <Button sx={{ display: "flex", justifyContent: "flex-end" }} onClick={() => setOpen(!open)}>{menuIcon}</Button>
         <Typography align="center" sx={{ marginBottom: "10px" }}><b>Nutriguide</b></Typography>
         {items.map((item) => ( 
-          <IconMenu icon={item.icon} name={item.name} separator={item.separator} url={item.url}></IconMenu>
+          <IconMenu icon={item.icon} name={item.name} separator={item.separator} url={item.url} />
         ))}
       </GridMenu>
     );

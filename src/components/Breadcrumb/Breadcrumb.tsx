@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
@@ -40,13 +40,18 @@ export const CustomizedBreadcrumbs: FC = () => {
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        {userLogged.token === "" ?  <StyledBreadcrumb icon={<Home fontSize="small" />} label="Nutriguide" component={Link} to="/" /> :null}
+        {userLogged.token === "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} label="Nutriguide" component={Link} to="/" /> :null}
         {location.pathname === "/login" ? <StyledBreadcrumb label="Iniciar Sesión" component={Link} to="/login" /> : null}
         {location.pathname === "/signup" ? <StyledBreadcrumb label="Registrarse" component={Link} to="/signup" /> : null}
         {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} label={userLogged.userInfo.name} component={Link} to="/" /> : null}
+        {location.pathname === "/calendar" ? <StyledBreadcrumb label="Calendario" component={Link} to="/calendar" /> : null}
+        {location.pathname === "/calendar/event/create/:participant" ? <StyledBreadcrumb label="Crear evento" component={Link} to="/calendar" /> : null}
         {location.pathname === "/personal" ? <StyledBreadcrumb label="Información personal" component={Link} to="/personal" /> : null}
         {location.pathname === "/health" ? <StyledBreadcrumb label="Información de salud" component={Link} to="/health" /> : null}
         {location.pathname === "/verification" ? <StyledBreadcrumb label="Verificación" component={Link} to="/verification" /> : null}
+        {location.pathname === "/nutritionists" ? <StyledBreadcrumb label="Nutricionistas" component={Link} to="/nutritionists" /> : null}
+        {location.pathname === "/clients" ? <StyledBreadcrumb label="Clientes" component={Link} to="/clients" /> : null}
+        {location.pathname === "/recipes" ? <StyledBreadcrumb label="Recetas" component={Link} to="/recipes" /> : null}
       </Breadcrumbs>
     </div>
   );
