@@ -86,7 +86,7 @@ export const CreateEventForm: FC<Props> = ({ basicUsers, owner, participant }) =
     await handleNewEventUser(config, newParticipant);
 
     dispatch(updateUser(newOwner));
-    navigate("/list", { replace: true });
+    newOwner.role === "Nutricionista" ? navigate("/clients", { replace: true }) : navigate("/nutritionists", { replace: true });
   };
 
   return (
