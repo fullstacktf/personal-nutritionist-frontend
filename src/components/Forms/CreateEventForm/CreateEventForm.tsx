@@ -6,6 +6,9 @@ import axios from "axios";
 import { Button, FormControl, Alert, Grid } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
 
+import { updateUser } from "../../../features/user/userSlice";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+
 interface Props {
   basicUsers: any;
   owner: any;
@@ -19,6 +22,7 @@ const FormBodyStyle: CSSProperties = {
 };
 
 export const CreateEventForm: FC<Props> = ({ basicUsers, owner, participant }) => {
+  const userToken = useAppSelector((state) => state.user.token);
   const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   const [isWrongRequest, setIsWrongRequest] = useState<boolean>();
@@ -42,24 +46,47 @@ export const CreateEventForm: FC<Props> = ({ basicUsers, owner, participant }) =
   const handleIsWrongRequestChange = (status: number) => {
     if(status === 200 || status === 201 ) {
       setIsWrongRequest(false);
-      setMessage("¡Formulario enviado con éxito!");
     } else {
-      console.log(status);
       setIsWrongRequest(true);
       setMessage("Datos incorrectos");
     }
   };
-  
-  const submitData = (event: any ) => {
-    event.preventDefault();
 
-    axios.post("https://api.nutriguide.es/calendar/event", data)
-    .then(res => {
+  const handleCreateEvent = async(config: object) => {
+    let newEvent;
+    await axios.post("https://api.nutriguide.es/calendar/event", data, config)
+    .then((res) => {
       handleIsWrongRequestChange(res.status);
-      navigate("/list", { replace: true });
-    }).catch( (error) => {
-      handleIsWrongRequestChange(error.response.status);
+      newEvent = res.data;
+    }).catch((err) => {
+      handleIsWrongRequestChange(err.response.status);
     });
+    return newEvent;
+  };
+
+  const handleNewEventUser = async(config: object, user: any) => {
+    axios.put(`https://api.nutriguide.es/users/${user._id}`, user, config);
+  };
+  
+  const dispatch = useAppDispatch();
+
+  const submitData = async(event: any) => {
+    event.preventDefault();
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+    const newEvent = await handleCreateEvent(config);
+
+    const newOwner = { ...owner };
+    newOwner.events = !newOwner.events ? [newEvent] : newOwner.events.concat(newEvent);
+    await handleNewEventUser(config, newOwner);
+
+    const newParticipant = { ...participant };
+    newParticipant.events = !newParticipant.events ? [newEvent] : newParticipant.events.concat(newEvent);
+    await handleNewEventUser(config, newParticipant);
+
+    dispatch(updateUser(newOwner));
+    newOwner.role === "Nutricionista" ? navigate("/clients", { replace: true }) : navigate("/nutritionists", { replace: true });
   };
 
   return (
@@ -79,5 +106,3 @@ export const CreateEventForm: FC<Props> = ({ basicUsers, owner, participant }) =
     </Grid>
   );
 };
-
-

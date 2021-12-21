@@ -54,42 +54,45 @@ export const NavBar: FC = () => {
           <img style={imgLogoStyle} src="/assets/avocado.png" alt="avocado" />
         </div>
         
-        <Typography style={TypographyTitleStyle} variant="h1">Nutriguide</Typography>
+        <Typography style={TypographyTitleStyle} variant="h1">
+          <Link to="/" style={{ color: "white", textDecoration: "none" }}>Nutriguide</Link>
+        </Typography>
         
-        {userToken !== "" ? 
-          <div style={divTopSideStyle}>
-            <Avatar variant="rounded" src={userInfo.photo}> {userInfo.name.charAt(0).toUpperCase()}</Avatar>
-            <Button 
-              onClick={handleLogOut}
-              variant="contained" 
-              color="error" 
-              endIcon={<ExitToApp />}
-              component={Link}
-              to="/"
-              sx={{ 
-                margin: "0.5em",
-                fontSize: {xs: 10, md: 16, lg: 16},
-                marginLeft: "1em"
-              }} 
-            >
-              Cerrar sesión
-            </Button>
-          </div>
-        :  
-          <div style={divTopSideStyle}>
-            <Button 
-              variant="text"
-              endIcon={<AccountCircle />}
-              component={Link} 
-              to="/signup"
-              sx={{ 
-                padding: "1em",
-                color: "white"
-              }}
-            >
-              Regístrate
-            </Button>
-          </div>
+        {
+          userToken !== "" ? 
+            <div style={divTopSideStyle}>
+              <Avatar variant="rounded" src={userInfo.photo}> {userInfo.name.charAt(0).toUpperCase()}</Avatar>
+              <Button 
+                onClick={handleLogOut}
+                variant="contained" 
+                color="error" 
+                endIcon={<ExitToApp />}
+                component={Link}
+                to="/"
+                sx={{ 
+                  margin: "0.5em",
+                  fontSize: {xs: 10, md: 16, lg: 16},
+                  marginLeft: "1em"
+                }} 
+              >
+                Cerrar sesión
+              </Button>
+            </div>
+          :  
+            <div style={divTopSideStyle}>
+              <Button 
+                variant="text"
+                endIcon={<AccountCircle />}
+                component={Link} 
+                to="/signup"
+                sx={{ 
+                  padding: "1em",
+                  color: "white"
+                }}
+              >
+                Regístrate
+              </Button>
+            </div>
         }
       </div>
       <CustomizedBreadcrumbs />
