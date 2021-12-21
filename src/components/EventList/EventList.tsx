@@ -19,6 +19,7 @@ const BorderStyle: CSSProperties = {
   width: "70%",
   height: "70%",
   maxWidth: "1290px",
+  maxHeight: "700px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
