@@ -13,8 +13,10 @@ import { NavBar } from "./components/NavBar/NavBar";
 import { LogInPage } from "./pages/LogInPage/LogInPage";
 import { Footer } from "./components/Footer/Footer";
 import { UserListPage } from "./pages/UserListPage/UserListPage";
+import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
+import { EventListPage } from "./pages/EventListPage/EventListPage";
 import { PersonalPage } from "./pages/SettingsPages/PersonalPage/PersonalPage";
-import { CreateEventPage } from "./pages/Event/CreateEventPage";
+import { CreateEventPage } from "./pages/Event/CreateEventPage/CreateEventPage";
 import { HealthPage } from "./pages/SettingsPages/HealthPage/HealthPage";
 import { VerificationPage } from "./pages/SettingsPages/VerificationPage/VerificationPage";
 
@@ -49,14 +51,18 @@ function App() {
           <Route path="/health" element={<HealthPage />} />
           <Route path="/personal" element={<PersonalPage/>} />
           <Route path="/verification" element={<VerificationPage />} />
+          <Route path="/recipes" element={<RecipeListPage />} />
+          <Route path="/calendar" element={<EventListPage />} />
           <Route path={"/calendar/event/create/:participant"} element={<CreateEventPage />} />
-          {/* <Route path="calendar/event/create" element={<CreateEventPage />} /> */}
+
           {/* <Route path="/list" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/personal" element={ userToken !== "" ? <PersonalPage /> : <WebPage />} />
           <Route path="/health" element={ userToken !== "" ? <HealthPage /> : <WebPage />} />
           <Route path="/personal" element={ userToken !== "" ? <PersonalPage/> : <WebPage />} />
-          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} /> */}
-          {/* <Route path="calendar/event/create/:participant" element={userLogged !== "" ? <CreateEventPage/> : <WebPage />} /> */}
+          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} />
+          <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} />
+          <Route path="/calendar" element={ userToken !== "" ? <EventListPage /> : <WebPage />} />
+          <Route path="calendar/event/create/:participant" element={userToken !== "" ? <CreateEventPage/> : <WebPage />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,13 +1,13 @@
 import { CSSProperties, FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../../app/hooks";
 
 import { Box, Button } from "@mui/material";
 import { Cancel } from "@mui/icons-material";
 
-import { SideMenu } from "../../components/Menu/Menu";
-import { CreateEventForm } from "../../components/Forms/CreateEventForm/CreateEventForm";
+import { SideMenu } from "../../../components/Menu/Menu";
+import { CreateEventForm } from "../../../components/Forms/CreateEventForm/CreateEventForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
@@ -72,30 +72,31 @@ const FormBodyStyle: CSSProperties = {
 
 export const CreateEventPage: FC = () => {
   let url = useLocation();
-  const [participants, setParticipants] = useState<any>();
+  const [basicUsers, setBasicUsers] = useState<any>();
+  const [participant, setParticipant] = useState<any>();
   const userInfo = useAppSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const handleUser = async(id: any) => {
       await axios.get(`https://api.nutriguide.es/users/${id}`)
         .then((res) => { 
-          const basicUsers = [
+          const basicUsersAux = [
             { _id: userInfo._id, name: userInfo.name, email: userInfo.email, phone: userInfo.phone, photo:userInfo.photo, isVerified: userInfo.isVerified },
             { _id: res.data._id, name: res.data.name, email: res.data.email, phone: res.data.phone, photo:res.data.photo, isVerified: res.data.isVerified },
           ];
-          setParticipants(basicUsers);
-
+          setBasicUsers(basicUsersAux);
+          setParticipant(res.data);
         });
     };
 
     handleUser(url.pathname.split("/").pop());
   }, [url, userInfo]);
 
-  if (participants == null) return <div>No hay participantes</div>;
+  if (basicUsers == null) return <div>No hay participantes</div>;
 
   return (
     <Box style={BoxStyle}>
-      <SideMenu></SideMenu>
+      <SideMenu />
       <div style={BorderStyle}>
         <div style={FormContainerStyle}>
           <div style={HeaderStyle}>
@@ -115,7 +116,7 @@ export const CreateEventPage: FC = () => {
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
-            <CreateEventForm participants={participants}/>
+            <CreateEventForm basicUsers={basicUsers} owner={userInfo} participant={participant} />
           </div>
         </div>
       </div>

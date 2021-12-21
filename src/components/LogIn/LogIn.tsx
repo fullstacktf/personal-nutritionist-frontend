@@ -23,10 +23,9 @@ export const LogIn: FC = () => {
   const handleIsWrongRequestChange = (status: number) => {
     if(status !== 200 ) {
       setIsWrongRequest(true);
-      setMessage("El usuario no existe");
+      setMessage("Usuario o contraseña incorrecta");
     } else {
       setIsWrongRequest(false);
-      setMessage("¡Has iniciado sesión con éxito!");
     }
   };
 
@@ -43,12 +42,13 @@ export const LogIn: FC = () => {
     event.preventDefault();
 
     axios.post("https://api.nutriguide.es/auth/login", data)
-    .then(res => {
+    .then((res) => {
       handleIsWrongRequestChange(res.status);
       dispatch(login(res.data));
       navigate("/", { replace: true });   
-    }).catch( (error) => {
-      handleIsWrongRequestChange(error.response.status);
+    })
+    .catch((err) => {
+      handleIsWrongRequestChange(err.response.status);
     });
   };
 

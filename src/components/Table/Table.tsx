@@ -1,19 +1,17 @@
 import { CSSProperties, FC, useState, ChangeEvent } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
 
-import { Avatar, IconButton, Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow, TablePagination, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
 
 interface Props {
   name: string;
   titles: Array<any>;
   data: Array<any>;
+  create?: JSX.Element;
 }
 
 interface Column {
-  id: "name" | "specialties" | "typeDiet" | "intolerances" | "email" | "phone" | "actions";
+  id: "name" | "actions" | "specialties" | "email" | "phone" | "intolerances" | "typeDiet" | "typeMeal" | "alergens";
   label: string;
   minWidth?: number;
   align: "left";
@@ -21,12 +19,14 @@ interface Column {
 
 interface Data {
   name: any;
-  specialties?: Array<string>;
-  typeDiet?: string;
-  intolerances?: Array<string>;
-  email: JSX.Element;
-  phone: JSX.Element;
   actions: JSX.Element;
+  specialties?: Array<string>;
+  email?: JSX.Element;
+  phone?: JSX.Element;
+  intolerances?: Array<string>;
+  typeDiet?: string;
+  typeMeal?: string;
+  alergens?: string;
 }
 
 const TitleContainerStyle: CSSProperties = {
@@ -65,49 +65,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   }
 }));
 
-export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
+export const StickyHeadTable: FC<Props> = ({ name, titles, data, create }) => {
   const columns: Column[] = titles.map((title) => {
     return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
 
-  const rows: Data[] = data.map((user) => {
-    const specialties = user.specialties != null ? user.specialties.join(", ") : user.specialties;
-    const intolerances = user.intolerances != null ? user.intolerances.join(", ") : user.intolerances;
-    const phone = user.phone === 0 ? "-" : user.phone;
-
-    return {
-      name: 
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Avatar style={{ marginRight: "10px" }} variant="rounded" src={user.photo}>{user.name.charAt(0).toUpperCase()}</Avatar>
-          {user.name}
-        </div>,
-      specialties: specialties,
-      typeDiet: user.typeDiet,
-      intolerances: intolerances,
-      email:
-        <div style={{ background: "#ffa726", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-          {user.email}
-        </div>,
-      phone:
-        <div style={{ background: "#1de9b6", borderRadius: "5px", padding: "5px 0 5px 0" }}>
-          {phone}
-        </div>,
-      actions:
-        <div>
-          <IconButton 
-            aria-label="calendar" 
-            color="secondary"
-            onClick={() => handleUser(user._id)}
-            component={Link} 
-            to={`/calendar/event/create/${user._id}`}
-          >
-            <InsertInvitation />
-          </IconButton>
-          <IconButton aria-label="profile" color="secondary" onClick={() => handleUser(user._id)}>
-            <AssignmentInd />
-          </IconButton>
-        </div>
-    };
+  const rows: Data[] = data.map((item) => {
+    let element: any = {};
+    columns.forEach((title, index) => {
+      const id = title.id;
+      element[id] = item[index];
+    });
+    return (element);
   });
 
   const [page, setPage] = useState(0);
@@ -120,11 +89,6 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
   const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const handleUser = (id: any) => {
-    axios.get(`https://api.nutriguide.es/users/${id}`)
-      .then((res) => { console.log(res.data); });
   };
   
   return (
@@ -161,7 +125,8 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data }) => {
                     ))}
                   </StyledTableRow>
                 );
-              })}
+              })
+            }
           </TableBody>
         </Table>
       </TableContainer>

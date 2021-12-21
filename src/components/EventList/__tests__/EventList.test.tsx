@@ -3,17 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { store } from "../../../app/store";
-import { NavBar } from "../NavBar";
+import { EventList } from "../EventList";
 
-test("renders sign up button", () => {
+test("events list has default text", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <NavBar />
+        <EventList />
       </BrowserRouter>
     </Provider>
   );
 
-  const catchWord = screen.getByText(/Regístrate/i);
+  const catchWord = screen.getByText(/No hay eventos/i);
   expect(catchWord).toBeInTheDocument();
 });

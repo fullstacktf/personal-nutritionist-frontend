@@ -4,7 +4,7 @@ import { StickyHeadTable } from "../Table";
 
 const setup = () => {
   const titles = [{ id: "name", label: "NOMBRE", minWidth: 170, align: "left" }];
-  const data = [{ name: "Alex", specialties: ["Siesta", "Comidita"], email: "alex@nutriguide.es", phone: 123456789 }];
+  const data = ["A"];
 
   render(
     <StickyHeadTable 
@@ -32,6 +32,6 @@ test("table component has title list", () => {
 test("table component has item list", () => {
   setup();
 
-  const catchWord = screen.getByText(/Alex/i);
+  const catchWord = screen.getByText("A");
   expect(catchWord).toBeInTheDocument();
 });

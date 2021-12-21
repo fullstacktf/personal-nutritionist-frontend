@@ -7,7 +7,9 @@ import { Button, FormControl, Alert, Grid } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
 
 interface Props {
-  participants: any;
+  basicUsers: any;
+  owner: any;
+  participant: any;
 }
 
 const FormBodyStyle: CSSProperties = {
@@ -16,16 +18,16 @@ const FormBodyStyle: CSSProperties = {
   width: "60%",
 };
 
-export const CreateEventForm: FC<Props> = ({participants}) => {
+export const CreateEventForm: FC<Props> = ({ basicUsers, owner, participant }) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   const [isWrongRequest, setIsWrongRequest] = useState<boolean>();
   const [data, setData] = useState({
     title: "",
     description: "",
-    owner: participants[0]._id,
+    owner: owner._id,
     status: "started",
-    participants: participants,
+    participants: basicUsers,
     startingDate: "",
     endingDate: ""
   });
@@ -50,6 +52,7 @@ export const CreateEventForm: FC<Props> = ({participants}) => {
   
   const submitData = (event: any ) => {
     event.preventDefault();
+
     axios.post("https://api.nutriguide.es/calendar/event", data)
     .then(res => {
       handleIsWrongRequestChange(res.status);
