@@ -12,23 +12,11 @@ const ContainerStyle: CSSProperties = {
   display: "flex",
   justifyContent: "center",
   flexDirection: "column",
-  width: "55%",
   alignItems: "center",
   backgroundColor: "white",
   padding: "10px 10px 10px 10px",
   borderRadius: "5px",
 };
-
-const GridContainer = styled(Grid) (() => ({
-  display: "flex",
-  flexGrow: 1,
-  alignItems: "center",
-  justifyContent: "center",
-  color: "black",
-  flexDirection: "column",
-  height: "100%",
-  width: "70%"
-}));
 
 export const Profile: FC<Props> = ({ userInfo }) => {
   return (
@@ -49,18 +37,18 @@ export const Profile: FC<Props> = ({ userInfo }) => {
       <div style={ContainerStyle}>
         {
           userInfo.role === "Nutricionista" ?
-            <GridContainer item xs={12} lg={12} sx={{ height: "10%" }}>
+            <div style={ContainerStyle}>
               <Typography variant="subtitle1"><b>Especialidades</b></Typography>
-              <Typography variant="subtitle1"> {userInfo.specialties} </Typography>
+              <Typography variant="subtitle1"> {userInfo.specialties.join(", ") || "-"} </Typography>
               <hr style={{ width: "50%" }}/>
-            </GridContainer>
+            </div>
           : 
-            <GridContainer item xs={12} lg={12} sx={{ height: "10%", marginTop: "1.5em" }}>
+            <div style={ContainerStyle}>
               <Typography variant="subtitle1"><b>Datos médicos</b></Typography>
               <Typography variant="subtitle1"><b>Altura</b>: { userInfo.height !== "" ? userInfo.height : "-" } </Typography>
               <Typography variant="subtitle1"><b>Peso</b>: { userInfo.weight !== "" ? userInfo.weight : "-" } </Typography>
               <hr style={{ width: "50%" }}/>
-            </GridContainer>
+            </div>
         }
       </div>
 
