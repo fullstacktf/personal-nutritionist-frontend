@@ -27,7 +27,7 @@ export const userSlice = createSlice ({
     },
     updateUser: (state, data) => {
       state.userInfo = data.payload;
-      localStorage.setItem("user", data.payload);
+      localStorage.setItem("user", JSON.stringify(data.payload));
     }
   },
 });

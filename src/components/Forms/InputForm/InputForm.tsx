@@ -54,7 +54,7 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="", onChan
     <FormControlStyled variant="filled" error={message !== ""} margin="normal">
       <InputLabel shrink>{title} {isRequired ? "*" : null}</InputLabel>
       <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} value={value} required={isRequired} />
-      { isActive ? <p style={pStyle}>{message}</p> : null }
+      { isActive ? <p style={pStyle}>{message}</p> : "" }
     </FormControlStyled>
   );
 };

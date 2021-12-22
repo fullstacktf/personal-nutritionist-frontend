@@ -51,8 +51,6 @@ export const PersonalForm: FC = () => {
     newUser.name = data.name;
     newUser.phone = parseInt(data.phone);
     newUser.description = data.description;
-    console.log(userInfo);
-    console.log(newUser);
 
     const config = {
       headers: { Authorization: `Bearer ${userToken}` }
@@ -75,7 +73,7 @@ export const PersonalForm: FC = () => {
         </BoxStyled>
         <BoxStyled>
           <Description sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-          <InputForm onChange={handleDataChange} value={data.description} title="Descripción" name="description" placeholder="Escribe tu email" type="text" validation={true} />
+          <InputForm onChange={handleDataChange} value={data.description} title="Descripción" name="description" placeholder="Describe algo sobre tí" type="text" validation={true} />
         </BoxStyled>
 
         <div style={ButtonStyle}>

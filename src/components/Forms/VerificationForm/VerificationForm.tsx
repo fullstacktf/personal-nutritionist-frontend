@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FC, CSSProperties  } from "react";
 import axios from "axios";
 
 import { Button, FormControl, Box } from "@mui/material";
-import { PermIdentity, School, Save, Cancel } from "@mui/icons-material";
+import { PermIdentity, School, Save, Cancel, AttachMoney } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
 import { updateUser } from "../../../features/user/userSlice";
@@ -33,7 +33,8 @@ export const VerificationForm: FC = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = useState({
     dni: userInfo.dni,
-    specialties: userInfo.specialties
+    specialties: userInfo.specialties,
+    price: userInfo.price
   });
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +50,7 @@ export const VerificationForm: FC = () => {
     const newUser = { ...userInfo };
     newUser.dni = data.dni;
     newUser.specialties = data.specialties.split(", ");
+    newUser.price = parseInt(data.price);
   
     const config = {
       headers: { Authorization: `Bearer ${userToken}` }
@@ -69,7 +71,11 @@ export const VerificationForm: FC = () => {
         </BoxStyled>
         <BoxStyled>
           <School sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-          <InputForm onChange={handleDataChange} value={data.specialties.join(", ") || null} title="Estudios" name="specialties" placeholder="Escribe tus estudios" type="text" />
+          <InputForm onChange={handleDataChange} title="Estudios" name="specialties" placeholder="Escribe tus estudios" type="text" />
+        </BoxStyled>
+        <BoxStyled>
+          <AttachMoney sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.price.toString()} title="Precio" name="price" placeholder="Precio de la sesión" type="number" />
         </BoxStyled>
         <div style={ButtonStyle}>
           <Button variant="contained" startIcon={<Save />} type="submit">Guardar Cambios</Button>

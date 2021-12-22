@@ -1,15 +1,18 @@
 import { CSSProperties, FC } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-import { Avatar, IconButton } from "@mui/material";
+import { Avatar, IconButton, Button } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { updateUser } from "../../features/user/userSlice";
 import { StickyHeadTable } from "../Table/Table";
 
 const BoxStyle: CSSProperties = {
   flexGrow: 1,
   display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
   alignItems: "center"
 };
@@ -37,20 +40,37 @@ export const RecipeListNutritionist: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const handleDeleleRecipe = (id: any) => {
+  const dispatch = useAppDispatch();
+
+  const handleDeleteRecipe = async(id: any) => {
     const config = {
       headers: { Authorization: `Bearer ${userToken}` }
     };
 
-    axios.delete(`https://api.nutriguide.es/weekmeal/recipe/${id}`, config)
+    await axios.delete(`https://api.nutriguide.es/weekmeal/recipe/${id}`, config)
       .then(res => { console.log(res.data); });
+       
+    const index = userInfo.recipes.findIndex((recipe: any) => recipe._id === id);
+    const newRecipes = [ ...userInfo.recipes ];
+    newRecipes.splice(index, 1);
+    const newUser = { ...userInfo };
+    newUser.recipes = newRecipes;
+    dispatch(updateUser(newUser));
   };
 
   if (!userInfo.recipes) {
     return (
       <div style={BoxStyle}>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
-          No hay recetas
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>          
+          <Button 
+            variant="contained" 
+            color="primary" 
+            component={Link}
+            to={"/recipes/create"}
+            sx={{ marginRight:"1em" }}
+          >
+            Crea tu primera receta
+          </Button>
         </div>
       </div>
     );
@@ -68,7 +88,7 @@ export const RecipeListNutritionist: FC = () => {
       </div>,
       alergens,
       <div>
-        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleleRecipe(item._id)}>
+        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleteRecipe(item._id)}>
           <DeleteOutline />
         </IconButton>
       </div>
@@ -77,6 +97,16 @@ export const RecipeListNutritionist: FC = () => {
 
   return (
     <div style={BoxStyle}>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        component={Link}
+        to={"/recipes/create"}
+        sx={{ marginRight:"1em" }}
+      >
+        Crea una nueva receta
+      </Button>
+
       <div style={BorderStyle}>
         <StickyHeadTable name="Lista de Recetas" titles={titles} data={recipes} />
       </div>

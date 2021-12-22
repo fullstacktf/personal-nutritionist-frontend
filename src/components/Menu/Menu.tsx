@@ -16,10 +16,10 @@ export const SideMenu: FC = () => {
   
   const items = [
     { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader>, url: "/" },
-    { icon: <Event color="info" />, name: "Calendar", url: "/calendar" },
-    { icon: <Settings color="info" />, name: "Settings", url: "/settings/personal" },
-    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionists", separator: <ListSubheader>Services</ListSubheader>, url: "/nutritionists" },
-    { icon: <MenuBook color="info" />, name: "Recipes", url: "/recipes" },
+    { icon: <Event color="info" />, name: "Calendario", url: "/calendar" },
+    { icon: <Settings color="info" />, name: "Configuración", url: "/settings/personal" },
+    { icon: <SupervisedUserCircle color="info" />, name: "Nutritionistas", separator: <ListSubheader>Servicios</ListSubheader>, url: "/nutritionists" },
+    { icon: <MenuBook color="info" />, name: "Recetas", url: "/recipes" },
   ];
 
   if (userInfo.role === "Nutricionista") {
@@ -51,7 +51,7 @@ export const SideMenu: FC = () => {
         <Button sx={{ display: "flex", justifyContent: "flex-end" }} onClick={() => setOpen(!open)}>{menuIcon}</Button>
         <Typography align="center" sx={{ marginBottom: "10px" }}><b>Nutriguide</b></Typography>
         {items.map((item) => ( 
-          <IconMenu icon={item.icon} name={item.name} separator={item.separator} url={item.url} />
+          <IconMenu key={item.name} icon={item.icon} name={item.name} separator={item.separator} url={item.url} />
         ))}
       </GridMenu>
     );

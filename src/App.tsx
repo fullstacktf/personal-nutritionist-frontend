@@ -23,6 +23,8 @@ import { HealthForm } from "./components/Forms/HealthForm/HealthForm";
 import { VerificationForm } from "./components/Forms/VerificationForm/VerificationForm";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { HirePage } from "./pages/HirePage/HirePage";
+import { CreateRecipePage } from "./pages/Recipe/CreateRecipePage/CreateRecipePage";
+import { CreateRecipeParticipantPage } from "./pages/Recipe/CreateRecipeParticipantPage/CreateRecipeParticipantPage";
 
 const theme = createTheme ({
   palette: {
@@ -61,6 +63,8 @@ function App() {
           <Route path="/profile/:user" element={ userToken !== "" ? <ProfilePage /> : <WebPage />} />
           <Route path="/hire/:user" element={ userToken !== "" ? <HirePage /> : <WebPage />} />
           <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} />
+          <Route path="/recipes/create" element={ userToken !== "" ? <CreateRecipePage /> : <WebPage />} />
+          <Route path="/weekmeal/recipe/create/:participant" element={userToken !== "" ? <CreateRecipeParticipantPage/> : <WebPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
