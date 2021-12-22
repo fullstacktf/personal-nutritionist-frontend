@@ -16,7 +16,7 @@ import { UserListPage } from "./pages/UserListPage/UserListPage";
 import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
 import { EventListPage } from "./pages/EventListPage/EventListPage";
 import { PersonalPage } from "./pages/SettingsPages/PersonalPage/PersonalPage";
-import { CreateEventPage } from "./pages/Event/CreateEventPage/CreateEventPage";
+import { CreateEventPage } from "./pages/CreateEventPage/CreateEventPage";
 import { CreateRecipePage } from "./pages/Recipe/CreateRecipePage/CreateRecipePage";
 import { CreateRecipeParticipantPage } from "./pages/Recipe/CreateRecipeParticipantPage/CreateRecipeParticipantPage";
 import { HealthPage } from "./pages/SettingsPages/HealthPage/HealthPage";

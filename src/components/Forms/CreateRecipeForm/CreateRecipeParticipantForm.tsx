@@ -1,5 +1,5 @@
 import { useState, FC, CSSProperties } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -10,6 +10,14 @@ import { useAppSelector } from "../../../app/hooks";
 interface Props {
   participant: any;
 }
+
+const BoxStyle: CSSProperties = {
+  flexGrow: 1,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center"
+};
 
 const FormBodyStyle: CSSProperties = {
   display: "flex",
@@ -68,6 +76,24 @@ export const CreateRecipeParticipantForm: FC<Props> = ({ participant }) => {
 
     navigate("/recipes", { replace: true });
   };
+
+  if (!userInfo.recipes) {
+    return (
+      <div style={BoxStyle}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            component={Link}
+            to={"/recipes/create"}
+            sx={{ marginRight:"1em" }}
+          >
+            Crea tu primera receta
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Grid sx={{width: "100%", height: "100%", display: "flex", alignItems: "center"}}>

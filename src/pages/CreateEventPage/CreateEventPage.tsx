@@ -1,13 +1,13 @@
 import { CSSProperties, FC, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 
 import { Box, Button } from "@mui/material";
 import { Cancel } from "@mui/icons-material";
 
-import { SideMenu } from "../../../components/Menu/Menu";
-import { CreateEventForm } from "../../../components/Forms/CreateEventForm/CreateEventForm";
+import { SideMenu } from "../../components/Menu/Menu";
+import { CreateEventForm } from "../../components/Forms/CreateEventForm/CreateEventForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",

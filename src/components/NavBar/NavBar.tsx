@@ -10,7 +10,7 @@ import { logout } from "../../features/user/userSlice";
 import { CustomizedBreadcrumbs } from "../Breadcrumb/Breadcrumb";
 
 const divTopStyle: CSSProperties = {
-  backgroundColor: "#937A61",
+  backgroundColor: "#8A6E51",
   color: "white",
   display: "flex",
   width: "100%",

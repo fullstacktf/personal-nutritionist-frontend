@@ -16,14 +16,6 @@ const BoxStyle: CSSProperties = {
   height: "87.5vh"
 };
 
-const ContainerStyle: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-  width: "70%",
-  alignItems: "center",
-  backgroundColor: "blue",
-};
-
 const GridContainer = styled(Grid) (() => ({
   display: "flex",
   flexGrow: 1,
@@ -31,7 +23,7 @@ const GridContainer = styled(Grid) (() => ({
   justifyContent: "center",
   color: "black",
   flexDirection: "column",
-  // height: "100%",
+  
   width: "70%"
 }));
 
@@ -49,10 +41,6 @@ export const HomePage: FC = () => {
   return (
     <Box style={BoxStyle}>
       <SideMenu />
-      {/* <div style={ContainerStyle}>
-        <Profile userInfo={userInfo} />
-        <EventList />
-      </div> */}
       <GridContainer container>
         <Profile userInfo={userInfo} />
         <GridEventsContainer container item>

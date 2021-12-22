@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-import { Button, FormControl, Alert, Grid, Box, Select, MenuItem, InputLabel, OutlinedInput, SelectChangeEvent } from "@mui/material";
-import { Save, Restaurant, Cancel, MonitorWeight } from "@mui/icons-material";
+import { Button, FormControl, Alert, Grid, Select, MenuItem, InputLabel, SelectChangeEvent } from "@mui/material";
 import { InputForm } from "../InputForm/InputForm";
 import { Tags } from "../../../components/Autocomplete/Autocomplete";
 
@@ -128,7 +127,6 @@ export const CreateRecipeForm: FC = () => {
             <Tags onChange={handleAlergens} name="alergens" label="Alérgenos" placeholder="Selecciona los alérgenos de la receta" data={alergens}></Tags>
             <InputForm onChange={handleDataChange} name="ingredients" placeholder="Ingredientes necesarios" title="Ingredientes" type="text" validation={true} isRequired={true} />
             <InputForm onChange={handleDataChange} name="preparation" placeholder="Preparación" title="Preparación" type="text" validation={true} isRequired={true} />
-            <InputForm onChange={handleDataChange} name="cookingTime" placeholder="Tiempo de preparación" title="Tiempo de Preparación" type="text" validation={true} isRequired={true} />
             <Button onClick={submitData} variant="contained" type="submit" sx={{marginTop: "1em"}}>Guardar Cambios</Button>
           </FormControl>
         </form>
