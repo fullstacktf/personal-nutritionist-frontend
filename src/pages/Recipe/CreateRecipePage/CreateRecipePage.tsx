@@ -1,20 +1,18 @@
-import { CSSProperties, FC, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
-import { useAppSelector } from "../../../app/hooks";
+import { CSSProperties, FC } from "react";
+import { Link } from "react-router-dom";
 
 import { Box, Button } from "@mui/material";
 import { Cancel } from "@mui/icons-material";
 
 import { SideMenu } from "../../../components/Menu/Menu";
-import { CreateEventForm } from "../../../components/Forms/CreateEventForm/CreateEventForm";
+import { CreateRecipeForm } from "../../../components/Forms/CreateRecipeForm/CreateRecipeForm";
 
 const BoxStyle: CSSProperties = {
   display: "flex",
   flexGrow: 1,
   color: "white",
   background: "#dbdbdb",
-  height: "87.5vh",
+  height: "87.5vh"
 };
 
 const BorderStyle: CSSProperties = {
@@ -23,7 +21,7 @@ const BorderStyle: CSSProperties = {
   display: "flex",
   flexDirection: "row",
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 };
 
 const FormContainerStyle: CSSProperties = {
@@ -36,7 +34,6 @@ const FormContainerStyle: CSSProperties = {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "5px",
 };
 
 const HeaderStyle: CSSProperties = {
@@ -70,35 +67,7 @@ const FormBodyStyle: CSSProperties = {
   alignItems: "center",
 };
 
-export const CreateEventPage: FC = () => {
-  let url = useLocation();
-  const [basicUsers, setBasicUsers] = useState<any>();
-  const [participant, setParticipant] = useState<any>();
-  const userInfo = useAppSelector((state) => state.user.userInfo);
-  const userToken = useAppSelector((state) => state.user.token);
-
-  useEffect(() => {
-    const handleUser = async(id: any) => {
-      const config = {
-        headers: { Authorization: `Bearer ${userToken}` }
-      };
-
-      await axios.get(`https://api.nutriguide.es/users/${id}`, config)
-        .then((res) => { 
-          const basicUsersAux = [
-            { _id: userInfo._id, name: userInfo.name, email: userInfo.email, phone: userInfo.phone, photo:userInfo.photo, isVerified: userInfo.isVerified },
-            { _id: res.data._id, name: res.data.name, email: res.data.email, phone: res.data.phone, photo:res.data.photo, isVerified: res.data.isVerified },
-          ];
-          setBasicUsers(basicUsersAux);
-          setParticipant(res.data);
-        });
-    };
-
-    handleUser(url.pathname.split("/").pop());
-  }, [url, userInfo, userToken]);
-
-  if (basicUsers == null) return <div>No hay participantes</div>;
-
+export const CreateRecipePage: FC = () => {
   return (
     <Box style={BoxStyle}>
       <SideMenu />
@@ -111,17 +80,17 @@ export const CreateEventPage: FC = () => {
                 color="error" 
                 startIcon={<Cancel />}
                 component={Link}
-                to={userInfo.role === "Nutricionista" ? "/clients" : "/nutritionists"}
+                to={"/recipes"}
                 sx={{ marginRight:"1em" }}
               >
                 Cancelar
               </Button>
-              <h2>Crea un nuevo evento</h2>
+              <h2>Crea una nueva receta</h2>
             </div>
           </div>
           <div style={SeparatorStyle}></div>
           <div style={FormBodyStyle}>
-            <CreateEventForm basicUsers={basicUsers} owner={userInfo} participant={participant} />
+            <CreateRecipeForm />
           </div>
         </div>
       </div>

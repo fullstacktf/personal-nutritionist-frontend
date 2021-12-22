@@ -17,6 +17,8 @@ import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
 import { EventListPage } from "./pages/EventListPage/EventListPage";
 import { PersonalPage } from "./pages/SettingsPages/PersonalPage/PersonalPage";
 import { CreateEventPage } from "./pages/Event/CreateEventPage/CreateEventPage";
+import { CreateRecipePage } from "./pages/Recipe/CreateRecipePage/CreateRecipePage";
+import { CreateRecipeParticipantPage } from "./pages/Recipe/CreateRecipeParticipantPage/CreateRecipeParticipantPage";
 import { HealthPage } from "./pages/SettingsPages/HealthPage/HealthPage";
 import { VerificationPage } from "./pages/SettingsPages/VerificationPage/VerificationPage";
 
@@ -54,6 +56,8 @@ function App() {
           <Route path="/nutritionists" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/clients" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} />
+          <Route path="/recipes/create" element={ userToken !== "" ? <CreateRecipePage /> : <WebPage />} />
+          <Route path="/weekmeal/recipe/create/:participant" element={userToken !== "" ? <CreateRecipeParticipantPage/> : <WebPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
