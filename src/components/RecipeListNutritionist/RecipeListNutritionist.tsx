@@ -62,6 +62,7 @@ export const RecipeListNutritionist: FC = () => {
     return (
       <div style={BoxStyle}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black" }}>
+          No hay recetas
           <Button 
             variant="contained" 
             color="primary" 
