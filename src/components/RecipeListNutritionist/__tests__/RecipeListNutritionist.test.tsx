@@ -14,6 +14,6 @@ test("nutritionits recipes list has default text", () => {
     </Provider>
   );
 
-  const catchWord = screen.getByText(/No hay recetas/i);
+  const catchWord = screen.getByText(/Crea tu primera receta/i);
   expect(catchWord).toBeInTheDocument();
 });

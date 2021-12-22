@@ -100,10 +100,8 @@ export const HealthForm: FC = () => {
         <BoxStyled sx={{ marginTop: "20px" }}>
           <Restaurant sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
           <FormControl>
-            <InputLabel id="demo-simple-select-label">Dieta</InputLabel>
+            <InputLabel>Dieta</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={data.diet}
               label="Selecciona tu tipo de dieta"
               onChange={handleDietChange}
