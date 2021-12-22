@@ -27,7 +27,7 @@ export const Footer: FC = () => {
     <GridFooterContainer container>
       <GridLeftItems container item xs={2} md={2} lg={2}>
         <Link href="https://docs.nutriguide.es" underline="hover" color="white"><b>Docs</b></Link>
-        <Link href="a" underline="hover" color="white"><b>Team</b></Link>
+        <Link href="https://docs.nutriguide.es/en/introduction/#-team" underline="hover" color="white"><b>Team</b></Link>
         <Link href="https://www.instagram.com/nutriguide_es/">
           <img style={LogoStyle} src="/assets/Instagram.png" alt="instragram icon"/>
         </Link>

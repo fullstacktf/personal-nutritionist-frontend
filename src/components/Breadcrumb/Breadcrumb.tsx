@@ -53,6 +53,7 @@ export const CustomizedBreadcrumbs: FC = () => {
         {location.pathname === "/nutritionists" ? <StyledBreadcrumb label="Nutricionistas" component={Link} to="/nutritionists" /> : null}
         {location.pathname === "/clients" ? <StyledBreadcrumb label="Clientes" component={Link} to="/clients" /> : null}
         {location.pathname === "/recipes" ? <StyledBreadcrumb label="Recetas" component={Link} to="/recipes" /> : null}
+        {location.pathname === "/hire/:user" ? <StyledBreadcrumb label="Contratar" component={Link} to="/hire/:user" /> : null}
       </Breadcrumbs>
     </div>
   );

@@ -1,7 +1,6 @@
 import { CSSProperties, FC } from "react";
 
-import { Grid, Avatar, Typography, Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Avatar, Typography, Button } from "@mui/material";
 import { Phone, Mail } from "@mui/icons-material";
 
 interface Props {
@@ -39,14 +38,15 @@ export const Profile: FC<Props> = ({ userInfo }) => {
           userInfo.role === "Nutricionista" ?
             <div style={ContainerStyle}>
               <Typography variant="subtitle1"><b>Especialidades</b></Typography>
-              <Typography variant="subtitle1"> {userInfo.specialties.join(", ") || "-"} </Typography>
+              <Typography variant="subtitle1">{userInfo.specialties ? userInfo.specialties.join(", ") : "-"}</Typography>
+              <Typography variant="subtitle1">{userInfo.price + "€"}</Typography>
               <hr style={{ width: "50%" }}/>
             </div>
           : 
             <div style={ContainerStyle}>
               <Typography variant="subtitle1"><b>Datos médicos</b></Typography>
-              <Typography variant="subtitle1"><b>Altura</b>: { userInfo.height !== "" ? userInfo.height : "-" } </Typography>
-              <Typography variant="subtitle1"><b>Peso</b>: { userInfo.weight !== "" ? userInfo.weight : "-" } </Typography>
+              <Typography variant="subtitle1"><b>Altura</b>: {userInfo.height !== "" ? userInfo.height : "-"}</Typography>
+              <Typography variant="subtitle1"><b>Peso</b>: {userInfo.weight !== "" ? userInfo.weight : "-"}</Typography>
               <hr style={{ width: "50%" }}/>
             </div>
         }

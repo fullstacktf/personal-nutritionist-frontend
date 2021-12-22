@@ -16,11 +16,13 @@ import { UserListPage } from "./pages/UserListPage/UserListPage";
 import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
 import { EventListPage } from "./pages/EventListPage/EventListPage";
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
-import { CreateEventPage } from "./pages/Event/CreateEventPage/CreateEventPage";
+import { CreateEventPage } from "./pages/CreateEventPage/CreateEventPage";
 import { PersonalForm } from "./components/Forms/PersonalForm/PersonalForm";
 import { AccountForm } from "./components/Forms/AccountForm/AccountForm";
 import { HealthForm } from "./components/Forms/HealthForm/HealthForm";
 import { VerificationForm } from "./components/Forms/VerificationForm/VerificationForm";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { HirePage } from "./pages/HirePage/HirePage";
 
 const theme = createTheme ({
   palette: {
@@ -56,6 +58,8 @@ function App() {
           <Route path="/settings/verification" element={ userToken !== "" ? <SettingsPage setting={<VerificationForm />} title="Verifícate" description="Aquí puedes modificar tu información sobre tus estudios" /> : <WebPage />} />
           <Route path="/nutritionists" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/clients" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
+          <Route path="/profile/:user" element={ userToken !== "" ? <ProfilePage /> : <WebPage />} />
+          <Route path="/hire/:user" element={ userToken !== "" ? <HirePage /> : <WebPage />} />
           <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} />
         </Routes>
         <Footer />
