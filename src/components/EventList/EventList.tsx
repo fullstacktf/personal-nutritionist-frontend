@@ -4,7 +4,8 @@ import axios from "axios";
 import { Avatar, IconButton } from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
 
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { updateUser } from "../../features/user/userSlice";
 import { StickyHeadTable } from "../Table/Table";
 
 const BoxStyle: CSSProperties = {
@@ -38,13 +39,31 @@ export const EventList: FC = () => {
     { id: "actions", label: "", minWidth: 30, align: "center" },
   ];
 
-  const handleDeleleEvent = (id: any) => {
+  const dispatch = useAppDispatch();
+
+  const handleUpdateUser = async(config: object, user: any) => {
+    axios.put(`https://api.nutriguide.es/users/${user._id}`, user, config);
+  };
+
+  const handleDeleteEvent = (id: any, event: any) => {
     const config = {
       headers: { Authorization: `Bearer ${userToken}` }
     };
 
-    axios.delete(`https://api.nutriguide.es/calendar/event/${id}`, config)
+    const newEvent = { ...event};
+    newEvent.status = "rejected";
+
+    axios.put(`https://api.nutriguide.es/calendar/event/${id}`, newEvent, config)
       .then(res => { console.log(res.data); });
+
+      const index = userInfo.events.findIndex((event: any) => event._id === id);
+      const newEvents = [ ...userInfo.events ];
+      newEvents.splice(index, 1);
+      const newUser = { ...userInfo };
+      newUser.events = newEvents;
+
+      handleUpdateUser(config, newUser);
+      dispatch(updateUser(newUser));
   };
 
   if (!userInfo.events) {
@@ -69,7 +88,7 @@ export const EventList: FC = () => {
       item.startingDate,
       item.endingDate,
       <div>
-        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleleEvent(item._id)}>
+        <IconButton aria-label="profile" color="secondary" onClick={() => handleDeleteEvent(item._id, item)}>
           <DeleteOutline />
         </IconButton>
       </div>
