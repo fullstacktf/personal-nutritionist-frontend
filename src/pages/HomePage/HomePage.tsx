@@ -1,7 +1,6 @@
 import { CSSProperties, FC } from "react";
 
-import { Box, Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Box } from "@mui/material";
 
 import { useAppSelector } from "../../app/hooks";
 import { SideMenu } from "../../components/Menu/Menu";
@@ -11,28 +10,23 @@ import { EventList } from "../../components/EventList/EventList";
 const BoxStyle: CSSProperties = {
   display: "flex",
   flexGrow: 1,
-  color: "white",
+  color: "black",
   backgroundColor: "#dbdbdb",
   height: "87.5vh"
 };
 
-const GridContainer = styled(Grid) (() => ({
+const ContainerStyle: CSSProperties = {
   display: "flex",
-  flexGrow: 1,
+  justifyContent: "space-evenly",
+  width: "86%",
   alignItems: "center",
-  justifyContent: "center",
-  color: "black",
-  flexDirection: "column",
-  width: "70%"
-}));
+};
 
-const GridEventsContainer = styled(Grid) (() => ({
-  width: "70%",
-  height: "50%",
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "5px",
-}));
+const ProfileContainerStyle: CSSProperties = {
+  display: "flex",
+  justifyContent: "flex-end",
+  width: "40%"
+};
 
 export const HomePage: FC = () => {
   const userInfo = useAppSelector((state) => state.user.userInfo);
@@ -40,12 +34,14 @@ export const HomePage: FC = () => {
   return (
     <Box style={BoxStyle}>
       <SideMenu />
-      <GridContainer container>
-        <Profile userInfo={userInfo} />
-        <GridEventsContainer container item>
+      <div style={ContainerStyle}>
+        <div style={ProfileContainerStyle}>
+          <Profile userInfo={userInfo} />
+        </div>
+        <div style={{ width: "90%" }}>
           <EventList />
-        </GridEventsContainer>
-      </GridContainer>
+        </div>
+      </div>
     </Box>
   );
 };

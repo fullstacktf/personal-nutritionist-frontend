@@ -1,93 +1,86 @@
 import { useState, ChangeEvent, FC, CSSProperties  } from "react";
-import { Button, FormControl, Box } from "@mui/material";
+import axios from "axios";
 
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import PersonIcon from "@mui/icons-material/Person";
-import DescriptionIcon from "@mui/icons-material/Description";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Button, FormControl, Box } from "@mui/material";
+import { LocalPhone, Person, Description, Save, Cancel } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
+import { updateUser } from "../../../features/user/userSlice";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { InputForm } from "../InputForm/InputForm";
 
-const FormContainer: CSSProperties = {
+const FormContainerStyle: CSSProperties = {
   display: "flex",
-  flexGrow: 1,
-  justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 };
 
-const InputsContainer: CSSProperties = {
+const BoxStyled = styled(Box)(() => ({
   display: "flex",
-  flexDirection: "column",
-  width: "100vh",
-  height: "40vh",
-};
-
-const ButtonsContainer: CSSProperties = {
-  display: "flex",
-  margin: "30px 10px 12px 12px",
-
-};
-
-const ButtonStyled = styled(Button)(() => ({
-  display: "flex",
-  marginRight: "15px",
-  background: "#187DE4",
-  color: "white",
+  alignItems: "flex-end",
+  width: "98%"
 }));
 
+const ButtonStyle: CSSProperties = {
+  width: "70%",
+  display: "flex",
+  justifyContent: "space-evenly",
+  padding: "30px 30px 30px 30px",
+};
+
 export const PersonalForm: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
   const [data, setData] = useState({
-    name: "",
-    phone: 0,
-    description: ""
+    name: userInfo.name,
+    phone: userInfo.phone,
+    description: userInfo.description
   });
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
-      [event.target.name] : event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
   
   const submitData = (event: any ) => {
     event.preventDefault();
-    console.log(data);
-    fetch("https://api.nutriguide.es/users", { method: "PUT",
-  	headers:{
-      "Content-Type":"application/json"
-      },
-      body: JSON.stringify(data)
-    });
+    
+    const newUser = { ...userInfo };
+    newUser.name = data.name;
+    newUser.phone = parseInt(data.phone);
+    newUser.description = data.description;
+    console.log(userInfo);
+    console.log(newUser);
+
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+
+    axios.put(`https://api.nutriguide.es/users/${userInfo._id}`, newUser, config)
+    .then((res) => { dispatch(updateUser(res.data)); });
   };
 
   return (
-    <form style={FormContainer} onSubmit={submitData}>
-      <FormControl>
-        <div style={InputsContainer}>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <PersonIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Nombre" name="name" placeholder="Escribe tu nombre y apellidos" type="text" validation={true} />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <LocalPhoneIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Teléfono" name="phone" placeholder="Escribe tu telefono" type="tel" validation={true} />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <DescriptionIcon sx={{ borderRadius: "5px", color: "action.active",background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Descripción" name="Descripcion" placeholder="Añade una descripción" type="text" />
-          </Box>
-          <div style={ButtonsContainer}>
-            <ButtonStyled variant="contained" type="submit">
-              <SaveIcon sx={{ color: "white", mr: 1, my: 1.5 }} />
-              Guardar Cambios
-            </ButtonStyled >
-            <Button sx={{ background: "#D7DAE7" }} onClick={submitData} variant="contained">
-            <CancelIcon sx={{ color: "action.active", mr: 1, my: 1.5 }} />
-              Cancelar
-            </Button>
-          </div>
+    <form onSubmit={submitData} style={{ width: "96%" }}>
+      <FormControl style={FormContainerStyle}>
+        <BoxStyled>
+          <Person sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.name} title="Nombre" name="name" placeholder="Escribe tu nombre y apellidos" type="text" validation={true} />
+        </BoxStyled>
+        <BoxStyled>
+          <LocalPhone sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.phone.toString()} title="Teléfono" name="phone" placeholder="Escribe tu teléfono" type="number" validation={true} />
+        </BoxStyled>
+        <BoxStyled>
+          <Description sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.description} title="Descripción" name="description" placeholder="Escribe tu email" type="text" validation={true} />
+        </BoxStyled>
+
+        <div style={ButtonStyle}>
+          <Button variant="contained" startIcon={<Save />} type="submit">Guardar Cambios</Button>
+          <Button color="info" startIcon={<Cancel />} onClick={submitData} variant="contained">Cancelar</Button>
         </div>
       </FormControl>
     </form>

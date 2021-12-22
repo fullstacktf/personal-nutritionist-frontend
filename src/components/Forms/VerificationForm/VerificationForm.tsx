@@ -1,94 +1,79 @@
 import { useState, ChangeEvent, FC, CSSProperties  } from "react";
+import axios from "axios";
+
 import { Button, FormControl, Box } from "@mui/material";
-
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
-import SchoolIcon from "@mui/icons-material/School";
+import { PermIdentity, School, Save, Cancel } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
+import { updateUser } from "../../../features/user/userSlice";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { InputForm } from "../InputForm/InputForm";
 
-const FormContainer: CSSProperties = {
+const FormContainerStyle: CSSProperties = {
   display: "flex",
-  flexGrow: 1,
-  justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 };
 
-const InputsContainer: CSSProperties = {
+const BoxStyled = styled(Box)(() => ({
   display: "flex",
-  flexDirection: "column",
-  width: "100vh",
-  height: "40vh",
-};
-
-const ButtonsContainer: CSSProperties = {
-  display: "flex",
-  margin: "30px 10px 12px 12px",
-
-};
-
-const ButtonStyled = styled(Button)(() => ({
-  display: "flex",
-  marginRight: "15px",
-  background: "#187DE4",
-  color: "white",
+  alignItems: "flex-end",
+  width: "98%"
 }));
 
+const ButtonStyle: CSSProperties = {
+  width: "70%",
+  display: "flex",
+  justifyContent: "space-evenly",
+  padding: "30px 30px 30px 30px",
+};
+
 export const VerificationForm: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
   const [data, setData] = useState({
-    name: "",
-    phone: 0,
-    description: ""
+    dni: userInfo.dni,
+    specialties: userInfo.specialties
   });
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
-      [event.target.name] : event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
   
   const submitData = (event: any ) => {
     event.preventDefault();
-    console.log(data);
-    fetch("https://api.nutriguide.es/users", { method: "PUT",
-  	headers:{
-      "Content-Type":"application/json"
-      },
-      body: JSON.stringify(data)
+
+    const newUser = { ...userInfo };
+    newUser.dni = data.dni;
+    newUser.specialties = data.specialties.split(", ");
+  
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+  
+    axios.put(`https://api.nutriguide.es/users/${userInfo._id}`, newUser, config)
+    .then((res) => {
+      dispatch(updateUser(res.data));
     });
   };
 
   return (
-    <form style={FormContainer} onSubmit={submitData}>
-      <FormControl>
-        <div style={InputsContainer}>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <PermIdentityIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="DNI" name="DNI" placeholder="Intoduce tu DNI" type="text"/>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <SchoolIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Estudios" name="specialties" placeholder="Escribe tus estudios" type="text" />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <PictureAsPdfIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} placeholder="Agregar un archivo pdf" name="specialties" type="file" />
-          </Box>
-
-          <div style={ButtonsContainer}>
-            <ButtonStyled variant="contained" type="submit">
-              <SaveIcon sx={{ color: "white", mr: 1, my: 1.5 }} />
-              Enviar
-            </ButtonStyled >
-            <Button sx={{ background: "#D7DAE7" }} onClick={submitData} variant="contained">
-            <CancelIcon sx={{ color: "action.active", mr: 1, my: 1.5 }} />
-              Cancelar
-            </Button>
-          </div>
+    <form onSubmit={submitData} style={{ width: "96%" }}>
+      <FormControl style={FormContainerStyle}>
+        <BoxStyled>
+          <PermIdentity sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.dni} title="DNI" name="dni" placeholder="Intoduce tu DNI" type="text" />
+        </BoxStyled>
+        <BoxStyled>
+          <School sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.specialties.join(", ") || null} title="Estudios" name="specialties" placeholder="Escribe tus estudios" type="text" />
+        </BoxStyled>
+        <div style={ButtonStyle}>
+          <Button variant="contained" startIcon={<Save />} type="submit">Guardar Cambios</Button>
+          <Button color="info" startIcon={<Cancel />} onClick={submitData} variant="contained">Cancelar</Button>
         </div>
       </FormControl>
     </form>

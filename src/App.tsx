@@ -15,12 +15,16 @@ import { Footer } from "./components/Footer/Footer";
 import { UserListPage } from "./pages/UserListPage/UserListPage";
 import { RecipeListPage } from "./pages/RecipeListPage/RecipeListPage";
 import { EventListPage } from "./pages/EventListPage/EventListPage";
-import { PersonalPage } from "./pages/SettingsPages/PersonalPage/PersonalPage";
+import { SettingsPage } from "./pages/SettingsPage/SettingsPage";
 import { CreateEventPage } from "./pages/CreateEventPage/CreateEventPage";
+import { PersonalForm } from "./components/Forms/PersonalForm/PersonalForm";
+import { AccountForm } from "./components/Forms/AccountForm/AccountForm";
+import { HealthForm } from "./components/Forms/HealthForm/HealthForm";
+import { VerificationForm } from "./components/Forms/VerificationForm/VerificationForm";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { HirePage } from "./pages/HirePage/HirePage";
 import { CreateRecipePage } from "./pages/Recipe/CreateRecipePage/CreateRecipePage";
 import { CreateRecipeParticipantPage } from "./pages/Recipe/CreateRecipeParticipantPage/CreateRecipeParticipantPage";
-import { HealthPage } from "./pages/SettingsPages/HealthPage/HealthPage";
-import { VerificationPage } from "./pages/SettingsPages/VerificationPage/VerificationPage";
 
 const theme = createTheme ({
   palette: {
@@ -31,7 +35,7 @@ const theme = createTheme ({
       main: brown[500],
     },
     info: {
-      main: "#FFFFFF"
+      main: "#BDBDBD"
     },
   }
 });
@@ -50,11 +54,14 @@ function App() {
           <Route path="/login" element={<LogInPage />} />
           <Route path="/calendar" element={ userToken !== "" ? <EventListPage /> : <WebPage />} />
           <Route path="/calendar/event/create/:participant" element={userToken !== "" ? <CreateEventPage/> : <WebPage />} />
-          <Route path="/personal" element={ userToken !== "" ? <PersonalPage /> : <WebPage />} />
-          <Route path="/health" element={ userToken !== "" ? <HealthPage /> : <WebPage />} />
-          <Route path="/verification" element={ userToken !== "" ? <VerificationPage /> : <WebPage />} />
+          <Route path="/settings/personal" element={ userToken !== "" ? <SettingsPage setting={<PersonalForm />} title="Información personal" description="Aquí puedes modificar tu información personal" /> : <WebPage />} />
+          <Route path="/settings/account" element={ userToken !== "" ? <SettingsPage setting={<AccountForm />} title="Información de la cuenta" description="Aquí puedes modificar tu información sobre tu cuenta" /> : <WebPage />} />
+          <Route path="/settings/health" element={ userToken !== "" ? <SettingsPage setting={<HealthForm />} title="Información de salud" description="Aquí puedes modificar tu información sobre tu salud" /> : <WebPage />} />
+          <Route path="/settings/verification" element={ userToken !== "" ? <SettingsPage setting={<VerificationForm />} title="Verifícate" description="Aquí puedes modificar tu información sobre tus estudios" /> : <WebPage />} />
           <Route path="/nutritionists" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
           <Route path="/clients" element={ userToken !== "" ? <UserListPage /> : <WebPage />} />
+          <Route path="/profile/:user" element={ userToken !== "" ? <ProfilePage /> : <WebPage />} />
+          <Route path="/hire/:user" element={ userToken !== "" ? <HirePage /> : <WebPage />} />
           <Route path="/recipes" element={ userToken !== "" ? <RecipeListPage /> : <WebPage />} />
           <Route path="/recipes/create" element={ userToken !== "" ? <CreateRecipePage /> : <WebPage />} />
           <Route path="/weekmeal/recipe/create/:participant" element={userToken !== "" ? <CreateRecipeParticipantPage/> : <WebPage />} />

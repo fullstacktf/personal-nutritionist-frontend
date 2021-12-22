@@ -69,6 +69,7 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data, create }) => {
   const columns: Column[] = titles.map((title) => {
     return { id: title.id, label: title.label, minWidth: title.minWidth, align: title.align }; 
   });
+  let cont = 0;
 
   const rows: Data[] = data.map((item) => {
     let element: any = {};
@@ -116,13 +117,17 @@ export const StickyHeadTable: FC<Props> = ({ name, titles, data, create }) => {
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                cont += 1;
                 return (
-                  <StyledTableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-                    {columns.map((column) => (
-                      <StyledTableCell key={column.id} align={column.align}>
-                        {row[column.id]}
-                      </StyledTableCell>
-                    ))}
+                  <StyledTableRow hover role="checkbox" tabIndex={-1} key={cont}>
+                    {columns.map((column) => {
+                      cont += 1;
+                      return (
+                        <StyledTableCell align={column.align} key={cont}>
+                          {row[column.id]}
+                        </StyledTableCell>
+                      );
+                    })}
                   </StyledTableRow>
                 );
               })

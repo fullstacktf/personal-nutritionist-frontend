@@ -86,10 +86,15 @@ export const ClientList: FC = () => {
           color="secondary"
           component={Link} 
           to={`/calendar/event/create/${item._id}`}
-        >
+          >
           <InsertInvitation />
         </IconButton>
-        <IconButton aria-label="profile" color="secondary">
+        <IconButton 
+          aria-label="profile"
+          color="secondary"
+          component={Link} 
+          to={`/profile/${item._id}`}
+        >
           <AssignmentInd />
         </IconButton>
         <IconButton 

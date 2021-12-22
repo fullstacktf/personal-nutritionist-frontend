@@ -1,7 +1,9 @@
 import { FC, useState, ChangeEvent, CSSProperties } from "react";
+
 import { Input, FormControl,InputLabel } from "@mui/material";
-import { isValidated } from "./validation";
 import { styled } from "@mui/material/styles";
+
+import { isValidated } from "./validation";
 
 interface Props {
   name: string;
@@ -11,6 +13,7 @@ interface Props {
   onChange: any;
   validation?: boolean;
   isRequired?: boolean;
+  value?: string;
 }
 
 const pStyle: CSSProperties = {
@@ -21,7 +24,7 @@ const FormControlStyled = styled(FormControl)(() => ({
   width: "100%",
 }));
 
-export const InputForm: FC<Props> = ({ name, type, placeholder, title="", onChange, validation=false, isRequired=false }) => {  
+export const InputForm: FC<Props> = ({ name, type, placeholder, title="", onChange, validation=false, isRequired=false, value }) => {  
   const [isActive, setActive] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
@@ -49,8 +52,8 @@ export const InputForm: FC<Props> = ({ name, type, placeholder, title="", onChan
 
   return (
     <FormControlStyled variant="filled" error={message !== ""} margin="normal">
-      <InputLabel shrink>{title}{ isRequired ? "*" : null }</InputLabel>
-      <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} required={isRequired}/>
+      <InputLabel shrink>{title} {isRequired ? "*" : null}</InputLabel>
+      <Input onChange={handleMessageChange} name={name} placeholder={placeholder} type={type} value={value} required={isRequired} />
       { isActive ? <p style={pStyle}>{message}</p> : null }
     </FormControlStyled>
   );

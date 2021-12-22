@@ -1,57 +1,46 @@
 import { useState, ChangeEvent, FC, CSSProperties  } from "react";
-import { Button, FormControl, Box, Select, MenuItem, InputLabel, SelectChangeEvent } from "@mui/material";
+import axios from "axios";
 
-import NoFoodIcon from "@mui/icons-material/NoFood";
-import HeightIcon from "@mui/icons-material/Height";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
-import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
-import RestaurantIcon from "@mui/icons-material/Restaurant";
+import { Button, FormControl, Box, Select, MenuItem, InputLabel, SelectChangeEvent } from "@mui/material";
+import { NoFood, Height, MonitorWeight, Restaurant, Save, Cancel } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
+import { updateUser } from "../../../features/user/userSlice";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Tags } from "../../../components/Autocomplete/Autocomplete";
 import { InputForm } from "../InputForm/InputForm";
 
-const FormContainer: CSSProperties = {
+const FormContainerStyle: CSSProperties = {
   display: "flex",
-  flexGrow: 1,
-  justifyContent: "center",
-  alignItems: "center",
+  alignItems: "center"
 };
 
-const InputsContainer: CSSProperties = {
+const BoxStyled = styled(Box)(() => ({
   display: "flex",
-  flexDirection: "column",
-  width: "100vh",
-  height: "40vh",
-};
-
-const ButtonsContainer: CSSProperties = {
-  display: "flex",
-  margin: "30px 10px 12px 12px",
-
-};
-
-const ButtonStyled = styled(Button)(() => ({
-  display: "flex",
-  marginRight: "15px",
-  background: "#187DE4",
-  color: "white",
+  alignItems: "flex-end",
+  width: "98%"
 }));
 
+const ButtonStyle: CSSProperties = {
+  width: "70%",
+  display: "flex",
+  justifyContent: "space-evenly",
+  padding: "30px 30px 30px 30px",
+};
 
 export const HealthForm: FC = () => {
+  const userInfo = useAppSelector((state) => state.user.userInfo);
+  const userToken = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
   const [data, setData] = useState({
-    intolerances: ["","","",""],
-    height: 0,
-    diet: "Vegetariana",
-    weight: 0
+    intolerances: ["", "", "", ""],
+    height: userInfo.height,
+    diet: userInfo.diet,
+    weight: userInfo.weight
   });
-
   const intolerances = [ "Huevos", "Leche", "Nueces", "Marisco" ];
 
   const handleDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-
     setData({
       ...data,
       [event.target.name]: event.target.value,
@@ -65,6 +54,7 @@ export const HealthForm: FC = () => {
       intolerances: newIntolerances,
     });
   };
+
   const handleDietChange = (event: SelectChangeEvent<string>) => {
     const newDiet = event.target.value;
     setData({ 
@@ -75,54 +65,61 @@ export const HealthForm: FC = () => {
 
   const submitData = (event: any ) => {
     event.preventDefault();
+
+    const newUser = { ...userInfo };
+    newUser.intolerances = data.intolerances;
+    newUser.height = parseInt(data.height);
+    newUser.weight = parseInt(data.weight);
+    newUser.diet = data.diet;
+
+    console.log(newUser);
+
+    const config = {
+      headers: { Authorization: `Bearer ${userToken}` }
+    };
+
+    axios.put(`https://api.nutriguide.es/users/${userInfo._id}`, newUser, config)
+    .then((res) => { dispatch(updateUser(res.data)); });
   };
 
   return (
-    <form style={FormContainer} onSubmit={submitData}>
-      <FormControl>
-        <div style={InputsContainer}>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <MonitorWeightIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Peso" name="weight" placeholder="Escribe tu peso" type="number" validation={true} />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-            <HeightIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <InputForm onChange={handleDataChange} title="Altura" name="height" placeholder="Escribe tu altura" type="number" validation={true} />
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end", marginTop: "25px" }}>
-            <NoFoodIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <Tags onChange={handleIntoleranceChange} name="intolerances" label="Intolerancias" placeholder="Selecciona tus intolerancias" data={intolerances}></Tags>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "flex-end", marginTop: "25px" }}>
-          <RestaurantIcon sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">Dieta</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={data.diet}
-                label="Selecciona tu tipo de dieta"
-                onChange={handleDietChange}
-                >
+    <form onSubmit={submitData} style={{ width: "96%" }}>
+      <FormControl style={FormContainerStyle}>
+        <BoxStyled>
+          <MonitorWeight sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.weight.toString()} title="Peso" name="weight" placeholder="Escribe tu peso" type="number" validation={true} />
+        </BoxStyled>
+        <BoxStyled>
+          <Height sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <InputForm onChange={handleDataChange} value={data.height.toString()} title="Altura" name="height" placeholder="Escribe tu altura" type="number" validation={true} />
+        </BoxStyled>
+        <BoxStyled>
+          <NoFood sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <Tags onChange={handleIntoleranceChange} name="intolerances" label="Intolerancias" placeholder="Selecciona tus intolerancias" data={intolerances} />
+        </BoxStyled>
+        <BoxStyled sx={{ marginTop: "20px" }}>
+          <Restaurant sx={{ borderRadius: "5px", color: "action.active", background: "#F3F6F9", mr: 1, my: 1.5 }} />
+          <FormControl>
+            <InputLabel id="demo-simple-select-label">Dieta</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={data.diet}
+              label="Selecciona tu tipo de dieta"
+              onChange={handleDietChange}
+              style={{ width: "500px" }}
+            >
+              <MenuItem value={"Vegetariana"}>Vegetariana</MenuItem>
+              <MenuItem value={"Omnivora"}>Omnívora</MenuItem>
+              <MenuItem value={"Vegana"}>Vegana</MenuItem>
+              <MenuItem value={"Flexitariana"}>Flexitariana</MenuItem>
+            </Select>
+          </FormControl>
+        </BoxStyled>
 
-                <MenuItem value={"Vegetariana"}>Vegetariana</MenuItem>
-                <MenuItem value={"Omnivora"}>Omnívora</MenuItem>
-                <MenuItem value={"Vegana"}>Vegana</MenuItem>
-                <MenuItem value={"Flexitariana"}>Flexitariana</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        
-          <div style={ButtonsContainer}>
-            <ButtonStyled variant="contained" type="submit">
-            <SaveIcon sx={{ color: "white", mr: 1, my: 1.5 }} />
-            Guardar Cambios
-            </ButtonStyled >
-            <Button sx={{ background: "#D7DAE7" }} onClick={submitData} variant="contained">
-            <CancelIcon sx={{ color: "action.active", mr: 1, my: 1.5 }} />
-            Cancelar
-            </Button>
-          </div>
+        <div style={ButtonStyle}>
+          <Button variant="contained" startIcon={<Save />} type="submit">Guardar Cambios</Button>
+          <Button color="info" startIcon={<Cancel />} onClick={submitData} variant="contained">Cancelar</Button>
         </div>
       </FormControl>
     </form>

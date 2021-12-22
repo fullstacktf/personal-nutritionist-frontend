@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { Avatar, IconButton } from "@mui/material";
-import { InsertInvitation, AssignmentInd } from "@mui/icons-material";
+import { InsertInvitation, AssignmentInd, PointOfSale } from "@mui/icons-material";
 
 import { useAppSelector } from "../../app/hooks";
 import { StickyHeadTable } from "../Table/Table";
@@ -80,14 +80,27 @@ export const NutritionistList: FC = () => {
       </div>,
       <div>
         <IconButton 
+          aria-label="hire" 
+          color="secondary"
+          component={Link} 
+          to={`/hire/${item._id}`}
+          >
+          <PointOfSale />
+        </IconButton>
+        <IconButton 
           aria-label="calendar" 
           color="secondary"
           component={Link} 
           to={`/calendar/event/create/${item._id}`}
-        >
+          >
           <InsertInvitation />
         </IconButton>
-        <IconButton aria-label="profile" color="secondary">
+        <IconButton 
+          aria-label="profile" 
+          color="secondary"
+          component={Link} 
+          to={`/profile/${item._id}`}
+        >
           <AssignmentInd />
         </IconButton>
       </div>
