@@ -23,7 +23,6 @@ const GridContainer = styled(Grid) (() => ({
   justifyContent: "center",
   color: "black",
   flexDirection: "column",
-  
   width: "70%"
 }));
 
