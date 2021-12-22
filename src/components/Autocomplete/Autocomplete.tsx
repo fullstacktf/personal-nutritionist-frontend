@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const Tags: FC<Props> = ({ label, placeholder, data, onChange, name }) => {
-
   return (
     <Stack spacing={3} sx={{ width: 500 }}>
       <Autocomplete

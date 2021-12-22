@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { emphasize, styled } from "@mui/material/styles";
 import { Breadcrumbs, Chip } from "@mui/material";
-import { Home } from "@mui/icons-material";
+import { Home, Settings } from "@mui/icons-material";
 import { grey } from "@mui/material/colors";
 
 import { useAppSelector } from "../../app/hooks";
@@ -46,9 +46,10 @@ export const CustomizedBreadcrumbs: FC = () => {
         {userLogged.token !== "" ? <StyledBreadcrumb icon={<Home fontSize="small" />} label={userLogged.userInfo.name} component={Link} to="/" /> : null}
         {location.pathname === "/calendar" ? <StyledBreadcrumb label="Calendario" component={Link} to="/calendar" /> : null}
         {location.pathname === "/calendar/event/create/:participant" ? <StyledBreadcrumb label="Crear evento" component={Link} to="/calendar" /> : null}
-        {location.pathname === "/personal" ? <StyledBreadcrumb label="Información personal" component={Link} to="/personal" /> : null}
-        {location.pathname === "/health" ? <StyledBreadcrumb label="Información de salud" component={Link} to="/health" /> : null}
-        {location.pathname === "/verification" ? <StyledBreadcrumb label="Verificación" component={Link} to="/verification" /> : null}
+        {location.pathname === "/settings/personal" ? <StyledBreadcrumb icon={<Settings fontSize="small" />} label="Información personal" component={Link} to="/settings/personal" /> : null}
+        {location.pathname === "/settings/account" ? <StyledBreadcrumb icon={<Settings fontSize="small" />} label="Información de cuenta" component={Link} to="/settings/account" /> : null}
+        {location.pathname === "/settings/health" ? <StyledBreadcrumb icon={<Settings fontSize="small" />} label="Información de salud" component={Link} to="/settings/health" /> : null}
+        {location.pathname === "/settings/verification" ? <StyledBreadcrumb icon={<Settings fontSize="small" />} label="Verificación" component={Link} to="/settings/verification" /> : null}
         {location.pathname === "/nutritionists" ? <StyledBreadcrumb label="Nutricionistas" component={Link} to="/nutritionists" /> : null}
         {location.pathname === "/clients" ? <StyledBreadcrumb label="Clientes" component={Link} to="/clients" /> : null}
         {location.pathname === "/recipes" ? <StyledBreadcrumb label="Recetas" component={Link} to="/recipes" /> : null}

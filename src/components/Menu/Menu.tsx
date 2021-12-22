@@ -17,7 +17,7 @@ export const SideMenu: FC = () => {
   const items = [
     { icon: <Home color="info" />, name: "Home", separator: <ListSubheader>Personal</ListSubheader>, url: "/" },
     { icon: <Event color="info" />, name: "Calendar", url: "/calendar" },
-    { icon: <Settings color="info" />, name: "Settings", url: "/settings" },
+    { icon: <Settings color="info" />, name: "Settings", url: "/settings/personal" },
     { icon: <SupervisedUserCircle color="info" />, name: "Nutritionists", separator: <ListSubheader>Services</ListSubheader>, url: "/nutritionists" },
     { icon: <MenuBook color="info" />, name: "Recipes", url: "/recipes" },
   ];
